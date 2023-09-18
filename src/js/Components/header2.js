@@ -1,4 +1,4 @@
-  const navbarSelector = "#header2";
+  const navbarSelector = "#header-2";
   const body = document.querySelector("body");
   const navbar = document.querySelector(navbarSelector);
   const checkbox = document.querySelector(navbarSelector + " input[type=checkbox]");

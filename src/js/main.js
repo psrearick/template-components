@@ -4,6 +4,7 @@ import path from "path";
 const sectionNames = {
   'headers': new URL('../Sections/headers.html', import.meta.url),
   'hero': new URL('../Sections/hero.html', import.meta.url),
+  'text': new URL('../Sections/text.html', import.meta.url),
 };
 
 const componentNames = {
@@ -11,6 +12,7 @@ const componentNames = {
   'header2': new URL('../Components/header2.html', import.meta.url),
   'header3': new URL('../Components/header3.html', import.meta.url),
   'hero1': new URL('../Components/hero1.html', import.meta.url),
+  'text1': new URL('../Components/text1.html', import.meta.url),
 };
 
 const componentJS = {
@@ -71,6 +73,7 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
     }
 
     root.innerHTML = html;
+    root.firstChild.classList.add(importName + "-frame-el");
     doc.body.appendChild(root);
 
     const links = document.querySelectorAll('link');
@@ -95,6 +98,20 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
       frame.contentWindow.eval(js);
     }
+
+    const nodeFrame = document.querySelector('#' + importName + " iframe");
+    const frameDoc = nodeFrame.contentWindow.document;
+    const frameEl = frameDoc.querySelector('.' + importName + '-frame-el');
+    const scrollHeight = frameEl.getAttribute('data-height');
+
+    if (scrollHeight) {
+      console.log(scrollHeight);
+      nodeFrame.style.height = scrollHeight + 'px';
+    }
+
+    // const minHeight = node.getAttribute('data-height');
+    // console.log(minHeight, node);
+    // console.log(.body.scrollHeight);
 
     const HTMLCodeElement = document.querySelector('#' + importName + '-html-code');
     if (HTMLCodeElement) {
