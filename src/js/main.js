@@ -7,11 +7,12 @@ import path from "path";
   };
 
   const componentNames = {
-    'header-1': new URL('../Components/header-1.html', import.meta.url),
+    'header1': new URL('../Components/header1.html', import.meta.url),
     'header2': new URL('../Components/header2.html', import.meta.url),
   };
 
   const componentJS = {
+    'header1': fs.readFileSync(path.join(__dirname, '/Components/header1.js'), "utf8"),
     'header2': fs.readFileSync(path.join(__dirname, '/Components/header2.js'), "utf8"),
   };
 
@@ -40,11 +41,26 @@ import path from "path";
       components[importName] = html;
       el.outerHTML = html;
 
+      const HTMLCode = document.querySelector('#' + importName);
+      const HTMLCodeElement = document.querySelector('#' + importName + '-html-code');
+      if (HTMLCodeElement && HTMLCode) {
+        HTMLCodeElement.innerHTML = encodeHTMLEntities(HTMLCode.outerHTML);
+      }
+
       if (Object.keys(componentJS).indexOf(importName) > -1) {
-        eval(componentJS[importName]);
+        const js = componentJS[importName];
+        eval(js);
+        const JSCodeElement = document.querySelector('#' + importName + '-js-code');
+        const JSCodeToggleElement = document.querySelector('#' + importName + '-js-show-code');
+        if (JSCodeElement) {
+          JSCodeElement.innerHTML = js;
+          JSCodeToggleElement.classList.remove('hidden');
+        }
       }
     }
   }
+
+  hljs.highlightAll();
 })();
 
 
