@@ -2,6 +2,9 @@ import fs from "fs";
 import path from "path";
 
 (async function () {
+
+  const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+
   const sectionNames = {
     'headers': new URL('../Sections/headers.html', import.meta.url),
   };
@@ -16,46 +19,95 @@ import path from "path";
     'header2': fs.readFileSync(path.join(__dirname, '/Components/header2.js'), "utf8"),
   };
 
+  const componentTemplateResponse = await fetch(new URL('../Templates/SectionComponent.html', import.meta.url));
+  const componentTemplate = await componentTemplateResponse.text();
+
   const sections = {};
   const components = {};
 
-  for (const type of [
-    {html: sections, urls: sectionNames},
-    {html: components, urls: componentNames}
-  ]) {
-    for (const el of document.querySelectorAll('[data-import]')) {
-      const importName = el.getAttribute('data-import');
-      if (Object.keys(type.html).indexOf(importName) > -1) {
-        el.outerHTML = components[importName];
+  for (const el of document.querySelectorAll('.header-section[data-import]')) {
+    const importName = el.getAttribute('data-import');
+    if (Object.keys(sections).indexOf(importName) > -1) {
+      el.outerHTML = components[importName];
 
-        if (typeof window[importName] === "function") {
-          window[importName]();
-        }
+      continue;
+    }
 
-        continue;
-      }
+    const resp = await fetch(sectionNames[importName]);
+    const html = await resp.text();
 
-      const resp = await fetch(type.urls[importName]);
-      const html = await resp.text();
+    components[importName] = html;
+    el.outerHTML = html;
+  }
 
+  for (const el of document.querySelectorAll('.component-section[data-import]')) {
+    const importName = el.getAttribute('data-import');
+
+    let component = componentTemplate;
+
+    component = component.replaceAll('{component}', importName);
+    component = component.replaceAll('{Component}', ucFirst(importName));
+    el.outerHTML = component;
+
+    const frame = document.querySelector("#" + importName + "-frame");
+    let doc = document.implementation.createHTMLDocument(importName + " Document");
+    let root = doc.createElement("div");
+
+    let html = null;
+    let js = null;
+
+    const storedHTML = Object.keys(components).indexOf(importName) > -1;
+    const hasJS = Object.keys(componentJS).indexOf(importName) > -1;
+
+    if (storedHTML) {
+      html = components[importName];
+    } else {
+      const resp = await fetch(componentNames[importName]);
+      html = await resp.text();
       components[importName] = html;
-      el.outerHTML = html;
+    }
 
-      const HTMLCode = document.querySelector('#' + importName);
-      const HTMLCodeElement = document.querySelector('#' + importName + '-html-code');
-      if (HTMLCodeElement && HTMLCode) {
-        HTMLCodeElement.innerHTML = encodeHTMLEntities(HTMLCode.outerHTML);
-      }
+    root.innerHTML = html;
+    doc.body.appendChild(root);
 
-      if (Object.keys(componentJS).indexOf(importName) > -1) {
-        const js = componentJS[importName];
-        eval(js);
-        const JSCodeElement = document.querySelector('#' + importName + '-js-code');
-        const JSCodeToggleElement = document.querySelector('#' + importName + '-js-show-code');
-        if (JSCodeElement) {
-          JSCodeElement.innerHTML = js;
-          JSCodeToggleElement.classList.remove('hidden');
-        }
+    const links = document.querySelectorAll('link');
+    Array.from(links).forEach(link => {
+      let linkEl = doc.createElement("link");
+      linkEl.href = link.href;
+      linkEl.rel = link.rel;
+      linkEl.type = link.type;
+      doc.head.appendChild(linkEl);
+    });
+
+    const viewport = doc.createElement("meta");
+    viewport.name = "viewport";
+    viewport.content = "width=device-width, initial-scale=1.0";
+    doc.head.appendChild(viewport);
+
+    let dest = frame.contentDocument;
+    let newNode = dest.importNode(doc.documentElement, true);
+    dest.replaceChild(newNode, dest.documentElement);
+
+    if (hasJS) {
+      js = componentJS[importName];
+
+      frame.contentWindow.eval(js);
+    }
+
+    const HTMLCodeElement = document.querySelector('#' + importName + '-html-code');
+    if (HTMLCodeElement) {
+      let htmlRoot = doc.createElement("div");
+      htmlRoot.innerHTML = html;
+      htmlRoot.querySelectorAll('script').forEach(el => el.remove());
+      HTMLCodeElement.innerHTML = encodeHTMLEntities(htmlRoot.innerHTML);
+    }
+
+    if (hasJS) {
+      const JSCodeElement = document.querySelector('#' + importName + '-js-code');
+      const JSCodeToggleElement = document.querySelector('#' + importName + '-js-show-code');
+      if (JSCodeElement) {
+        JSCodeElement.innerHTML = js;
+        JSCodeToggleElement.classList.remove('hidden');
       }
     }
   }
