@@ -7,12 +7,14 @@ import path from "path";
 
   const sectionNames = {
     'headers': new URL('../Sections/headers.html', import.meta.url),
+    'hero': new URL('../Sections/hero.html', import.meta.url),
   };
 
   const componentNames = {
     'header1': new URL('../Components/header1.html', import.meta.url),
     'header2': new URL('../Components/header2.html', import.meta.url),
     'header3': new URL('../Components/header3.html', import.meta.url),
+    'hero1': new URL('../Components/hero1.html', import.meta.url),
   };
 
   const componentJS = {
@@ -77,7 +79,6 @@ import path from "path";
       let linkEl = doc.createElement("link");
       linkEl.href = link.href;
       linkEl.rel = link.rel;
-      linkEl.type = link.type;
       doc.head.appendChild(linkEl);
     });
 
