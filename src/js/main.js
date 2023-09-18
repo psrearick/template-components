@@ -5,6 +5,7 @@ const sectionNames = {
   'headers': new URL('../Sections/headers.html', import.meta.url),
   'hero': new URL('../Sections/hero.html', import.meta.url),
   'text': new URL('../Sections/text.html', import.meta.url),
+  'services': new URL('../Sections/services.html', import.meta.url),
 };
 
 const componentNames = {
@@ -13,6 +14,7 @@ const componentNames = {
   'header3': new URL('../Components/header3.html', import.meta.url),
   'hero1': new URL('../Components/hero1.html', import.meta.url),
   'text1': new URL('../Components/text1.html', import.meta.url),
+  'services1': new URL('../Components/services1.html', import.meta.url),
 };
 
 const componentJS = {
