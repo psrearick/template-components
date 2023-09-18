@@ -1,7 +1,7 @@
 <!-- {component} -->
-<div class="mb-16">
+<div class="mb-16 max-w-7xl mx-auto">
     <!-- header and toggle -->
-    <div class="flex gap-4 max-w-7xl mx-auto">
+    <div class="flex gap-4 mx-auto">
         <!-- header -->
         <div class="flex flex-col justify-center">
             <h3 class="text-gray-600 text-2xl font-bold font-serif">{Component}</h3>
@@ -25,29 +25,27 @@
     <!-- end header and toggle -->
 
   <!-- code HTML display -->
-  <div class="bg-gray-200 m-4 px-4 rounded-lg">
-        <pre class="hidden">
-            <code id="{component}-html-code" class="component-code block rounded-lg overflow-scroll text-xs language-html"></code>
+  <div class="bg-gray-200 mb-8 px-4 rounded-lg">
+        <pre class="hidden max-w-6xl mx-auto">
+            <code id="{component}-html-code" class="component-code block rounded-lg overflow-auto text-xs language-html"></code>
         </pre>
   </div>
   <!-- end code HTML display -->
 
     <!-- code JS display -->
-    <div class="bg-gray-200 m-4 px-4 rounded-lg">
-        <pre class="hidden">
-            <code id="{component}-js-code" class="component-code block rounded-lg overflow-scroll text-xs language-js"></code>
+    <div class="bg-gray-200 mb-8 px-4 rounded-lg">
+        <pre class="hidden max-w-6xl mx-auto">
+            <code id="{component}-js-code" class="component-code block rounded-lg overflow-auto text-xs language-js"></code>
         </pre>
     </div>
     <!-- end code JS display -->
 
-<!--    <div class="w-full border-b border-primary-500 border-dashed"></div>-->
     <!-- {Component} Component -->
-    <div id="{component}" class="mx-32 py-8 bg-gray-200 rounded-xl">
-      <div class="max-w-7xl mx-auto">
+    <div id="{component}" class="py-8 bg-gray-200 rounded-xl">
+      <div class="max-w-6xl mx-auto">
         <iframe class="w-full h-full max-w-full min-h-[200px] bg-white resize rounded-lg" title="{component}-frame" id="{component}-frame" src="about:blank"></iframe>
       </div>
     </div>
     <!-- end {Component} Component -->
-<!--    <div class="w-full border-b border-primary-500 border-dashed"></div>-->
 </div>
 <!-- end {component} -->
