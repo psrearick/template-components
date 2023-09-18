@@ -1,0 +1,105 @@
+<!-- header-1 -->
+<div>
+    <!-- header and toggle -->
+    <div class="flex gap-4">
+        <!-- header -->
+        <div class="flex flex-col justify-center">
+            <h3 class="text-gray-600 text-2xl font-bold font-serif">Header-1</h3>
+        </div>
+        <!-- end header -->
+        <!-- toggle code -->
+        <button id="header-1-show-code"
+                class="showCode bg-primary-500 rounded-lg my-4 text-white hover:text-primary-200 hover:bg-primary-700 py-2 px-4">
+            Toggle Code
+        </button>
+        <!-- end toggle code -->
+    </div>
+    <!-- end header and toggle -->
+
+    <!-- code display -->
+    <div class="bg-gray-100 m-4 px-4 rounded-lg">
+        <pre class="hidden">
+            <code id="header-1-code" class="component-code block rounded-lg overflow-scroll text-xs"></code>
+        </pre>
+    </div>
+    <!-- end code display -->
+
+    <div class="w-full border-b border-primary-500 border-dashed"></div>
+    <!-- Header-1 Component -->
+      <div id="header-1" class="group data-[checked]:z-10 z-0 sticky top-0
+                transition-[z-index] duration-500 ease-[steps(2, jump-both)]
+            ">
+        <nav aria-label="header navbar" class="bg-white h-16">
+          <div class="w-11/12 max-w-[64rem] m-auto flex flex-row-reverse justify-between items-center relative h-full">
+
+            <!-- Menu Toggle -->
+            <div class="h-[1.626rem] w-8 relative lg:hidden">
+              <!-- Lines -->
+              <div class="flex flex-col justify-between h-full w-full absolute">
+                <span class="block h-1 w-full bg-gray-700 rounded-xl origin-top-left ease-in-out duration-300 group-data-[checked]:rotate-45"></span>
+                <span class="block h-1 w-full bg-gray-700 rounded-xl ease-in-out duration-300 group-data-[checked]:scale-y-0"></span>
+                <span class="block h-1 w-full bg-gray-700 rounded-xl origin-bottom-left ease-in-out duration-300 group-data-[checked]:-rotate-45"></span>
+              </div>
+              <!-- End Lines-->
+              <!-- Checkbox-->
+              <label class="cursor-pointer w-8
+                            group-data-[checked]:fixed absolute
+                            group-data-[checked]:h-auto h-[1.626rem]
+                            group-data-[checked]:lg:w-2/3 group-data-[checked]:w-1/3
+                            group-data-[checked]:right-0 group-data-[checked]:inset-y-0"
+              >
+                <input type="checkbox" class="opacity-0 cursor-pointer"/>
+              </label>
+              <!-- End Checkbox-->
+            </div>
+            <!-- End Menu Toggle -->
+
+            <!-- navigation links -->
+            <div class="bg-white shadow-2xl lg:shadow-none py-20 text-center
+                                    fixed left-0 top-0 bottom-0 w-2/3 lg:p-0
+                                    lg:relative lg:visible lg:translate-x-0 lg:h-auto lg:w-auto
+                                    ease-in-out duration-500 invisible lg:duration-0 translate-x-[-150%]
+                                    group-data-[checked]:visible group-data-[checked]:translate-x-0
+                                    overflow-auto scrollbar-hidden">
+              <ul class="flex flex-col lg:flex-row gap-4 h-full text-gray-700 text-lg">
+                <li class="hover:text-primary-500"><a href="#">Home</a></li>
+                <li class="hover:text-primary-500"><a href="#">About</a></li>
+                <li class="hover:text-primary-500"><a href="#">Blogs</a></li>
+                <li class="hover:text-primary-500"><a href="#">Portfolio</a></li>
+                <li class="hover:text-primary-500"><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <!-- end navigation links -->
+
+            <!-- site title -->
+            <div>
+              <a href="#">
+                <h1 class="text-gray-700 font-bold text-2xl">Navbar #header-1</h1>
+              </a>
+            </div>
+            <!-- end site title -->
+          </div>
+          <script>
+            (function () {
+              const navbarSelector = "#header-1";
+              const body = document.querySelector("body");
+              const navbar = document.querySelector(navbarSelector);
+              const checkbox = document.querySelector(navbarSelector + " input[type=checkbox]");
+
+              checkbox.addEventListener('change', function () {
+                if (this.checked) {
+                  navbar.setAttribute('data-checked', '');
+                  body.classList.add('overflow-hidden');
+                } else {
+                  navbar.removeAttribute('data-checked');
+                  body.classList.remove('overflow-hidden');
+                }
+              });
+            }());
+          </script>
+        </nav>
+    </div>
+    <!-- end Header-1 Component -->
+    <div class="w-full border-b border-primary-500 border-dashed"></div>
+</div>
+<!-- end header-1 -->
