@@ -14,6 +14,7 @@ const componentNames = {
   'header3': new URL('../Components/header3.html', import.meta.url),
   'hero1': new URL('../Components/hero1.html', import.meta.url),
   'text1': new URL('../Components/text1.html', import.meta.url),
+  'text2': new URL('../Components/text2.html', import.meta.url),
   'services1': new URL('../Components/services1.html', import.meta.url),
 };
 
