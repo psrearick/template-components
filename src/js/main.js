@@ -25,6 +25,7 @@ const componentJS = {
   'header3': fs.readFileSync(path.join(__dirname, '/Components/header3.js'), "utf8"),
 };
 
+const componentCode = {};
 
 const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
@@ -103,35 +104,37 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
       frame.contentWindow.eval(js);
     }
 
-    // const nodeFrame = document.querySelector('#' + importName + " iframe");
-    // const frameDoc = nodeFrame.contentWindow.document;
-    // const frameEl = frameDoc.querySelector('.' + importName + '-frame-el');
-    // const scrollHeight = frameEl.getAttribute('data-height');
-    //
-    // if (scrollHeight) {
-    //   console.log(scrollHeight);
-    //   nodeFrame.style.height = scrollHeight + 'px';
-    // }
+    const nodeFrame = document.querySelector('#' + importName + " iframe");
+    const frameDoc = nodeFrame.contentWindow.document;
+    const frameEl = frameDoc.querySelector('.' + importName + '-frame-el');
+    const scrollHeight = frameEl.getAttribute('data-height');
 
-    const HTMLCodeElement = document.querySelector('#' + importName + '-html-code');
-    if (HTMLCodeElement) {
-      let htmlRoot = doc.createElement("div");
-      htmlRoot.innerHTML = html;
-      htmlRoot.querySelectorAll('script').forEach(el => el.remove());
-      HTMLCodeElement.innerHTML = encodeHTMLEntities(htmlRoot.innerHTML);
+    if (scrollHeight) {
+      nodeFrame.style.height = scrollHeight + 'px';
     }
 
+    const codeConfig = {
+      html: {
+        element: document.querySelector('#' + importName + '-html-code'),
+        code: html,
+      },
+    };
+
     if (hasJS) {
+      codeConfig.js = {
+        element: document.querySelector('#' + importName + '-js-code'),
+        code: js,
+      }
+
       const JSCodeElement = document.querySelector('#' + importName + '-js-code');
       const JSCodeToggleElement = document.querySelector('#' + importName + '-js-show-code');
       if (JSCodeElement) {
-        JSCodeElement.innerHTML = js;
         JSCodeToggleElement.classList.remove('hidden');
       }
     }
-  }
 
-  hljs.highlightAll();
+    componentCode[importName] = codeConfig;
+  }
 })();
 
 function encodeHTMLEntities(text) {
@@ -182,7 +185,24 @@ addEventListener("click", (event) => {
   }
 
   if (id.indexOf('-show-code') > -1) {
+    const componentNameWithType = id.replace('-show-code', '');
+    const exploded = componentNameWithType.split('-');
+    const componentType = exploded.pop();
+    const componentName = exploded.join("");
     const codeElement = document.querySelector("#" + id.replace('-show-code', '-code'));
+    let code = componentCode[componentName][componentType].code;
+
+    if (componentType === 'html') {
+      let htmlRoot = document.createElement("div");
+      htmlRoot.innerHTML = code;
+      htmlRoot.querySelectorAll('script').forEach(el => el.remove());
+      code = encodeHTMLEntities(htmlRoot.innerHTML);
+    }
+
+    codeElement.innerHTML = code;
+
+    hljs.highlightElement(codeElement);
+
     const pre = codeElement.parentElement;
     const visible = pre.classList.contains('block');
 
