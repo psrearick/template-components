@@ -57,6 +57,7 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
     component = component.replaceAll('{component}', importName);
     component = component.replaceAll('{Component}', ucFirst(importName));
+
     el.outerHTML = component;
 
     const frame = document.querySelector("#" + importName + "-frame");
