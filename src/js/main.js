@@ -102,19 +102,15 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
       frame.contentWindow.eval(js);
     }
 
-    const nodeFrame = document.querySelector('#' + importName + " iframe");
-    const frameDoc = nodeFrame.contentWindow.document;
-    const frameEl = frameDoc.querySelector('.' + importName + '-frame-el');
-    const scrollHeight = frameEl.getAttribute('data-height');
-
-    if (scrollHeight) {
-      console.log(scrollHeight);
-      nodeFrame.style.height = scrollHeight + 'px';
-    }
-
-    // const minHeight = node.getAttribute('data-height');
-    // console.log(minHeight, node);
-    // console.log(.body.scrollHeight);
+    // const nodeFrame = document.querySelector('#' + importName + " iframe");
+    // const frameDoc = nodeFrame.contentWindow.document;
+    // const frameEl = frameDoc.querySelector('.' + importName + '-frame-el');
+    // const scrollHeight = frameEl.getAttribute('data-height');
+    //
+    // if (scrollHeight) {
+    //   console.log(scrollHeight);
+    //   nodeFrame.style.height = scrollHeight + 'px';
+    // }
 
     const HTMLCodeElement = document.querySelector('#' + importName + '-html-code');
     if (HTMLCodeElement) {
