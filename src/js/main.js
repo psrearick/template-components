@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import hljs from "./vendor/highlight.min.js";
 
 const sectionNames = {
   'headers': new URL('../Sections/headers.html', import.meta.url),
