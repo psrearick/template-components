@@ -12,22 +12,55 @@
   <meta property="og:url" content="">
   <meta property="og:image" content="">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="./site.webmanifest">
+  <link rel="apple-touch-icon" href="./icon.png">
   <!-- Place favicon.ico in the root directory -->
 
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/night-owl.min.css">
+  <link rel="stylesheet" href="./css/night-owl.min.css">
 
   <meta name="theme-color" content="#fafafa">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+    @font-face {
+      font-family: 'Inter';
+      font-weight: 300;
+      src: url('./fonts/Inter-Light.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      font-weight: 400;
+      src: url('./fonts/Inter-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Inter';
+      font-weight: bold;
+      src: url('./fonts/Inter-Bold.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Montserrat';
+      font-weight: 300;
+      src: url('./fonts/Montserrat-Light.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Montserrat';
+      font-weight: 400;
+      src: url('./fonts/Montserrat-Regular.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Montserrat';
+      font-weight: bold;
+      src: url('./fonts/Montserrat-Bold.ttf') format('truetype');
+    }
   </style>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="./js/vendor/highlight.min.js"></script>
 </head>
 
 <body class="font-sans bg-white">
@@ -42,13 +75,6 @@
   <script src="./js/vendor/modernizr-3.11.2.min.js"></script>
   <script src="./js/plugins.js"></script>
   <script type="module" src="./js/main.js"></script>
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 
 </html>
