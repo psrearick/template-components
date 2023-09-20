@@ -61,8 +61,6 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
     el.outerHTML = component;
 
     const frame = document.querySelector("#" + importName + "-frame");
-    let doc = document.implementation.createHTMLDocument(importName + " Document");
-    let root = doc.createElement("div");
 
     let html = null;
     let js = null;
@@ -78,40 +76,12 @@ const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
       components[importName] = html;
     }
 
-    root.innerHTML = html;
-    root.firstChild.classList.add(importName + "-frame-el");
-    doc.body.appendChild(root);
-
-    const links = document.querySelectorAll('link');
-    Array.from(links).forEach(link => {
-      let linkEl = doc.createElement("link");
-      linkEl.href = link.href;
-      linkEl.rel = link.rel;
-      doc.head.appendChild(linkEl);
-    });
-
-    const viewport = doc.createElement("meta");
-    viewport.name = "viewport";
-    viewport.content = "width=device-width, initial-scale=1.0";
-    doc.head.appendChild(viewport);
-
-    let dest = frame.contentDocument;
-    let newNode = dest.importNode(doc.documentElement, true);
-    dest.replaceChild(newNode, dest.documentElement);
+    frame.innerHTML = html;
 
     if (hasJS) {
       js = componentJS[importName];
 
-      frame.contentWindow.eval(js);
-    }
-
-    const nodeFrame = document.querySelector('#' + importName + " iframe");
-    const frameDoc = nodeFrame.contentWindow.document;
-    const frameEl = frameDoc.querySelector('.' + importName + '-frame-el');
-    const scrollHeight = frameEl.getAttribute('data-height');
-
-    if (scrollHeight) {
-      nodeFrame.style.height = scrollHeight + 'px';
+      eval(js);
     }
 
     const codeConfig = {
