@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ["Inter", "Nunito", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif"],
-        'serif': ["Montserrat", "Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+        'sans': ["Nunito", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif"],
+        'serif': ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
       },
       colors: {
         gray: colors.slate,

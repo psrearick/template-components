@@ -52,6 +52,14 @@
   }
 }
 
+.font-sans.fonts-loaded {
+  font-family: Inter, Nunito, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+.font-serif.fonts-loaded {
+  font-family: Montserrat, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }

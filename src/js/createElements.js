@@ -1,5 +1,6 @@
 import {componentJS, componentNames, sectionNames} from "./elementDefinitions";
 import {encodeHTMLEntities, ucFirst} from "./utilities";
+import FontFaceObserver from "fontfaceobserver";
 
 const sections = {};
 let components = {};
@@ -79,5 +80,18 @@ export const createCodeElement = (code) => {
   htmlRoot.querySelectorAll('script').forEach(el => el.remove());
 
   return encodeHTMLEntities(htmlRoot.innerHTML);
+};
+
+export const loadFonts = () => {
+  const MontserratObserver = new FontFaceObserver('Montserrat');
+  const InterObserver = new FontFaceObserver('Inter');
+
+  Promise.all([
+    MontserratObserver.load(),
+    InterObserver.load(),
+  ]).then(() => {
+    document.querySelectorAll('.font-sans').forEach(el => el.classList.add('fonts-loaded'));
+    document.querySelectorAll('.font-serif').forEach(el => el.classList.add('fonts-loaded'));
+  });
 };
 

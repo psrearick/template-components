@@ -41,5 +41,8 @@
       "distDir": "./dist",
       "publicUrl": "."
     }
+  },
+  "dependencies": {
+    "fontfaceobserver": "^2.3.0"
   }
 }

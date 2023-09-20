@@ -1,4 +1,4 @@
-import {addElementsToDom, createComponents, createSections} from "./createElements";
+import {addElementsToDom, createComponents, createSections, loadFonts} from "./createElements";
 import {addEventListeners} from "./addEventListeners";
 
 Promise.all([
@@ -6,4 +6,5 @@ Promise.all([
   createComponents(),
 ])
   .then(addElementsToDom)
-  .then(async (componentCode) => await addEventListeners(componentCode));
+  .then(async (componentCode) => await addEventListeners(componentCode))
+  .then(loadFonts);

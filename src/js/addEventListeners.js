@@ -1,7 +1,7 @@
 import hljs from "./vendor/highlight.min.js";
 import {createCodeElement} from "./createElements";
 
-export const addEventListeners = (componentCode) => {
+export const addEventListeners = async (componentCode) => {
   console.log(componentCode);
   addEventListener("click", async (event) => {
     const id = event.target.id;
