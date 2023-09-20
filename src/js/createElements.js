@@ -82,7 +82,7 @@ export const createCodeElement = (code) => {
   return encodeHTMLEntities(htmlRoot.innerHTML);
 };
 
-export const loadFonts = () => {
+export const loadFonts = async () => {
   const MontserratObserver = new FontFaceObserver('Montserrat');
   const InterObserver = new FontFaceObserver('Inter');
 

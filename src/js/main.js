@@ -1,10 +1,16 @@
 import {addElementsToDom, createComponents, createSections, loadFonts} from "./createElements";
 import {addEventListeners} from "./addEventListeners";
+import {updateResponsiveClasses} from "./updateResponsiveClasses";
+import {addContainerQueries} from "./addContainerQueries";
 
 Promise.all([
   createSections(),
   createComponents(),
 ])
-  .then(addElementsToDom)
+  .then(async () => await addElementsToDom())
   .then(async (componentCode) => await addEventListeners(componentCode))
-  .then(loadFonts);
+  .then(async () => updateResponsiveClasses())
+  .then(async () => await addContainerQueries())
+  .then(async () => await loadFonts());
+
+
