@@ -26,4 +26,5 @@ export const componentJS = {
   'header1': fs.readFileSync(path.join(__dirname, '/Components/header1.js'), "utf8"),
   'header2': fs.readFileSync(path.join(__dirname, '/Components/header2.js'), "utf8"),
   'header3': fs.readFileSync(path.join(__dirname, '/Components/header3.js'), "utf8"),
+  'faq1': fs.readFileSync(path.join(__dirname, '/Components/faq1.js'), "utf8"),
 };
