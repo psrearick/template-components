@@ -6,6 +6,7 @@ export const sectionNames = {
   'hero': new URL('../Sections/hero.html', import.meta.url),
   'text': new URL('../Sections/text.html', import.meta.url),
   'services': new URL('../Sections/services.html', import.meta.url),
+  'contact': new URL('../Sections/contact.html', import.meta.url),
 };
 
 export const componentNames = {
@@ -16,6 +17,7 @@ export const componentNames = {
   'text1': new URL('../Components/text1.html', import.meta.url),
   'text2': new URL('../Components/text2.html', import.meta.url),
   'services1': new URL('../Components/services1.html', import.meta.url),
+  'contact1': new URL('../Components/contact1.html', import.meta.url),
 };
 
 export const componentJS = {
