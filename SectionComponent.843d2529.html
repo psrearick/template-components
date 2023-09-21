@@ -39,9 +39,26 @@
     <!-- end code JS display -->
 
     <!-- {Component} Component -->
-    <div id="{component}" class="py-8 bg-gray-200 rounded-xl">
+    <div id="{component}" class="py-8 bg-gray-200 rounded-xl component">
       <div class="max-w-6xl mx-auto">
+        <!-- Change Screen Size -->
+        <div class="hidden lg:block">
+          <div class="grid grid-cols-3 py-4 gap-4">
+            <button class="btn btn-md col-span-3 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-mobile">
+              <span class="block">Mobile</span>
+            </button>
+            <button class="btn btn-md col-span-3 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-tablet">
+              <span class="block">Tablet</span>
+            </button>
+            <button class="btn btn-md col-span-3 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-desktop">
+              <span class="block">Desktop</span>
+            </button>
+          </div>
+        </div>
+        <!-- end Change Screen Size -->
+        <!-- Component Container -->
         <div class="w-full h-full max-w-full min-h-[200px] bg-white overflow-auto rounded-lg resize frame @container" title="{component}-frame" id="{component}-frame"></div>
+        <!-- end Component Container -->
       </div>
     </div>
     <!-- end {Component} Component -->
