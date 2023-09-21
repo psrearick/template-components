@@ -176,18 +176,38 @@ const addResizeListener = () => {
 
 const toggleAllSections = () => {
   document.querySelector('#toggle-sections-button').addEventListener('click', () => {
-    document.querySelectorAll('[id$="-section-header"]').forEach((element) => {
-      toggleSectionByElement(element);
+    const headers = Array.from(document.querySelectorAll('[id$="-section-header"]'));
+    const closedSections = headers.filter(header => {
+      const section = document.querySelector("#" + header.getAttribute('id').replace('-section-header', ''));
+      return section.classList.contains('hidden')
+    }).length;
+
+    headers.forEach((element) => {
+      toggleSectionByElement(element, closedSections > 0);
     });
   });
 };
 
-const toggleSectionByElement = (element) => {
+const toggleSectionByElement = (element, value = null) => {
   const section = document.querySelector("#" + element.getAttribute('id').replace('-section-header', ''));
   const hidden = section.classList.contains('hidden');
 
-  section.classList.remove(hidden ? 'hidden' : 'block');
-  section.classList.add(hidden ? 'block' : 'hidden');
+  if (value === null || value === undefined) {
+    section.classList.remove(hidden ? 'hidden' : 'block');
+    section.classList.add(hidden ? 'block' : 'hidden');
+
+    return;
+  }
+
+  if (value && hidden) {
+    section.classList.remove('hidden');
+  }
+
+  if (value) {
+    return;
+  }
+
+  section.classList.add('hidden');
 };
 
 export const addEventListeners = (componentCode) => {

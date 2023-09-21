@@ -3,6 +3,7 @@ import path from "path";
 
 export const sectionNames = {
   'headers': new URL('../Sections/headers.html', import.meta.url),
+  'footers': new URL('../Sections/footers.html', import.meta.url),
   'hero': new URL('../Sections/hero.html', import.meta.url),
   'text': new URL('../Sections/text.html', import.meta.url),
   'services': new URL('../Sections/services.html', import.meta.url),
@@ -20,6 +21,7 @@ export const componentNames = {
   'services1': new URL('../Components/services1.html', import.meta.url),
   'contact1': new URL('../Components/contact1.html', import.meta.url),
   'faq1': new URL('../Components/faq1.html', import.meta.url),
+  'footer1': new URL('../Components/footer1.html', import.meta.url),
 };
 
 export const componentJS = {
