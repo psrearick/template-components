@@ -136,7 +136,7 @@ const resizeScreenSize = (screen, element) => {
     scale = componentWidth / frameWidth;
   }
 
-  element.style.transform = "scale(" + scale.toFixed(2) + ")";
+  element.style.transform = "scale(" + Math.min(scale, 1).toFixed(2) + ")";
   element.style.resize = "none";
 
   frameHeight = element.getBoundingClientRect().height;
