@@ -4,7 +4,7 @@
 
 @layer components {
   .accordion-title {
-    @apply cursor-pointer text-primary-500 hover:text-primary-800
+    @apply cursor-pointer text-primary-600 hover:text-primary-800
             border-b border-primary-100 hover:border-primary-800
             px-4 py-4 mb-4 mt-8 flex justify-between items-center uppercase
   }
@@ -97,6 +97,10 @@
   .link-text-active {
     background-color: theme('colors.primary.700');
     color: theme('colors.white');
+  }
+
+  .secondary-link-text {
+    @apply text-secondary-600 hover:text-secondary-300 underline
   }
 
   .link-text-active:hover {
