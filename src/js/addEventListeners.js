@@ -87,63 +87,71 @@ const resetScreenSize = (element) => {
   element.style.marginTop = "";
   element.style.marginBottom = "";
   element.style.resize = "";
+  element.style.marginLeft = "";
+  element.style.marginRight = "";
 };
 
 const resizeScreenSize = (screen, element) => {
   if (Object.keys(sizes).indexOf(screen) === -1) {
     resetScreenSize(element);
-
     element.removeAttribute('data-exact-size');
 
     return;
   }
-  const component = element.closest('.component');
-  const componentWidth= component.getBoundingClientRect().width;
-  const componentHeight= component.getBoundingClientRect().height;
-  const targetScreenSize = sizes[screen];
 
-  let frameWidth = element.getBoundingClientRect().width;
+  let rotate;
 
-  let rotate = false;
-  if (element.hasAttribute('data-exact-size')) {
-    const attribute = element.getAttribute('data-exact-size');
+  if (!element.hasAttribute('data-exact-size')) {
+    element.setAttribute('data-exact-size', screen + "-reset");
+  }
 
-    if (attribute.indexOf('-rotated') > -1) {
-      element.setAttribute('data-exact-size', screen);
-      rotate = false;
-    } else {
-      element.setAttribute('data-exact-size', screen + "-rotated");
-      rotate = true;
-    }
-  } else {
+  const attribute = element.getAttribute('data-exact-size');
+
+  if (attribute.indexOf('-reset') > -1 || attribute.indexOf('-rotated') > -1) {
     element.setAttribute('data-exact-size', screen);
     rotate = false;
+  } else {
+    element.setAttribute('data-exact-size', screen + "-rotated");
+    rotate = true;
   }
 
   resetScreenSize(element);
 
+  const component = element.closest('.component-container');
+  const componentWidth= component.getBoundingClientRect().width;
+  const targetScreenSize = sizes[screen];
+
   element.style.width = (rotate ? targetScreenSize.height : targetScreenSize.width) + 'px';
   element.style.height = (rotate ? targetScreenSize.width : targetScreenSize.height) + 'px';
 
-  const frameDimensions = element.getBoundingClientRect();
-  frameWidth = frameDimensions.width;
-  const frameHeight = frameDimensions.height;
+  let frameDimensions = element.getBoundingClientRect();
+  let frameHeight = frameDimensions.height;
+  const frameWidth = frameDimensions.width;
   const windowHeight = window.innerHeight;
   const currentScale = frameHeight / windowHeight;
   let scale = 0.8 / currentScale;
   const scaledWidth = frameWidth * scale;
 
   if (scaledWidth > componentWidth) {
-    scale = component / frameWidth;
+    scale = componentWidth / frameWidth;
   }
 
-  const scaledHeight = scale * frameHeight;
-  const heightDifference = frameHeight - scaledHeight;
-
   element.style.transform = "scale(" + scale.toFixed(2) + ")";
-  element.style.marginTop = "-" + heightDifference/3 + "px";
-  element.style.marginBottom = "-" + heightDifference/3 + "px";
   element.style.resize = "none";
+
+  frameHeight = element.getBoundingClientRect().height;
+  const componentHeight = component.getBoundingClientRect().height;
+
+  const desiredYMargin = 20;
+  const heightDifference = componentHeight - frameHeight;
+  if ((heightDifference) > desiredYMargin) {
+    const marginShift = heightDifference / 2;
+    element.style.marginTop = "-" + marginShift + "px";
+    element.style.marginBottom = "-" + marginShift + "px";
+  }
+
+  element.style.marginLeft = "auto";
+  element.style.marginRight = "auto";
 };
 
 const addResizeListener = () => {
