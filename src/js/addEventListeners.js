@@ -4,17 +4,6 @@ import {createCodeElement} from "./createElements";
 const toggleCodeSection = (componentCode) => {
   document.querySelectorAll('[id$="-show-code"]').forEach((element) => {
     element.addEventListener("click", async (event) => {
-      // const id = event.target.id;
-      // const parentId = event.target.parentElement.id;
-      //
-      // if (!id && !parentId) {
-      //   return;
-      // }
-      //
-      // if (id.indexOf('-show-code') === -1) {
-      //   return;
-      // }
-
       const componentNameWithType = element.getAttribute('id').replace('-show-code', '');
       const exploded = componentNameWithType.split('-');
       const componentType = exploded.pop();
@@ -33,13 +22,8 @@ const toggleCodeSection = (componentCode) => {
       const pre = codeElement.parentElement;
       const visible = pre.classList.contains('block');
 
-      // if (visible) {
-        pre.classList.remove(visible ? 'block' : 'hidden');
-        pre.classList.add(visible ? 'hidden' : 'block');
-      // } else {
-      //   pre.classList.remove('hidden');
-      //   pre.classList.add('block');
-      // }
+      pre.classList.remove(visible ? 'block' : 'hidden');
+      pre.classList.add(visible ? 'hidden' : 'block');
     });
   });
 }
@@ -47,15 +31,7 @@ const toggleCodeSection = (componentCode) => {
 const toggleSection = () => {
   document.querySelectorAll('[id$="-section-header"]').forEach((element) => {
     element.addEventListener("click", async (event) => {
-      const section = document.querySelector("#" + element.getAttribute('id').replace('-section-header', ''));
-
-      if (section.classList.contains('hidden')) {
-        section.classList.remove('hidden');
-        section.classList.add('block');
-      } else {
-        section.classList.remove('block');
-        section.classList.add('hidden');
-      }
+      toggleSectionByElement(element);
     });
   });
 };
@@ -113,6 +89,19 @@ const addResizeListener = () => {
 }
 
 const toggleAllSections = () => {
+  document.querySelector('#toggle-sections-button').addEventListener('click', () => {
+    document.querySelectorAll('[id$="-section-header"]').forEach((element) => {
+      toggleSectionByElement(element);
+    });
+  });
+};
+
+const toggleSectionByElement = (element) => {
+  const section = document.querySelector("#" + element.getAttribute('id').replace('-section-header', ''));
+  const hidden = section.classList.contains('hidden');
+
+  section.classList.remove(hidden ? 'hidden' : 'block');
+  section.classList.add(hidden ? 'block' : 'hidden');
 };
 
 export const addEventListeners = (componentCode) => {
