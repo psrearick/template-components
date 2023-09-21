@@ -51,40 +51,118 @@ const sizes = {
   },
 };
 
-const selectScreenSize = (screen, element) => {
+const resizeObserver = new ResizeObserver((entries) => {
+  for (const entry of entries) {
+    const el = entry.target;
+    const width = el.getBoundingClientRect().width;
+    const height = el.getBoundingClientRect().height;
+    const screen = el.getAttribute('data-exact-size');
 
-  const targetScreenSize = sizes[screen];
-  const frameWidth = element.getBoundingClientRect().width;
+    if (Object.keys(sizes).indexOf(screen) === -1) {
+      entry.target.setAttribute('data-exact-size', 'false');
 
-  if (frameWidth !== targetScreenSize.width) {
-    element.style.width = targetScreenSize.width + 'px';
-    element.style.height = targetScreenSize.height + 'px';
+      return;
+    }
+
+    if (width !== sizes[screen].width) {
+      entry.target.setAttribute('data-exact-size', 'false');
+
+      return;
+    }
+
+    if (height !== sizes[screen].height) {
+      entry.target.setAttribute('data-exact-size', 'false');
+
+      return;
+    }
+
+    entry.target.setAttribute('data-exact-size', screen);
+  }
+});
+
+const resetScreenSize = (element) => {
+  element.style.width = "";
+  element.style.height = "";
+  element.style.transform = "";
+  element.style.marginTop = "";
+  element.style.marginBottom = "";
+  element.style.resize = "";
+};
+
+const resizeScreenSize = (screen, element) => {
+  if (Object.keys(sizes).indexOf(screen) === -1) {
+    resetScreenSize(element);
+
+    element.removeAttribute('data-exact-size');
 
     return;
   }
+  const component = element.closest('.component');
+  const componentWidth= component.getBoundingClientRect().width;
+  const componentHeight= component.getBoundingClientRect().height;
+  const targetScreenSize = sizes[screen];
 
-  element.style.height = targetScreenSize.width + 'px';
-  element.style.width = targetScreenSize.height + 'px';
+  let frameWidth = element.getBoundingClientRect().width;
+
+  let rotate = false;
+  if (element.hasAttribute('data-exact-size')) {
+    const attribute = element.getAttribute('data-exact-size');
+
+    if (attribute.indexOf('-rotated') > -1) {
+      element.setAttribute('data-exact-size', screen);
+      rotate = false;
+    } else {
+      element.setAttribute('data-exact-size', screen + "-rotated");
+      rotate = true;
+    }
+  } else {
+    element.setAttribute('data-exact-size', screen);
+    rotate = false;
+  }
+
+  resetScreenSize(element);
+
+  element.style.width = (rotate ? targetScreenSize.height : targetScreenSize.width) + 'px';
+  element.style.height = (rotate ? targetScreenSize.width : targetScreenSize.height) + 'px';
+
+  const frameDimensions = element.getBoundingClientRect();
+  frameWidth = frameDimensions.width;
+  const frameHeight = frameDimensions.height;
+  const windowHeight = window.innerHeight;
+  const currentScale = frameHeight / windowHeight;
+  let scale = 0.8 / currentScale;
+  const scaledWidth = frameWidth * scale;
+
+  if (scaledWidth > componentWidth) {
+    scale = component / frameWidth;
+  }
+
+  const scaledHeight = scale * frameHeight;
+  const heightDifference = frameHeight - scaledHeight;
+
+  element.style.transform = "scale(" + scale.toFixed(2) + ")";
+  element.style.marginTop = "-" + heightDifference/3 + "px";
+  element.style.marginBottom = "-" + heightDifference/3 + "px";
+  element.style.resize = "none";
 };
 
 const addResizeListener = () => {
   document.querySelectorAll(".responsive-button").forEach((button) => {
-    button
-      .addEventListener("click", (event) => {
-        let buttonElement = event.target;
+    button.addEventListener("click", (event) => {
+      let buttonElement = event.target;
 
-        if (!event.target.hasAttribute('data-button-id')) {
-          buttonElement = event.target.closest('[data-button-id]');
-        }
+      if (!event.target.hasAttribute('data-button-id')) {
+        buttonElement = event.target.closest('[data-button-id]');
+      }
 
-        const dataButtonId = buttonElement.getAttribute('data-button-id');
-        const componentElement = button.closest('.component');
-        const componentName = componentElement.getAttribute('id');
-        const frameElement = componentElement.querySelector('#' + componentName + '-frame');
-        const targetScreenSizeName = dataButtonId.replace(componentName + '-', '');
+      const dataButtonId = buttonElement.getAttribute('data-button-id');
+      const componentElement = button.closest('.component');
+      const componentName = componentElement.getAttribute('id');
+      const frameElement = componentElement.querySelector('#' + componentName + '-frame');
+      const targetScreenSizeName = dataButtonId.replace(componentName + '-', '');
 
-        selectScreenSize(targetScreenSizeName, frameElement);
-      });
+      resizeScreenSize(targetScreenSizeName, frameElement);
+    });
   });
 }
 
