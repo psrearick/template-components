@@ -8,10 +8,6 @@ document.querySelectorAll(faqSelector + " .accordion > li > .accordion-title")
       const hiddenIcon = listItem.querySelector('svg.hidden');
       const regularIcon = listItem.querySelector('svg:not(.hidden)');
 
-      console.log(event.target);
-      console.log(hiddenIcon);
-      console.log(regularIcon);
-
       regularIcon.classList.add('hidden');
       hiddenIcon.classList.remove('hidden');
 

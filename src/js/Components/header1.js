@@ -2,10 +2,7 @@ const navbarSelector = "#header-1";
 const navbar = document.querySelector(navbarSelector);
 const checkbox = document.querySelector(navbarSelector + " input[type=checkbox]");
 
-console.log(document);
-
 checkbox.addEventListener('change', function () {
-  console.log('change');
   if (this.checked) {
     navbar.setAttribute('data-checked', '');
   } else {

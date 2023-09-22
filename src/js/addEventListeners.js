@@ -91,7 +91,7 @@ const resetScreenSize = (element) => {
   element.style.marginRight = "";
 };
 
-const resizeScreenSize = (screen, element) => {
+export const resizeScreenSize = (screen, element, ratio = 0.8) => {
   if (Object.keys(sizes).indexOf(screen) === -1) {
     resetScreenSize(element);
     element.removeAttribute('data-exact-size');
@@ -129,7 +129,7 @@ const resizeScreenSize = (screen, element) => {
   const frameWidth = frameDimensions.width;
   const windowHeight = window.innerHeight;
   const currentScale = frameHeight / windowHeight;
-  let scale = 0.8 / currentScale;
+  let scale = ratio / currentScale;
   const scaledWidth = frameWidth * scale;
 
   if (scaledWidth > componentWidth) {
@@ -168,6 +168,8 @@ const addResizeListener = () => {
       const componentName = componentElement.getAttribute('id');
       const frameElement = componentElement.querySelector('#' + componentName + '-frame');
       const targetScreenSizeName = dataButtonId.replace(componentName + '-', '');
+
+      console.log(frameElement);
 
       resizeScreenSize(targetScreenSizeName, frameElement);
     });
