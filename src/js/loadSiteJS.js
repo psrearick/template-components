@@ -1,43 +1,50 @@
-import {componentNames, componentJS} from "./elementDefinitions";
-import {loadFonts} from "./createElements";
-import {resizeScreenSize} from "./addEventListeners";
+import { handleResizeEvent } from "./addEventListeners";
+import fs from "fs";
+import path from "path";
 
-export const loadSiteJS = async () => {
+let generator;
+let previewWindowHTML;
+
+const setPreviewWindowHTML = async () => {
+  if (previewWindowHTML) {
+    return;
+  }
+
+  previewWindowHTML = await generator.fetchCode(new URL('../Templates/PreviewWindow.html', import.meta.url));
+};
+
+const loadNavbar = () => {
   const navbarSelector = "#template-components-header";
-  const navbar = document.querySelector(navbarSelector);
-  const checkbox = document.querySelector(navbarSelector + " input[type=checkbox]");
+  let navBarJS = fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8");
+  navBarJS = navBarJS.replaceAll('{{selector}}', navbarSelector);
+  window.eval(navBarJS);
+};
 
-  checkbox.addEventListener('change', function () {
-    if (this.checked) {
-      navbar.setAttribute('data-checked', '');
-    } else {
-      navbar.removeAttribute('data-checked');
-    }
-  });
-
-  navbar.querySelectorAll('li, button').forEach(element => {
-    element.addEventListener('click', (event) => {
-      checkbox.checked = false;
-      const evt = new Event('change');
-      checkbox.dispatchEvent(evt);
-    });
-  });
-
+const hideBuildPanelListener = () => {
   document.querySelector('#hide-build-panel').addEventListener('click', function () {
     document.querySelector('#build-panel').classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    document.body.classList.remove('lg:overflow-auto');
     document.querySelectorAll('.add-component-button').forEach((element) => {
       element.closest('button').classList.add('hidden');
     });
   });
+};
+
+const showBuildPanelListener = () => {
   document.querySelector('#show-build-panel').addEventListener('click', function () {
     document.querySelector('#build-panel').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    document.body.classList.add('lg:overflow-auto');
     document.querySelectorAll('.add-component-button').forEach((element) => {
       element.closest('button').classList.remove('hidden');
     });
   });
+};
 
+const addComponentListener = async () => {
   document.querySelectorAll('.add-component-button').forEach(element => {
-    element.addEventListener('click', (event) => {
+    element.addEventListener('click', async (event) => {
       const component = event.target.closest('button').getAttribute('id').replace('add-', '');
 
       const list = document.querySelector('#build-list');
@@ -47,21 +54,21 @@ export const loadSiteJS = async () => {
       const newEntry = document.createElement('div');
       newEntry.setAttribute('data-component', component);
       newEntry.setAttribute('build-list-order', numberOfEntries.toString());
-      newEntry.innerHTML = `
-            <div class="py-4 px-2 gap-2 grid grid-cols-2 lg:grid-cols-3 shadow">
-                <div class="cursor-pointer flex flex-col justify-center text-center col-span-2 lg:col-span-3"><p>${component}</p></div>
-                <button class="cursor-pointer btn-md btn-hollow">up</button>
-                <button class="cursor-pointer btn-md btn-hollow">down</button>
-                <div class="cursor-pointer flex flex-col text-center justify-center text-red-500 text-xs py-2 col-span-2 lg:col-span-1"><p>remove</p></div>
-            </div>`;
+
+      const resp = await fetch(new URL('../Templates/componentBuilderEntry.html', import.meta.url));
+      let html = await resp.text();
+      html = html.replaceAll(`{{component}}`, component);
+
+      newEntry.innerHTML = html;
       newEntry.classList.add('build-list-entry');
       list.appendChild(newEntry);
     });
   });
+};
 
-
-
+const previewBuildListener = async () => {
   document.querySelector('#preview-build').addEventListener('click', async () => {
+    await setPreviewWindowHTML();
     const listElement = document.querySelector('#build-list');
     const entryElements = listElement.querySelectorAll('[data-component]');
 
@@ -72,76 +79,12 @@ export const loadSiteJS = async () => {
     document.querySelector('#preview-panel')?.remove();
 
     const previewPanel = document.createElement('div');
-    previewPanel.innerHTML = `
-        <div id="preview-panel-window" class="fixed flex flex-col z-30 top-0 left-0 bottom-0 right-0 bg-gray-300">
-<!--          <div class="h-full w-full flex">-->
-            <p class="text-2xl font-bold">Page Preview</p>
-            <div id="preview-panel" class="max-w-7xl w-full mx-auto component relative flex-1">
-              <div class="h-16">
-                <div class="grid grid-cols-4 py-4 gap-4">
-                  <button
-                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                    data-button-id="preview-panel-mobile"
-                  >
-                    <span class="block">Mobile</span>
-                  </button>
-                  <button
-                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                    data-button-id="preview-panel-tablet"
-                  >
-                    <span class="block">Tablet</span>
-                  </button>
-                  <button
-                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                    data-button-id="preview-panel-desktop"
-                  >
-                    <span class="block">Desktop</span>
-                  </button>
-                  <button
-                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                    data-button-id="preview-panel-reset"
-                  >
-                    <span class="block">Reset</span>
-                  </button>
-                </div>
-              </div>
-              <div class="py-2 component-container absolute top-16 bottom-0 left-0 right-0">
-                <div class="relative w-full h-full flex flex-col justify-center">
-                    <div class="wrapper h-full w-full overflow-hidden relative max-w-7xl mx-auto">
-                        <iframe id="preview-panel-frame" class="border border-primary-500 bg-white absolute w-full h-full origin-top-left"></iframe>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="py-6 bg-white">
-              <div class="flex justify-end gap-4 max-w-7xl">
-                  <button id="close-preview-button" class="btn-md btn-secondary">Close Preview</button>
-                  <button id="download-page-button" class="btn btn-md">Download</button>
-              </div>
-            </div>
-<!--          </div>-->
-        </div>`;
+    previewPanel.innerHTML = previewWindowHTML;
     document.body.appendChild(previewPanel);
     document.body.classList.add('overflow-hidden');
 
     document.querySelectorAll("#preview-panel .responsive-button").forEach((button) => {
-      button.addEventListener("click", (event) => {
-        let buttonElement = event.target;
-
-        if (!event.target.hasAttribute('data-button-id')) {
-          buttonElement = event.target.closest('[data-button-id]');
-        }
-
-        const dataButtonId = buttonElement.getAttribute('data-button-id');
-        const componentElement = button.closest('.component');
-        const componentName = componentElement.getAttribute('id');
-        const frameElement = componentElement.querySelector('#' + componentName + '-frame');
-        const targetScreenSizeName = dataButtonId.replace(componentName + '-', '');
-
-        console.log(frameElement);
-
-        resizeScreenSize(targetScreenSizeName, frameElement, 0.6);
-      });
+      button.addEventListener("click", (event) => handleResizeEvent(event, button));
     });
 
     document.querySelector('#close-preview-button').addEventListener('click', () => {
@@ -216,6 +159,8 @@ export const loadSiteJS = async () => {
     const script = doc.createElement('script');
     script.innerHTML = jsString;
 
+    console.log(script);
+
     frame.contentDocument.body.appendChild(script);
 
     document.querySelector('#download-page-button').addEventListener('click', () => {
@@ -235,4 +180,14 @@ export const loadSiteJS = async () => {
       window.URL.revokeObjectURL(url)
     });
   });
+};
+
+export const loadSiteJS = async (currentGenerator) => {
+  generator = currentGenerator;
+  loadNavbar();
+  hideBuildPanelListener();
+  showBuildPanelListener();
+  await addComponentListener();
+  // await previewBuildListener();
+
 }

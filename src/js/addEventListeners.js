@@ -1,21 +1,18 @@
 import hljs from "./vendor/highlight.min.js";
-import {createCodeElement} from "./createElements";
 
-const toggleCodeSection = (componentCode) => {
+let generator;
+
+const toggleCodeSection = () => {
   document.querySelectorAll('[id$="-show-code"]').forEach((element) => {
-    element.addEventListener("click", async (event) => {
+    element.addEventListener("click", async () => {
       const componentNameWithType = element.getAttribute('id').replace('-show-code', '');
       const exploded = componentNameWithType.split('-');
       const componentType = exploded.pop();
       const componentName = exploded.join("");
       const codeElement = document.querySelector("#" + componentNameWithType + '-code');
-      let code = componentCode.components[componentName][componentType];
 
-      if (componentType === 'html') {
-        code = createCodeElement(code);
-      }
-
-      codeElement.innerHTML = code;
+      console.log(generator.componentCode[componentName][componentType]);
+      codeElement.innerHTML = generator.componentCode[componentName][componentType].display;
 
       hljs.highlightElement(codeElement);
 
@@ -30,7 +27,7 @@ const toggleCodeSection = (componentCode) => {
 
 const toggleSection = () => {
   document.querySelectorAll('[id$="-section-header"]').forEach((element) => {
-    element.addEventListener("click", async (event) => {
+    element.addEventListener("click", async () => {
       toggleSectionByElement(element);
     });
   });
@@ -50,35 +47,6 @@ const sizes = {
     height: 768,
   },
 };
-
-const resizeObserver = new ResizeObserver((entries) => {
-  for (const entry of entries) {
-    const el = entry.target;
-    const width = el.getBoundingClientRect().width;
-    const height = el.getBoundingClientRect().height;
-    const screen = el.getAttribute('data-exact-size');
-
-    if (Object.keys(sizes).indexOf(screen) === -1) {
-      entry.target.setAttribute('data-exact-size', 'false');
-
-      return;
-    }
-
-    if (width !== sizes[screen].width) {
-      entry.target.setAttribute('data-exact-size', 'false');
-
-      return;
-    }
-
-    if (height !== sizes[screen].height) {
-      entry.target.setAttribute('data-exact-size', 'false');
-
-      return;
-    }
-
-    entry.target.setAttribute('data-exact-size', screen);
-  }
-});
 
 const resetScreenSize = (element) => {
   element.style.width = "";
@@ -169,25 +137,25 @@ export const resizeScreenSize = (screen, element, ratio = 0.8) => {
   element.style.marginRight = "auto";
 };
 
+export const handleResizeEvent = (event, button) => {
+  let buttonElement = event.target;
+
+  if (!event.target.hasAttribute('data-button-id')) {
+    buttonElement = event.target.closest('[data-button-id]');
+  }
+
+  const dataButtonId = buttonElement.getAttribute('data-button-id');
+  const componentElement = button.closest('.component');
+  const componentName = componentElement.getAttribute('id');
+  const frameElement = componentElement.querySelector('#' + componentName + '-frame');
+  const targetScreenSizeName = dataButtonId.replace(componentName + '-', '');
+
+  resizeScreenSize(targetScreenSizeName, frameElement);
+};
+
 const addResizeListener = () => {
   document.querySelectorAll(".responsive-button").forEach((button) => {
-    button.addEventListener("click", (event) => {
-      let buttonElement = event.target;
-
-      if (!event.target.hasAttribute('data-button-id')) {
-        buttonElement = event.target.closest('[data-button-id]');
-      }
-
-      const dataButtonId = buttonElement.getAttribute('data-button-id');
-      const componentElement = button.closest('.component');
-      const componentName = componentElement.getAttribute('id');
-      const frameElement = componentElement.querySelector('#' + componentName + '-frame');
-      const targetScreenSizeName = dataButtonId.replace(componentName + '-', '');
-
-      console.log(frameElement);
-
-      resizeScreenSize(targetScreenSizeName, frameElement);
-    });
+    button.addEventListener("click", (event) => handleResizeEvent(event, button));
   });
 }
 
@@ -227,9 +195,10 @@ const toggleSectionByElement = (element, value = null) => {
   section.classList.add('hidden');
 };
 
-export const addEventListeners = (componentCode) => {
+export const addEventListeners = (currentGenerator) => {
+  generator = currentGenerator;
   toggleSection();
   toggleAllSections();
-  toggleCodeSection(componentCode);
+  toggleCodeSection();
   addResizeListener();
 };
