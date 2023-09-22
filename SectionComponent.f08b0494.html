@@ -3,8 +3,17 @@
     <!-- header and toggle -->
     <div class="grid grid-cols-4 gap-x-4 mt-8 mx-auto">
       <!-- header -->
-      <div class="col-span-4 md:col-span-2 justify-center flex flex-col">
-          <p class="text-gray-600 text-2xl font-bold font-serif">{Component}</p>
+      <div class="col-span-4 md:col-span-2">
+          <div class="flex">
+            <button id="add-{component}" class="btn btn-md add-component-button mr-4 hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
+              </svg>
+            </button>
+            <div class="flex flex-col justify-center">
+              <p class="text-gray-600 text-2xl font-bold font-serif">{Component}</p>
+            </div>
+          </div>
       </div>
       <!-- end header -->
 
@@ -41,7 +50,7 @@
     <!-- end code JS display -->
 
     <!-- {Component} Component -->
-    <div id="{component}" class="py-8 bg-gray-200 rounded-xl component">
+    <div id="{component}" class="py-8 px-2 bg-gray-200 rounded-xl component">
       <div class="max-w-6xl mx-auto">
         <!-- Change Screen Size -->
         <div class="hidden lg:block">
