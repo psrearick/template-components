@@ -92,9 +92,16 @@ const resetScreenSize = (element) => {
 };
 
 export const resizeScreenSize = (screen, element, ratio = 0.8) => {
+  const wrapper = element.closest('.wrapper');
+
   if (Object.keys(sizes).indexOf(screen) === -1) {
     resetScreenSize(element);
+
     element.removeAttribute('data-exact-size');
+
+    if (wrapper) {
+      resetScreenSize(wrapper);
+    }
 
     return;
   }
@@ -139,6 +146,13 @@ export const resizeScreenSize = (screen, element, ratio = 0.8) => {
   element.style.transform = "scale(" + Math.min(scale, 1).toFixed(2) + ")";
   element.style.resize = "none";
 
+  if (wrapper) {
+    element.closest('.wrapper').style.height = element.getBoundingClientRect().height.toString() + 'px';
+    element.closest('.wrapper').style.width = element.getBoundingClientRect().width.toString() + 'px';
+
+    return;
+  }
+
   frameHeight = element.getBoundingClientRect().height;
   const componentHeight = component.getBoundingClientRect().height;
 
@@ -148,6 +162,7 @@ export const resizeScreenSize = (screen, element, ratio = 0.8) => {
     const marginShift = heightDifference / 2;
     element.style.marginTop = "-" + marginShift + "px";
     element.style.marginBottom = "-" + marginShift + "px";
+    console.log(componentHeight, frameHeight, marginShift);
   }
 
   element.style.marginLeft = "auto";

@@ -28,6 +28,7 @@ export const loadSiteJS = async () => {
     document.querySelectorAll('.add-component-button').forEach((element) => {
       element.closest('button').classList.add('hidden');
     });
+    document.body.classList.remove('overflow-hidden');
   });
   document.querySelector('#show-build-panel').addEventListener('click', function () {
     document.querySelector('#build-panel').classList.remove('hidden');
@@ -73,43 +74,44 @@ export const loadSiteJS = async () => {
 
     const previewPanel = document.createElement('div');
     previewPanel.innerHTML = `
-        <div id="preview-panel" class="fixed z-30 top-0 left-0 bottom-0 right-0 bg-white component">
-          <div class="h-full w-full flex flex-col">
-            <div class="flex-1 bg-gray-300 flex flex-col">
-              <div class="py-2">
-                <div class="max-w-7xl mx-auto">
-                  <p class="text-2xl font-bold">Page Preview</p>
-
-                  <div class="grid grid-cols-4 py-4 gap-4">
-                    <button
-                      class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                      data-button-id="preview-panel-mobile"
-                    >
-                      <span class="block">Mobile</span>
-                    </button>
-                    <button
-                      class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                      data-button-id="preview-panel-tablet"
-                    >
-                      <span class="block">Tablet</span>
-                    </button>
-                    <button
-                      class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                      data-button-id="preview-panel-desktop"
-                    >
-                      <span class="block">Desktop</span>
-                    </button>
-                    <button
-                      class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
-                      data-button-id="preview-panel-reset"
-                    >
-                      <span class="block">Reset</span>
-                    </button>
-                  </div>
+        <div id="preview-panel-window" class="fixed flex flex-col z-30 top-0 left-0 bottom-0 right-0 bg-gray-300">
+<!--          <div class="h-full w-full flex">-->
+            <p class="text-2xl font-bold">Page Preview</p>
+            <div id="preview-panel" class="max-w-7xl w-full mx-auto component relative flex-1">
+              <div class="h-16">
+                <div class="grid grid-cols-4 py-4 gap-4">
+                  <button
+                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
+                    data-button-id="preview-panel-mobile"
+                  >
+                    <span class="block">Mobile</span>
+                  </button>
+                  <button
+                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
+                    data-button-id="preview-panel-tablet"
+                  >
+                    <span class="block">Tablet</span>
+                  </button>
+                  <button
+                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
+                    data-button-id="preview-panel-desktop"
+                  >
+                    <span class="block">Desktop</span>
+                  </button>
+                  <button
+                    class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button"
+                    data-button-id="preview-panel-reset"
+                  >
+                    <span class="block">Reset</span>
+                  </button>
                 </div>
               </div>
-              <div class="flex-1 py-2 component-container">
-                <iframe id="preview-panel-frame" class="border border-primary-500 bg-white max-w-7xl w-full h-full mx-auto"></iframe>
+              <div class="py-2 component-container absolute top-16 bottom-0 left-0 right-0">
+                <div class="relative w-full h-full flex flex-col justify-center">
+                    <div class="wrapper h-full w-full overflow-hidden relative max-w-7xl mx-auto">
+                        <iframe id="preview-panel-frame" class="border border-primary-500 bg-white absolute w-full h-full origin-top-left"></iframe>
+                    </div>
+                </div>
               </div>
             </div>
             <div class="py-6 bg-white">
@@ -118,9 +120,10 @@ export const loadSiteJS = async () => {
                   <button id="download-page-button" class="btn btn-md">Download</button>
               </div>
             </div>
-          </div>
+<!--          </div>-->
         </div>`;
     document.body.appendChild(previewPanel);
+    document.body.classList.add('overflow-hidden');
 
     document.querySelectorAll("#preview-panel .responsive-button").forEach((button) => {
       button.addEventListener("click", (event) => {
@@ -143,7 +146,7 @@ export const loadSiteJS = async () => {
     });
 
     document.querySelector('#close-preview-button').addEventListener('click', () => {
-      document.querySelector('#preview-panel')?.remove();
+      document.querySelector('#preview-panel-window')?.remove();
     });
 
     const frame = document.querySelector('#preview-panel-frame');
