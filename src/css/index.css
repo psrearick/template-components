@@ -71,7 +71,7 @@
   }
 
   .btn:hover, .btn-light {
-    background-color: theme('colors.primary.100');
+    background-color: theme('colors.primary.200');
     color: theme('colors.primary.900');
   }
 

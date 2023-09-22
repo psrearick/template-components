@@ -9,3 +9,11 @@ checkbox.addEventListener('change', function () {
     navbar.removeAttribute('data-checked');
   }
 });
+
+navbar.querySelectorAll('li, button').forEach(element => {
+  element.addEventListener('click', (event) => {
+    checkbox.checked = false;
+    const evt = new Event('change');
+    checkbox.dispatchEvent(evt);
+  });
+});
