@@ -28,7 +28,6 @@ export const loadSiteJS = async () => {
     document.querySelectorAll('.add-component-button').forEach((element) => {
       element.closest('button').classList.add('hidden');
     });
-    document.body.classList.remove('overflow-hidden');
   });
   document.querySelector('#show-build-panel').addEventListener('click', function () {
     document.querySelector('#build-panel').classList.remove('hidden');
@@ -146,6 +145,7 @@ export const loadSiteJS = async () => {
     });
 
     document.querySelector('#close-preview-button').addEventListener('click', () => {
+      document.body.classList.remove('overflow-hidden');
       document.querySelector('#preview-panel-window')?.remove();
     });
 
