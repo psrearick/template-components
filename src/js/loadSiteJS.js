@@ -146,10 +146,6 @@ export const loadSiteJS = async () => {
       document.querySelector('#preview-panel')?.remove();
     });
 
-    document.querySelector('#download-page-button').addEventListener('click', () => {
-
-    });
-
     const frame = document.querySelector('#preview-panel-frame');
 
     let pageHtml = [];
@@ -202,8 +198,6 @@ export const loadSiteJS = async () => {
     styleEl.innerHTML = styleString;
     doc.head.appendChild(styleEl);
 
-    // await loadFonts(frame.contentDocument);
-
     const viewport = doc.createElement("meta");
     viewport.name = "viewport";
     viewport.content = "width=device-width, initial-scale=1.0";
@@ -213,10 +207,29 @@ export const loadSiteJS = async () => {
     let newNode = dest.importNode(doc.documentElement, true);
     dest.replaceChild(newNode, dest.documentElement);
 
+    frame.contentDocument.querySelectorAll('script').forEach(el => el.remove());
+
     const jsString = pageJs.join('');
     const script = doc.createElement('script');
     script.innerHTML = jsString;
 
     frame.contentDocument.body.appendChild(script);
+
+    document.querySelector('#download-page-button').addEventListener('click', () => {
+      const file = new File([frame.contentDocument.documentElement.innerHTML], 'page.html', {
+        type: 'text/plain',
+      })
+
+      const link = document.createElement('a')
+      const url = URL.createObjectURL(file)
+
+      link.href = url
+      link.download = file.name
+      document.body.appendChild(link)
+      link.click()
+
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+    });
   });
 }
