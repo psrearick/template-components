@@ -20,10 +20,7 @@ export const components = {
       }
     },
     js: {
-      // code: fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8"),
-      // code: new URL('Components/header.js', import.meta.url),
-      // code: '/Components/header.js',
-      code: path.join(__dirname, '/Components/header.js'),
+      code: fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8"),
       properties: {
         selector: '#header-1',
       },
@@ -32,10 +29,7 @@ export const components = {
   'header2': {
     html: { code: new URL('../Components/header2.html', import.meta.url), properties: {}},
     js: {
-      // code: fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8"),
-      // code: '/Components/header.js',
-      // code: new URL('Components/header.js', import.meta.url),
-      code: path.join(__dirname, '/Components/header.js'),
+      code: fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8"),
       properties: {
         selector: '#header-2',
       },
@@ -44,10 +38,7 @@ export const components = {
   'header3': {
     html: { code: new URL('../Components/header3.html', import.meta.url), properties: {}},
     js: {
-      // code: fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8"),
-      // code: new URL('Components/header.js', import.meta.url),
-      // code: '/Components/header.js',
-      code: path.join(__dirname, '/Components/header.js'),
+      code: fs.readFileSync(path.join(__dirname, '/Components/header.js'), "utf8"),
       properties: {
         selector: '#header-3',
       },
@@ -76,10 +67,7 @@ export const components = {
   'faq1': {
     html: { code: new URL('../Components/faq1.html', import.meta.url), properties: {}},
     js: {
-      // code: fs.readFileSync(path.join(__dirname, '/Components/faq1.js'), "utf8"),
-      // code: new URL('Components/faq1.js', import.meta.url),
-      // code: '/Components/faq1.js',
-      code: path.join(__dirname, '/Components/faq1.js'),
+      code: fs.readFileSync(path.join(__dirname, '/Components/faq1.js'), "utf8"),
       properties: {},
     }
   },

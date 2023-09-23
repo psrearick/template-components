@@ -1,6 +1,6 @@
 import {components as componentDefinitions, sections as sectionDefinitions} from "./elementDefinitions";
 import {encodeHTMLEntities, ucFirst} from "./utilities";
-import fs from "fs";
+import { readFileSync } from "fs";
 
 export default class ComponentGenerator {
   sections = {};
@@ -62,7 +62,6 @@ export default class ComponentGenerator {
   fetchCode = async (path) => {
     const resp = await fetch(path);
     const text = await resp.text();
-    console.log(text);
     return text;
   };
 
@@ -114,10 +113,7 @@ export default class ComponentGenerator {
 
     response.hasJS = true;
 
-    // const jsCode = await this.fetchCode(js.code);
-
-
-    const jsCode = fs.readFileSync(js.code);
+    const jsCode = js.code;
     const jsProps = js.properties;
     response.original = jsCode;
     response.code = jsCode;
