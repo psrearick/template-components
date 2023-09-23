@@ -98,11 +98,12 @@ export const createElement = (
   destinationElement = 'body',
   attributes = {},
   classes = [],
+  createForAll = false
 ) => {
   const element = new ElementGenerator(tag, destination);
 
   if (append) {
-    element.append();
+    element.append(destinationElement, createForAll);
   }
 
   if (Object.keys(attributes).length > 0) {

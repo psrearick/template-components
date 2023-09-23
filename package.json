@@ -11,6 +11,8 @@
   "scripts": {
     "build": "parcel build src/index.html",
     "deploy": "gh-pages -d dist",
+    "fix": "eslint --fix src --ext .js && stylelint --allow-empty-input \"src/**/*.css\" --fix && prettier --fix src",
+    "lint": "eslint src --ext .js && stylelint --allow-empty-input \"src/**/*.css\" && prettier --check src",
     "dev": "parcel src/index.html",
     "predeploy": "npm run rebuild",
     "rebuild": "npm run reset && npm run build",
@@ -27,12 +29,19 @@
     "autoprefixer": "^10.4.15",
     "buffer": "^6.0.3",
     "cssnano": "^6.0.1",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
     "gh-pages": "^6.0.0",
     "parcel": "^2.9.3",
     "parcel-reporter-static-files-copy": "^1.5.2",
     "path-browserify": "^1.0.1",
     "postcss": "^8.4.29",
+    "prettier": "^3.0.3",
     "process": "^0.11.10",
+    "sass": "^1.68.0",
+    "stylelint": "^15.10.3",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard-scss": "^11.0.0",
     "tailwindcss": "^3.3.3"
   },
   "repository": {
@@ -46,6 +55,7 @@
   },
   "dependencies": {
     "@tailwindcss/container-queries": "^0.1.1",
-    "fontfaceobserver": "^2.3.0"
+    "fontfaceobserver": "^2.3.0",
+    "stylelint-config-standard": "^34.0.0"
   }
 }

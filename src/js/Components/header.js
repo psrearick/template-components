@@ -11,7 +11,7 @@ checkbox.addEventListener('change', function () {
 });
 
 navbar.querySelectorAll('li, button').forEach(element => {
-  element.addEventListener('click', (event) => {
+  element.addEventListener('click', () => {
     checkbox.checked = false;
     const evt = new Event('change');
     checkbox.dispatchEvent(evt);

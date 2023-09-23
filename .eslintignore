@@ -1,0 +1,6 @@
+.parcel-cache
+dist
+doc
+node_modules
+src/js/vendor
+static
