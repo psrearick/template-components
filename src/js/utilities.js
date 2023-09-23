@@ -14,7 +14,8 @@ export const bodyScroll = (prevent = true) => {
 
 export const makeId = (length) => {
   let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const charactersLength = characters.length;
   let counter = 0;
   while (counter < length) {
@@ -22,17 +23,17 @@ export const makeId = (length) => {
     counter += 1;
   }
   return result;
-}
+};
 
 export const encodeHTMLEntities = (text) => {
-  let textArea = createElement(text, false, 'textarea')
+  let textArea = createElement(text, false, 'textarea');
   textArea.innerText = text;
   let encodedOutput = textArea.innerHTML;
   let arr = encodedOutput.split('<br>');
   encodedOutput = arr.join('\n');
   textArea.remove();
   return encodedOutput;
-}
+};
 
 export class ElementGenerator {
   constructor(tag = 'div', destination = document) {
@@ -49,10 +50,10 @@ export class ElementGenerator {
   };
 
   appendToSelector = (selector = 'body', all = false) => {
-
     if (all) {
-      this.destination.querySelectorAll(selector)
-        .forEach(element => element.appendChild(this.element));
+      this.destination
+        .querySelectorAll(selector)
+        .forEach((element) => element.appendChild(this.element));
 
       return this;
     }
@@ -71,17 +72,18 @@ export class ElementGenerator {
   get = () => this.element;
 
   setAttributes = (attributes) => {
-    Object.keys(attributes)
-      .forEach(name => this.element.setAttribute(name, attributes[name]));
+    Object.keys(attributes).forEach((name) =>
+      this.element.setAttribute(name, attributes[name]),
+    );
 
     return this;
   };
 
   setClasses = (classes) => {
-    classes.forEach(name => this.element.classList.add(name));
+    classes.forEach((name) => this.element.classList.add(name));
 
     return this;
-  }
+  };
 
   setContent = (content) => {
     this.element.innerHTML = content;
@@ -98,7 +100,7 @@ export const createElement = (
   destinationElement = 'body',
   attributes = {},
   classes = [],
-  createForAll = false
+  createForAll = false,
 ) => {
   const element = new ElementGenerator(tag, destination);
 

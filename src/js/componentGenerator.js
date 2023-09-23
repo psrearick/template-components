@@ -1,5 +1,8 @@
-import {components as componentDefinitions, sections as sectionDefinitions} from "./elementDefinitions";
-import {createElement, encodeHTMLEntities, ucFirst} from "./utilities";
+import {
+  components as componentDefinitions,
+  sections as sectionDefinitions,
+} from './elementDefinitions';
+import { createElement, encodeHTMLEntities, ucFirst } from './utilities';
 
 export default class ComponentGenerator {
   sections = {};
@@ -7,10 +10,14 @@ export default class ComponentGenerator {
   componentCode = {};
 
   addSectionsToDom = async () => {
-    Object.keys(this.sections).forEach(sectionName => {
-      const parents = document.querySelectorAll('.header-section[data-import = ' + sectionName + ']');
+    Object.keys(this.sections).forEach((sectionName) => {
+      const parents = document.querySelectorAll(
+        '.header-section[data-import = ' + sectionName + ']',
+      );
 
-      parents.forEach(parent => parent.appendChild(this.sections[sectionName]));
+      parents.forEach((parent) =>
+        parent.appendChild(this.sections[sectionName]),
+      );
     });
   };
 
@@ -19,12 +26,14 @@ export default class ComponentGenerator {
   };
 
   addComponentsToDom = async () => {
-    Object.keys(this.components).forEach(componentName => {
+    Object.keys(this.components).forEach((componentName) => {
       const component = this.componentCode[componentName];
       const componentElement = this.components[componentName];
-      const parents = document.querySelectorAll('.component-section[data-import = ' + componentName +']');
+      const parents = document.querySelectorAll(
+        '.component-section[data-import = ' + componentName + ']',
+      );
 
-      parents.forEach(parent => parent.appendChild(componentElement));
+      parents.forEach((parent) => parent.appendChild(componentElement));
 
       if (!component.js.hasJS) {
         return;
@@ -32,7 +41,9 @@ export default class ComponentGenerator {
 
       this.runJS(component.js.code);
 
-      componentElement.querySelector('#' + componentName + '-js-show-code').classList.remove('hidden');
+      componentElement
+        .querySelector('#' + componentName + '-js-show-code')
+        .classList.remove('hidden');
     });
   };
 
@@ -136,19 +147,28 @@ export default class ComponentGenerator {
   };
 
   createComponents = async () => {
-    const componentTemplateResponse = await fetch(new URL('../Templates/SectionComponent.html', import.meta.url));
+    const componentTemplateResponse = await fetch(
+      new URL('../Templates/SectionComponent.html', import.meta.url),
+    );
     const componentTemplate = await componentTemplateResponse.text();
     const componentList = Object.keys(componentDefinitions);
-    const componentListData = await this.generateDataForComponents(componentList);
+    const componentListData =
+      await this.generateDataForComponents(componentList);
 
     for (const componentName of componentList) {
       let componentContainer = componentTemplate;
-      componentContainer = componentContainer.replaceAll('{component}', componentName);
-      componentContainer = componentContainer.replaceAll('{Component}', ucFirst(componentName));
+      componentContainer = componentContainer.replaceAll(
+        '{component}',
+        componentName,
+      );
+      componentContainer = componentContainer.replaceAll(
+        '{Component}',
+        ucFirst(componentName),
+      );
 
       const containerEl = createElement(componentContainer);
 
-      const frame = containerEl.querySelector("#" + componentName + "-frame");
+      const frame = containerEl.querySelector('#' + componentName + '-frame');
 
       const componentData = componentListData[componentName];
       frame.innerHTML = componentData.html.code;
@@ -158,13 +178,10 @@ export default class ComponentGenerator {
   };
 
   getHTMLDisplayCode = (code) => {
-    let htmlRoot = createElement(code)
+    let htmlRoot = createElement(code);
 
-    htmlRoot.querySelectorAll('script').forEach(el => el.remove());
+    htmlRoot.querySelectorAll('script').forEach((el) => el.remove());
 
     return encodeHTMLEntities(htmlRoot.innerHTML);
   };
-};
-
-
-
+}

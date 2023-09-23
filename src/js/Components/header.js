@@ -1,6 +1,8 @@
 const navbarSelector = '{{selector}}';
 const navbar = document.querySelector(navbarSelector);
-const checkbox = document.querySelector(navbarSelector + " input[type=checkbox]");
+const checkbox = document.querySelector(
+  navbarSelector + ' input[type=checkbox]',
+);
 
 checkbox.addEventListener('change', function () {
   if (this.checked) {
@@ -10,7 +12,7 @@ checkbox.addEventListener('change', function () {
   }
 });
 
-navbar.querySelectorAll('li, button').forEach(element => {
+navbar.querySelectorAll('li, button').forEach((element) => {
   element.addEventListener('click', () => {
     checkbox.checked = false;
     const evt = new Event('change');

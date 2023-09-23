@@ -6,19 +6,19 @@
   .accordion-title {
     @apply cursor-pointer text-primary-600 hover:text-primary-800
             border-b border-primary-100 hover:border-primary-800
-            px-4 py-4 mb-4 mt-8 flex justify-between items-center uppercase
+            px-4 py-4 mb-4 mt-8 flex justify-between items-center uppercase;
   }
 
   .active > .accordion-title > div > svg {
-    @apply flex-1
+    @apply flex-1;
   }
 
   .active > .accordion-title > p {
-    @apply max-w-[75%] flex-1
+    @apply max-w-[75%] flex-1;
   }
 
   .active > .accordion-title {
-    @apply border border-primary-600 rounded-full
+    @apply border border-primary-600 rounded-full;
   }
 
   .accordion > li > .accordion-content {
@@ -65,12 +65,14 @@
     border-color: theme('colors.primary.900');
   }
 
-  .btn, .btn-light:hover {
+  .btn,
+  .btn-light:hover {
     background-color: theme('colors.primary.600');
     color: theme('colors.white');
   }
 
-  .btn:hover, .btn-light {
+  .btn:hover,
+  .btn-light {
     background-color: theme('colors.primary.200');
     color: theme('colors.primary.900');
   }
@@ -78,11 +80,15 @@
   .btn-md {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 10%),
+      0 4px 6px -4px rgb(0 0 0 / 10%);
   }
 
   .btn-md:hover {
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    box-shadow:
+      0 20px 25px -5px rgb(0 0 0 / 10%),
+      0 8px 10px -6px rgb(0 0 0 / 10%);
   }
 
   .link-text {
@@ -100,7 +106,7 @@
   }
 
   .secondary-link-text {
-    @apply text-secondary-600 hover:text-secondary-300 underline
+    @apply text-secondary-600 hover:text-secondary-300 underline;
   }
 
   .link-text-active:hover {
@@ -110,11 +116,11 @@
 }
 
 .font-sans.fonts-loaded {
-  font-family: Inter, Nunito, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-family: Inter, Nunito, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
 }
 
 .font-serif.fonts-loaded {
-  font-family: Montserrat, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: Montserrat, Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
@@ -145,6 +151,11 @@ pre code {
   font-weight: bold;
 }
 
-h1.fancy-text, h2.fancy-text, h3.fancy-text, .text-6xl.fancy-text, .text-5xl.fancy-text, .text-7xl.fancy-text {
+h1.fancy-text,
+h2.fancy-text,
+h3.fancy-text,
+.text-6xl.fancy-text,
+.text-5xl.fancy-text,
+.text-7xl.fancy-text {
   text-shadow: 5px 5px 0 #dbdddf;
 }
