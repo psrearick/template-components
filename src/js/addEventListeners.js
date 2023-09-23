@@ -11,7 +11,6 @@ const toggleCodeSection = () => {
       const componentName = exploded.join("");
       const codeElement = document.querySelector("#" + componentNameWithType + '-code');
 
-      console.log(generator.componentCode[componentName][componentType]);
       codeElement.innerHTML = generator.componentCode[componentName][componentType].display;
 
       hljs.highlightElement(codeElement);
@@ -130,7 +129,6 @@ export const resizeScreenSize = (screen, element, ratio = 0.8) => {
     const marginShift = heightDifference / 2;
     element.style.marginTop = "-" + marginShift + "px";
     element.style.marginBottom = "-" + marginShift + "px";
-    console.log(componentHeight, frameHeight, marginShift);
   }
 
   element.style.marginLeft = "auto";
