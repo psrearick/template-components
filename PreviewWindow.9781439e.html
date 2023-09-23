@@ -1,0 +1,36 @@
+<div id="preview-panel-window" class="fixed flex flex-col z-30 top-0 left-0 bottom-0 right-0 bg-gray-300">
+  <p class="text-2xl font-bold max-w-6xl mx-auto w-full py-6">Page Preview</p>
+  <div id="preview-panel" class="max-w-6xl w-full mx-auto component relative flex-1">
+    <div class="h-16">
+      <div class="grid grid-cols-4 py-4 gap-4">
+        <button class="btn-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="preview-panel-mobile">
+          <span class="block">Mobile</span>
+        </button>
+        <button class="btn-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="preview-panel-tablet">
+          <span class="block">Tablet</span>
+        </button>
+        <button class="btn-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="preview-panel-desktop">
+          <span class="block">Desktop</span>
+        </button>
+        <button class="btn-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="preview-panel-reset">
+          <span class="block">Reset</span>
+        </button>
+      </div>
+    </div>
+    <div class="py-2 component-container absolute top-16 bottom-0 left-0 right-0">
+      <div class="relative w-full h-full flex flex-col justify-center">
+        <div class="wrapper h-full w-full overflow-hidden relative max-w-7xl mx-auto">
+          <iframe title="preview-panel-frame" id="preview-panel-frame" class="border border-primary-500 bg-white absolute w-full h-full origin-top-left"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-6 bg-white">
+    <div class="flex justify-end gap-4 max-w-6xl">
+      <button id="close-preview-button" class="btn-md btn-secondary">
+        Close Preview
+      </button>
+      <button id="download-page-button" class="btn btn-md">Download</button>
+    </div>
+  </div>
+</div>
