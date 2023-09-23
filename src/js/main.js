@@ -5,8 +5,10 @@ import {addContainerQueries} from "./addContainerQueries";
 import {loadSiteJS} from "./loadSiteJS";
 import loadFonts from "./loadFonts";
 import ComponentGenerator from "./componentGenerator";
+import PageBuilder from "./pageBuilder";
 
 const generator = new ComponentGenerator();
+const pageBuilder = new PageBuilder(generator);
 
 Promise.all([
   generator.createSections(),
@@ -17,9 +19,5 @@ Promise.all([
   .then(async () => updateResponsiveClasses())
   .then(async () => await addContainerQueries())
   .then(async () => await loadSiteJS(generator))
+  .then(async () => await pageBuilder.registerListeners())
   .then(async () => await loadFonts());
-
-
-
-
-

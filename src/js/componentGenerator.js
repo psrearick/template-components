@@ -1,6 +1,5 @@
 import {components as componentDefinitions, sections as sectionDefinitions} from "./elementDefinitions";
-import {encodeHTMLEntities, ucFirst} from "./utilities";
-import { readFileSync } from "fs";
+import {createElement, encodeHTMLEntities, ucFirst} from "./utilities";
 
 export default class ComponentGenerator {
   sections = {};
@@ -51,18 +50,13 @@ export default class ComponentGenerator {
   createSections = async () => {
     for (const sectionName of Object.keys(sectionDefinitions)) {
       const resp = await fetch(sectionDefinitions[sectionName]);
-      const el = document.createElement('div');
-
-      el.innerHTML = await resp.text();
-
-      this.sections[sectionName] = el;
+      this.sections[sectionName] = createElement(await resp.text());
     }
   };
 
   fetchCode = async (path) => {
     const resp = await fetch(path);
-    const text = await resp.text();
-    return text;
+    return await resp.text();
   };
 
   replaceProps = (code, props) => {
@@ -152,8 +146,8 @@ export default class ComponentGenerator {
       componentContainer = componentContainer.replaceAll('{component}', componentName);
       componentContainer = componentContainer.replaceAll('{Component}', ucFirst(componentName));
 
-      const containerEl = document.createElement('div');
-      containerEl.innerHTML = componentContainer;
+      const containerEl = createElement(componentContainer);
+
       const frame = containerEl.querySelector("#" + componentName + "-frame");
 
       const componentData = componentListData[componentName];
@@ -164,8 +158,8 @@ export default class ComponentGenerator {
   };
 
   getHTMLDisplayCode = (code) => {
-    let htmlRoot = document.createElement("div");
-    htmlRoot.innerHTML = code;
+    let htmlRoot = createElement(code)
+
     htmlRoot.querySelectorAll('script').forEach(el => el.remove());
 
     return encodeHTMLEntities(htmlRoot.innerHTML);
