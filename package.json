@@ -11,7 +11,7 @@
   "scripts": {
     "build": "parcel build src/index.html",
     "deploy": "gh-pages -d dist",
-    "dev": "parcel src/index.html --open",
+    "dev": "parcel src/index.html",
     "predeploy": "npm run rebuild",
     "rebuild": "npm run reset && npm run build",
     "reset": "rm -rf .parcel-cache && rm -rf dist",
