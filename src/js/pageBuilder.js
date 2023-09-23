@@ -127,7 +127,7 @@ export default class PageBuilder {
   };
 
   constructDocument = () => {
-    createElement(this.previewWindowHTML);
+    createElement(this.previewWindowHTML, true);
     this.frame = document.querySelector('#preview-panel-frame');
 
     let doc = document.implementation.createHTMLDocument("Preview Page");
@@ -175,7 +175,7 @@ export default class PageBuilder {
   previewBuild = async () => {
     document.querySelector('#preview-panel')?.remove();
 
-    await this.setPreviewWindowHTML;
+    await this.setPreviewWindowHTML();
 
     const list = this.getBuildList();
 
