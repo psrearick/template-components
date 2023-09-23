@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js" lang="en">
 
-<head><script type="module" src="index.2856da02.js"></script>
+<head><script type="module" src="index.89a55447.js"></script>
   <meta charset="utf-8">
   <title>Template Components</title>
   <meta name="description" content="Template Components">
@@ -17,7 +17,7 @@
   <!-- Place favicon.ico in the root directory -->
 
   <link rel="stylesheet" href="index.a5b04e65.css">
-  <link rel="stylesheet" href="index.e47b1f25.css">
+  <link rel="stylesheet" href="index.b2c15149.css">
   <link rel="stylesheet" href="index.525e91d5.css">
 
   <meta name="theme-color" content="#fafafa">
@@ -72,7 +72,7 @@
             <li><a class="inline-block px-2 py-3 w-full hover:text-white text-primary-800 hover:bg-primary-700" href="#contact-section">Contact</a></li>
             <li><a class="inline-block px-2 py-3 w-full hover:text-white text-primary-800 hover:bg-primary-700" href="#faq-section">FAQ</a></li>
           </ul>
-          <div class="flex justify-around">
+          <div class="lg:flex justify-around">
             <button class="btn-secondary btn-md w-100 lg:w-auto lg:mx-0 mt-4" id="toggle-sections-button">Toggle Sections</button>
             <button class="btn btn-md w-100 lg:w-auto lg:mx-0 mt-4" id="show-build-panel">Build Web Page</button>
           </div>
@@ -91,25 +91,23 @@
   </div>
 
   <div class="flex justify-between">
-    <div id="build-panel" class="basis-1/4 bg-gray-200 hidden">
-      <div class="fixed top-16 bottom-0 left-0 w-1/4">
+    <div id="build-panel" class="bottom-0 top-16 w-full z-10 bg-gray-200 hidden fixed lg:relative lg:w-1/4 lg:top-auto lg:bottom-auto">
+      <div class="h-full lg:h-auto lg:fixed lg:top-16 lg:bottom-0 lg:left-0 lg:w-1/4">
         <div class="h-full flex flex-col">
           <div class="flex-1 overflow-auto">
-            <div id="build-list"></div>
+            <div id="build-list" class="flex flex-col gap-2 py-2"></div>
           </div>
           <div class="p-2 lg:p-4">
-            <div>
-              <button id="preview-build" class="btn btn-md w-full">Preview</button>
-            </div>
-            <div class="flex flex-col lg:flex-row justify-between gap-4 pt-4">
-              <button class="w-full btn-hollow btn-md">Reset</button>
-              <button id="hide-build-panel" class="w-full btn-hollow btn-md">Hide</button>
+            <div class="grid grid-cols-2 gap-4">
+              <button id="preview-build" class="btn btn-md w-full order-1 col-span-2">Preview</button>
+              <button class="w-full btn-secondary-hollow btn-md col-span-2 order-3 md:order-2 md:col-span-1">Cancel</button>
+              <button id="hide-build-panel" class="w-full btn-hollow btn-md col-span-2 order-2 md:order-3 md:col-span-1">Hide</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="flex-1 basis-3/4">
+    <div class="flex-1 lg:w-3/4 max-w-full">
       <div class="mx-auto px-4 pb-4">
         <div id="headers-section" class="header-section" data-import="headers"></div>
         <div id="footers-section" class="header-section" data-import="footers"></div>
@@ -124,7 +122,7 @@
 
   <script src="index.1c1b9f6e.js"></script>
   <script src="index.07722491.js"></script>
-  <script type="module" src="index.dabea9c6.js"></script>
+  <script type="module" src="index.20e24213.js"></script>
 </body>
 
 </html>
