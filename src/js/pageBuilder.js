@@ -83,7 +83,7 @@ export default class PageBuilder {
 
   registerPreview = () =>
     document.querySelector('#preview-build').addEventListener('click', () => {
-      this.previewBuild().then(() => {});
+      (async () => this.previewBuild())();
     });
 
   registerResize = () =>
