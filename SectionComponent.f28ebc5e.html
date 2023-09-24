@@ -53,7 +53,7 @@
   <div id="{component}" class="py-8 px-2 bg-gray-200 rounded-xl component">
     <div class="max-w-6xl mx-auto">
       <!-- Change Screen Size -->
-      <div class="hidden lg:block">
+      <div class="">
         <div class="grid grid-cols-4 py-4 gap-4">
           <button class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-mobile">
             <span class="block">Mobile</span>
@@ -71,11 +71,18 @@
       </div>
       <!-- end Change Screen Size -->
       <!-- Component Container -->
-      <div class="component-container">
-        <div class="w-full h-full max-w-full mx-auto min-h-[200px] bg-white overflow-auto rounded-lg resize frame @container" title="{component}-frame" id="{component}-frame"></div>
+
+      <div class="relative">
+        <div class="my-2 component-container">
+          <div class="w-full h-full flex flex-col justify-center">
+            <div class="wrapper h-full w-full overflow-hidden min-h-[200px] relative max-w-6xl mx-auto resize">
+              <div class="rounded-lg min-h-[200px] frame @container border border-primary-500 bg-white absolute w-full h-full origin-top-left overflow-auto" title="{component}-frame" id="{component}-frame"></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- end Component Container -->
     </div>
+    <!-- end Component Container -->
   </div>
   <!-- end {Component} Component -->
 </div>

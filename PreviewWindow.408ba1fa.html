@@ -2,7 +2,7 @@
   <p class="text-2xl font-bold max-w-6xl mx-auto w-full py-6">Page Preview</p>
   <div id="preview-panel" class="max-w-6xl w-full mx-auto component relative flex-1">
     <div class="h-16 px-4" id="preview-screen-size">
-      <button class="btn-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-lg w-full responsive-button lg:hidden mb-4" id="preview-screen-size-toggle">
+      <button class="btn-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-lg w-full lg:hidden mb-4" id="preview-screen-size-toggle">
         <span class="block">Change Screen Size</span>
       </button>
       <div id="preview-screen-size-buttons" class="grid-cols-4 py-4 gap-4 hidden lg:grid">
@@ -23,7 +23,7 @@
     <div class="my-2 component-container absolute top-16 bottom-0 left-0 right-0">
       <div class="relative w-full h-full flex flex-col justify-center">
         <div class="wrapper h-full w-full overflow-hidden relative max-w-7xl mx-auto">
-          <iframe title="preview-panel-frame" id="preview-panel-frame" class="border border-primary-500 bg-white absolute w-full h-full origin-top-left"></iframe>
+          <iframe title="preview-panel-frame" id="preview-panel-frame" class="border border-primary-500 bg-white absolute w-full h-full origin-top-left" data-origin=".component-container"></iframe>
         </div>
       </div>
     </div>
