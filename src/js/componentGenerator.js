@@ -63,8 +63,13 @@ export default class ComponentGenerator {
 
   createSections = async () => {
     for (const sectionName of Object.keys(sectionDefinitions)) {
-      const resp = await fetch(sectionDefinitions[sectionName]);
-      this.sections[sectionName] = createElement(await resp.text());
+      const resp = await fetch(sectionDefinitions[sectionName].path);
+      this.sections[sectionName] = createElement(
+        this.replaceProps(
+          await resp.text(),
+          sectionDefinitions[sectionName].properties,
+        ),
+      );
     }
   };
 
@@ -76,8 +81,14 @@ export default class ComponentGenerator {
   replaceProps = (code, props, id = '') => {
     let replacedCode = code;
 
+    props = props || {};
+
     Object.keys(props).forEach((propKey) => {
       replacedCode = replacedCode.replaceAll(`{{${propKey}}}`, props[propKey]);
+      replacedCode = replacedCode.replaceAll(
+        `{{${propKey}|c}}`,
+        ucFirst(props[propKey]),
+      );
       replacedCode = replacedCode.replaceAll(
         `{{${propKey}|r}}`,
         props[propKey] + id,

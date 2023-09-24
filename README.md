@@ -44,7 +44,7 @@ From here, `npm run start`, will run `npm run dev` to start a parcel development
 ## Adding a Section
 
 1. Create a section as an `.html` file in `/src/Sections` using the section template `/src/Templates/Section.html`. This can be shortcut with `sh bin/create-section.sh SECTION`.
-2. Modify the `html` file as needed, using template variables as described in [templates](#templates).
+2. Modify the `html` file as needed, using template variables as described in [template variables](#template-variables).
 3. Add two entries for the section in `index.html`, one for the navigation and one for the body display.
 4. Add an entry for the section to the `sections` object in `/src/js/elementDefinitions.js`.
 
@@ -55,15 +55,16 @@ From here, `npm run start`, will run `npm run dev` to start a parcel development
 **Navigation**
 
 ```html
-
-<a
-  class="inline-block px-2 py-3 w-full hover:text-white text-primary-800 hover:bg-primary-700"
-  href="#SECTION-section" <!-- this is the id given to the `div` in the body -->
->
+<li>
+  <a
+    class="inline-block px-2 py-3 w-full hover:text-white text-primary-800 hover:bg-primary-700"
+    href="#SECTION-section" <!-- this is the id given to the `div` in the body -->
+  >
   SECTION
   <!-- This is the display value in the link,
   it should match the text in the section header button in the section `html` file -->
-</a>
+  </a>
+</li>
 ```
 
 **Body**
@@ -77,14 +78,21 @@ From here, `npm run start`, will run `npm run dev` to start a parcel development
 ></div>
 ```
 
-#### Element Definition
+#### Section Element Definition
 
 - the key is the section name, it should match the `data-import` value in `index.html`.
-- The value should be the URL to the `html` file. Use `URL` constructor with `import.meta.url` as the base url to convert the relative path in the `/src/Sections` directory to an absolute path to the `dist` directory, readable by the browser.
+- The value is an object with a key for path and properties:
+  - `path`: is the URL to the `html` file. Use `URL` constructor with `import.meta.url` as the base url to convert the relative path in the `/src/Sections` directory to an absolute path to the `dist` directory, readable by the browser.
+  - `properties`: is an object of key/value pairs used in the template.
 
 ```js
 export const sections = {
-  SECTION: new URL('../Sections/SECTION.html', import.meta.url),
+  SECTION: {
+    path: new URL('../Sections/SECTION.html', import.meta.url),
+    properties: {
+      section: 'SECTION',
+    },
+  },
 };
 ```
 
@@ -92,11 +100,21 @@ export const sections = {
 
 1. Add an `.html` file for the component in `/src/Components/`. This can be shortcut with `sh bin/create-section.sh SECTION`.
 2. If needed, add a `.js` file for the component in `src/js/Components`. This can be shortcut with `sh bin/create-section.sh --js COMPONENT`.
-3. Add any template variables needed to the `js` and `html` files, see [templates](#templates).
+3. Add any template variables needed to the `js` and `html` files, see [template variables](#template-variables).
 4. Add an entry for the component to the `components` object in `/src/js/elementDefinitions.js`.
 5. Add an entry for the component to the "section components" `div` in the component's section `html` file.
 
-### Element Definition
+### Component Element Definition
+
+- Component definitions are split between `html` and `js`.
+- `html` has two values: `code` and `properties`.
+  - `code`: is the URL to the `html` file. Use `URL` constructor with `import.meta.url` as the base url to convert the relative path in the `/src/Sections` directory to an absolute path to the `dist` directory, readable by the browser.
+  - `properties`: is an object of key/value pairs used in the template.
+- `js` has two values: `code` and `properties`.
+  - `code`: is the js code to be executed in string form. This can be retrieved from a file using `fs.readFileSync` using the `encoding` option to get a string instead of a buffer.
+    - This uses two arguments, the path and encoding. For the path, use `path.join` to join the directory of the element definition, `__dirname`, to the relative path of the JavaScript file, `/Components/{filename}`. The encoding should be `'utf-8'`.
+  - `properties`: is an object of key/value pairs used in the template.
+  - If the component does not use JavaScript, leave it as an empty object: `js: {}`;
 
 ```js
 export const components = {
@@ -128,8 +146,15 @@ export const components = {
 </div>
 ```
 
-## Templates
+## Template Variables
 
-### Section
+Variables can be used in component and section templates. This is most useful when a template is used multiple times.
 
-### Component
+Use the {{variable}} syntax for the placeholder. Modifier can be used by appending a `|` to the variable, followed by the modifier:
+
+`|r` will add a random string to the end of the variable name that is unique to that component. So, `{{variable|u}}` would become something like `variable5Gu3s`. This ensures that variables are unique if a component of template shows up twice on a page.
+
+`|c` will make the first character of the variable's value uppercase. So, `{{variable|c}}` would become `Variable`.
+
+The values for variables are configured using the properties object in each element's Element Definition. For components,
+the object is specific to the language, or file, being used. See the [code example](#component-element-definition) for the Component.

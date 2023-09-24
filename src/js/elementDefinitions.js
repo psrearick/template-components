@@ -2,13 +2,54 @@ import fs from 'fs';
 import path from 'path';
 
 export const sections = {
-  headers: new URL('../Sections/headers.html', import.meta.url),
-  footers: new URL('../Sections/footers.html', import.meta.url),
-  hero: new URL('../Sections/hero.html', import.meta.url),
-  text: new URL('../Sections/text.html', import.meta.url),
-  services: new URL('../Sections/services.html', import.meta.url),
-  contact: new URL('../Sections/contact.html', import.meta.url),
-  faq: new URL('../Sections/faq.html', import.meta.url),
+  headers: {
+    path: new URL('../Sections/headers.html', import.meta.url),
+    properties: {
+      section: 'headers',
+    },
+  },
+  footers: {
+    path: new URL('../Sections/footers.html', import.meta.url),
+    properties: {
+      section: 'footers',
+    },
+  },
+  hero: {
+    path: new URL('../Sections/hero.html', import.meta.url),
+    properties: {
+      section: 'hero',
+    },
+  },
+  text: {
+    path: new URL('../Sections/text.html', import.meta.url),
+    properties: {
+      section: 'text',
+    },
+  },
+  services: {
+    path: new URL('../Sections/services.html', import.meta.url),
+    properties: {
+      section: 'services',
+    },
+  },
+  contact: {
+    path: new URL('../Sections/contact.html', import.meta.url),
+    properties: {
+      section: 'contact',
+    },
+  },
+  faq: {
+    path: new URL('../Sections/faq.html', import.meta.url),
+    properties: {
+      section: 'faq',
+    },
+  },
+  testSection: {
+    path: new URL('../Sections/testSection.html', import.meta.url),
+    properties: {
+      section: 'testSection',
+    },
+  },
 };
 
 export const components = {
