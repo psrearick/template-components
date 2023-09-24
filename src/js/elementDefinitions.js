@@ -134,4 +134,13 @@ export const components = {
     },
     js: {},
   },
+  text3: {
+    html: {
+      code: new URL('../Components/text3.html', import.meta.url),
+      properties: {
+        selector: 'text-3',
+      },
+    },
+    js: {},
+  },
 };
