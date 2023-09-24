@@ -1,14 +1,21 @@
 export const ucFirst = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
-export const bodyScroll = (prevent = true) => {
-  if (prevent) {
+export const bodyScroll = (prevent = true, large = false) => {
+  if (prevent && large) {
     document.body.classList.add('overflow-hidden');
     document.body.classList.remove('lg:overflow-auto');
 
     return;
   }
 
-  document.body.classList.add('lg:overflow-auto');
+  if (prevent) {
+    document.body.classList.add('overflow-hidden');
+    document.body.classList.add('lg:overflow-auto');
+
+    return;
+  }
+
+  document.body.classList.remove('lg:overflow-auto');
   document.body.classList.remove('overflow-hidden');
 };
 

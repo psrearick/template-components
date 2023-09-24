@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { ElementGenerator } from './utilities';
+import { bodyScroll, ElementGenerator } from './utilities';
 
 let generator;
 
@@ -19,26 +19,57 @@ const hideBuildPanelListener = () => {
   document
     .querySelector('#hide-build-panel')
     .addEventListener('click', function () {
-      document.querySelector('#build-panel').classList.add('hidden');
-      document.body.classList.remove('overflow-hidden');
-      document.body.classList.remove('lg:overflow-auto');
-      document.querySelectorAll('.add-component-button').forEach((element) => {
-        element.closest('button').classList.add('hidden');
-      });
+      hideBuildPanel();
     });
 };
 
-const showBuildPanelListener = () => {
+const toggleBuildPanel = () => {
+  if (document.querySelector('#build-panel').classList.contains('hidden')) {
+    showBuildPanel();
+
+    return;
+  }
+
+  hideBuildPanel();
+};
+
+const toggleBuildPanelListener = () => {
   document
     .querySelector('#show-build-panel')
-    .addEventListener('click', function () {
-      document.querySelector('#build-panel').classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-      document.body.classList.add('lg:overflow-auto');
-      document.querySelectorAll('.add-component-button').forEach((element) => {
-        element.closest('button').classList.remove('hidden');
-      });
-    });
+    .addEventListener('click', toggleBuildPanel);
+};
+
+const cancelBuild = () => {
+  document.querySelectorAll('.add-component-button').forEach((element) => {
+    element.closest('button').classList.add('hidden');
+  });
+
+  clearBuildList();
+
+  hideBuildPanel();
+};
+
+const cancelButtonListener = () => {
+  document
+    .querySelector('#cancel-build')
+    .addEventListener('click', cancelBuild);
+};
+
+const showBuildPanel = () => {
+  bodyScroll(true, false);
+  document.querySelector('#build-panel').classList.remove('hidden');
+  document.querySelectorAll('.add-component-button').forEach((element) => {
+    element.closest('button').classList.remove('hidden');
+  });
+};
+
+const hideBuildPanel = () => {
+  bodyScroll(false);
+  document.querySelector('#build-panel').classList.add('hidden');
+};
+
+const clearBuildList = () => {
+  document.querySelector('#build-list').innerHTML = null;
 };
 
 const addComponentListener = async () => {
@@ -177,6 +208,7 @@ export const loadSiteJS = async (currentGenerator) => {
   generator = currentGenerator;
   loadNavbar();
   hideBuildPanelListener();
-  showBuildPanelListener();
+  toggleBuildPanelListener();
+  cancelButtonListener();
   await addComponentListener();
 };
