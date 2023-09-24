@@ -135,11 +135,16 @@ export const resizeScreenSize = (screen, element, ratio = 0.8) => {
   element.style.width = (rotate ? targetHeight : targetWidth) + 'px';
   element.style.height = (rotate ? targetWidth : targetHeight) + 'px';
 
+  const originSelector = element.getAttribute('data-origin');
+  const originHeight = originSelector
+    ? element.closest(originSelector).getBoundingClientRect().height
+    : window.innerHeight;
+
   let frameDimensions = element.getBoundingClientRect();
   let frameHeight = frameDimensions.height;
   const frameWidth = frameDimensions.width;
-  const windowHeight = window.innerHeight;
-  const currentScale = frameHeight / windowHeight;
+  // const windowHeight = window.innerHeight;
+  const currentScale = frameHeight / originHeight;
   let scale = ratio / currentScale;
   const scaledWidth = frameWidth * scale;
 
