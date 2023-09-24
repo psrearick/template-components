@@ -5,6 +5,8 @@ import {
   ElementGenerator,
   makeId,
 } from './utilities';
+const acorn = require('acorn');
+const walk = require('acorn-walk');
 
 export default class PageBuilder {
   pageCode = {
@@ -93,7 +95,7 @@ export default class PageBuilder {
     this.registerDownload();
   };
 
-  getHTMLForComponent = (name) => {
+  getHTMLForComponent = (name, id = '') => {
     const html = {
       pageHTML: '',
       displayHTML: '',
@@ -104,17 +106,10 @@ export default class PageBuilder {
       return html;
     }
 
-    const props = {};
-
-    if (Object.keys(component.html.props).length > 0) {
-      Object.keys(component.html.props).forEach((key) => {
-        props[key] = component.html.props[key] + makeId(5);
-      });
-    }
-
     const replacedCode = this.generator.replaceProps(
       component.html.original,
-      props,
+      component.html.props,
+      id,
     );
     html.pageHTML = replacedCode;
     html.displayHTML = this.generator.getHTMLDisplayCode(replacedCode);
@@ -122,7 +117,7 @@ export default class PageBuilder {
     return html;
   };
 
-  getJSForComponent = (name) => {
+  getJSForComponent = (name, id = '') => {
     const js = {
       pageJS: '',
       displayJS: '',
@@ -133,18 +128,41 @@ export default class PageBuilder {
       return js;
     }
 
-    const props = {};
-    if (Object.keys(component.js.props).length > 0) {
-      Object.keys(component.js.props).forEach((key) => {
-        props[key] = component.js.props[key] + makeId(5);
-      });
-    }
-
-    const replacedCode = this.generator.replaceProps(
+    let replacedCode = this.generator.replaceProps(
       component.js.original,
-      props,
+      component.js.props,
+      id,
     );
-    js.pageHTML = replacedCode;
+
+    const declarations = [];
+    const identifiers = [];
+    walk.full(acorn.parse(replacedCode, { ecmaVersion: 'latest' }), (node) => {
+      if (node.type === 'Identifier') {
+        identifiers.push(node);
+      }
+      if (node.type === 'VariableDeclaration') {
+        declarations.push(node.declarations[0].id.name);
+      }
+    });
+
+    replacedCode = identifiers.reduce((accumulator, currentValue, index) => {
+      const startPosition = index === 0 ? 0 : identifiers[index - 1].end;
+      const toEnd = index === identifiers.length - 1;
+      const wasDeclared = declarations.indexOf(currentValue.name) > -1;
+      accumulator += replacedCode.substring(startPosition, currentValue.end);
+
+      if (wasDeclared) {
+        accumulator += id;
+      }
+
+      if (toEnd) {
+        accumulator += replacedCode.substring(currentValue.end);
+      }
+
+      return accumulator;
+    }, '');
+
+    js.pageJS = replacedCode;
     js.displayJS = replacedCode;
 
     return js;
@@ -200,10 +218,11 @@ export default class PageBuilder {
       .querySelectorAll('script')
       .forEach((el) => el.remove());
 
-    const jsString = this.pageCode.pageJS.join('');
-    new ElementGenerator('script', doc)
-      .setContent(jsString)
-      .appendToElement(this.frame.contentDocument.body);
+    this.pageCode.pageJS.forEach((jsString) => {
+      new ElementGenerator('script', doc)
+        .setContent(jsString)
+        .appendToElement(this.frame.contentDocument.body);
+    });
   };
 
   previewBuild = async () => {
@@ -218,11 +237,12 @@ export default class PageBuilder {
     Object.keys(this.generator.componentCode)
       .filter((componentName) => list.indexOf(componentName) > -1)
       .forEach((componentName) => {
-        const html = this.getHTMLForComponent(componentName);
+        const id = makeId(5);
+        const html = this.getHTMLForComponent(componentName, id);
         this.pageCode.pageHTML.push(html.pageHTML);
         this.pageCode.displayHTML.push(html.displayHTML);
 
-        const js = this.getJSForComponent(componentName);
+        const js = this.getJSForComponent(componentName, id);
         this.pageCode.pageJS.push(js.pageJS);
         this.pageCode.displayJS.push(js.displayJS);
       });

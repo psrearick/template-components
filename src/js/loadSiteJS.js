@@ -5,12 +5,13 @@ import { ElementGenerator } from './utilities';
 let generator;
 
 const loadNavbar = () => {
-  const navbarSelector = '#template-components-header';
+  const navbarSelector = 'template-components-header';
   let navBarJS = fs.readFileSync(
     path.join(__dirname, '/Components/header.js'),
     'utf8',
   );
   navBarJS = navBarJS.replaceAll('{{selector}}', navbarSelector);
+  navBarJS = navBarJS.replaceAll('{{selector|r}}', navbarSelector);
   window.eval(navBarJS);
 };
 

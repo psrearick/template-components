@@ -16,7 +16,7 @@ export const components = {
     html: {
       code: new URL('../Components/header1.html', import.meta.url),
       properties: {
-        selectorName: 'header-1',
+        selector: 'header-1',
       },
     },
     js: {
@@ -25,14 +25,16 @@ export const components = {
         'utf8',
       ),
       properties: {
-        selector: '#header-1',
+        selector: 'header-1',
       },
     },
   },
   header2: {
     html: {
       code: new URL('../Components/header2.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'header-2',
+      },
     },
     js: {
       code: fs.readFileSync(
@@ -40,14 +42,16 @@ export const components = {
         'utf8',
       ),
       properties: {
-        selector: '#header-2',
+        selector: 'header-2',
       },
     },
   },
   header3: {
     html: {
       code: new URL('../Components/header3.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'header-3',
+      },
     },
     js: {
       code: fs.readFileSync(
@@ -55,62 +59,78 @@ export const components = {
         'utf8',
       ),
       properties: {
-        selector: '#header-3',
+        selector: 'header-3',
       },
     },
   },
   hero1: {
     html: {
       code: new URL('../Components/hero1.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'hero-1',
+      },
     },
     js: {},
   },
   text1: {
     html: {
       code: new URL('../Components/text1.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'text-1',
+      },
     },
     js: {},
   },
   text2: {
     html: {
       code: new URL('../Components/text2.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'text-2',
+      },
     },
     js: {},
   },
   services1: {
     html: {
       code: new URL('../Components/services1.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'services-1',
+      },
     },
     js: {},
   },
   contact1: {
     html: {
       code: new URL('../Components/contact1.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'contact-1',
+      },
     },
     js: {},
   },
   faq1: {
     html: {
       code: new URL('../Components/faq1.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'faq-1',
+      },
     },
     js: {
       code: fs.readFileSync(
         path.join(__dirname, '/Components/faq1.js'),
         'utf8',
       ),
-      properties: {},
+      properties: {
+        selector: 'faq-1',
+      },
     },
   },
   footer1: {
     html: {
       code: new URL('../Components/footer1.html', import.meta.url),
-      properties: {},
+      properties: {
+        selector: 'footer-1',
+      },
     },
     js: {},
   },

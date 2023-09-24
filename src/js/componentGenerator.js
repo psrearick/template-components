@@ -2,7 +2,12 @@ import {
   components as componentDefinitions,
   sections as sectionDefinitions,
 } from './elementDefinitions';
-import { createElement, encodeHTMLEntities, ucFirst } from './utilities';
+import {
+  createElement,
+  encodeHTMLEntities,
+  makeId,
+  ucFirst,
+} from './utilities';
 
 export default class ComponentGenerator {
   sections = {};
@@ -15,9 +20,7 @@ export default class ComponentGenerator {
         '.header-section[data-import = ' + sectionName + ']',
       );
 
-      parents.forEach((parent) =>
-        parent.appendChild(this.sections[sectionName]),
-      );
+      parents.forEach((parent) => parent.append(this.sections[sectionName]));
     });
   };
 
@@ -33,7 +36,7 @@ export default class ComponentGenerator {
         '.component-section[data-import = ' + componentName + ']',
       );
 
-      parents.forEach((parent) => parent.appendChild(componentElement));
+      parents.forEach((parent) => parent.append(componentElement));
 
       if (!component.js.hasJS) {
         return;
@@ -70,24 +73,28 @@ export default class ComponentGenerator {
     return await resp.text();
   };
 
-  replaceProps = (code, props) => {
+  replaceProps = (code, props, id = '') => {
     let replacedCode = code;
 
     Object.keys(props).forEach((propKey) => {
       replacedCode = replacedCode.replaceAll(`{{${propKey}}}`, props[propKey]);
+      replacedCode = replacedCode.replaceAll(
+        `{{${propKey}|r}}`,
+        props[propKey] + id,
+      );
     });
 
     return replacedCode;
   };
 
-  generateHTMLForComponent = async (name) => {
+  generateHTMLForComponent = async (name, id) => {
     const html = componentDefinitions[name].html;
     const htmlCode = await this.fetchCode(html.code);
     const htmlProps = html.properties;
 
     let replacedHTML = htmlCode;
     if (htmlProps && Object.keys(htmlProps).length > 0) {
-      replacedHTML = this.replaceProps(replacedHTML, htmlProps);
+      replacedHTML = this.replaceProps(replacedHTML, htmlProps, id);
     }
 
     return {
@@ -100,7 +107,7 @@ export default class ComponentGenerator {
     };
   };
 
-  generateJSForComponent = async (name) => {
+  generateJSForComponent = async (name, id) => {
     const response = {
       code: '',
       original: '',
@@ -124,7 +131,7 @@ export default class ComponentGenerator {
     response.code = jsCode;
 
     if (jsProps && Object.keys(jsProps).length > 0) {
-      response.code = this.replaceProps(jsCode, jsProps);
+      response.code = this.replaceProps(jsCode, jsProps, id);
       response.props = jsProps;
     }
 
@@ -137,9 +144,10 @@ export default class ComponentGenerator {
     const componentData = {};
 
     for (const componentName of componentList) {
+      const id = makeId(5);
       componentData[componentName] = {
-        html: await this.generateHTMLForComponent(componentName),
-        js: await this.generateJSForComponent(componentName),
+        html: await this.generateHTMLForComponent(componentName, id),
+        js: await this.generateJSForComponent(componentName, id),
       };
     }
 

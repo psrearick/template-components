@@ -1,4 +1,4 @@
-const navbarSelector = '{{selector}}';
+const navbarSelector = '#{{selector|r}}';
 const navbar = document.querySelector(navbarSelector);
 const checkbox = document.querySelector(
   navbarSelector + ' input[type=checkbox]',

@@ -1,4 +1,4 @@
-const faqSelector = '#faq-1';
+const faqSelector = '#{{selector|r}}';
 
 document
   .querySelectorAll(faqSelector + ' .accordion > li > .accordion-title')

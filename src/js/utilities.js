@@ -53,18 +53,18 @@ export class ElementGenerator {
     if (all) {
       this.destination
         .querySelectorAll(selector)
-        .forEach((element) => element.appendChild(this.element));
+        .forEach((element) => element.append(this.element));
 
       return this;
     }
 
-    this.destination.querySelector(selector).appendChild(this.element);
+    this.destination.querySelector(selector).append(this.element);
 
     return this;
   };
 
   appendToElement = (destinationElement) => {
-    destinationElement.appendChild(this.element);
+    destinationElement.append(this.element);
 
     return this;
   };
