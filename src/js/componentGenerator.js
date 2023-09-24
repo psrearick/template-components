@@ -8,6 +8,7 @@ import {
   makeId,
   ucFirst,
 } from './utilities';
+import { resizeScreenSize } from './addEventListeners';
 
 export default class ComponentGenerator {
   sections = {};
@@ -36,7 +37,10 @@ export default class ComponentGenerator {
         '.component-section[data-import = ' + componentName + ']',
       );
 
-      parents.forEach((parent) => parent.append(componentElement));
+      parents.forEach((parent) => {
+        const child = parent.appendChild(componentElement);
+        resizeScreenSize('reset', child.querySelector('.frame'));
+      });
 
       if (!component.js.hasJS) {
         return;

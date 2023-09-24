@@ -44,12 +44,6 @@ export const sections = {
       section: 'faq',
     },
   },
-  testSection: {
-    path: new URL('../Sections/testSection.html', import.meta.url),
-    properties: {
-      section: 'testSection',
-    },
-  },
 };
 
 export const components = {

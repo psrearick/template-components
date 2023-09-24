@@ -56,7 +56,7 @@ const cancelButtonListener = () => {
 };
 
 const showBuildPanel = () => {
-  bodyScroll(true, false);
+  bodyScroll(true);
   document.querySelector('#build-panel').classList.remove('hidden');
   document.querySelectorAll('.add-component-button').forEach((element) => {
     element.closest('button').classList.remove('hidden');

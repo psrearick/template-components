@@ -291,7 +291,7 @@ export default class PageBuilder {
     const list = this.getBuildList();
     const componentNames = list.map((listItem) => listItem.name);
 
-    bodyScroll();
+    bodyScroll(true, true);
 
     componentNames.forEach((componentName) => {
       const id = makeId(5);
