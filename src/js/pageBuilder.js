@@ -24,9 +24,10 @@ export default class PageBuilder {
     const listElement = document.querySelector('#build-list');
     const entryElements = listElement.querySelectorAll('[data-component]');
 
-    return Array.from(entryElements).map((element) =>
-      element.getAttribute('data-component'),
-    );
+    return Array.from(entryElements).map((element, index) => ({
+      id: index,
+      name: element.getAttribute('data-component'),
+    }));
   };
 
   setPreviewWindowHTML = async () => {
@@ -45,6 +46,13 @@ export default class PageBuilder {
       .addEventListener('click', () => {
         bodyScroll(false);
         document.querySelector('#preview-panel-window')?.remove();
+
+        this.pageCode = {
+          pageHTML: [],
+          displayHTML: [],
+          pageJS: [],
+          displayJS: [],
+        };
       });
 
   registerDownload = () => {
@@ -74,11 +82,9 @@ export default class PageBuilder {
   };
 
   registerPreview = () =>
-    document
-      .querySelector('#preview-build')
-      .addEventListener('click', async () => {
-        await this.previewBuild();
-      });
+    document.querySelector('#preview-build').addEventListener('click', () => {
+      this.previewBuild().then(() => {});
+    });
 
   registerResize = () =>
     document
@@ -231,21 +237,20 @@ export default class PageBuilder {
     await this.setPreviewWindowHTML();
 
     const list = this.getBuildList();
+    const componentNames = list.map((listItem) => listItem.name);
 
     bodyScroll();
 
-    Object.keys(this.generator.componentCode)
-      .filter((componentName) => list.indexOf(componentName) > -1)
-      .forEach((componentName) => {
-        const id = makeId(5);
-        const html = this.getHTMLForComponent(componentName, id);
-        this.pageCode.pageHTML.push(html.pageHTML);
-        this.pageCode.displayHTML.push(html.displayHTML);
+    componentNames.forEach((componentName) => {
+      const id = makeId(5);
+      const html = this.getHTMLForComponent(componentName, id);
+      this.pageCode.pageHTML.push(html.pageHTML);
+      this.pageCode.displayHTML.push(html.displayHTML);
 
-        const js = this.getJSForComponent(componentName, id);
-        this.pageCode.pageJS.push(js.pageJS);
-        this.pageCode.displayJS.push(js.displayJS);
-      });
+      const js = this.getJSForComponent(componentName, id);
+      this.pageCode.pageJS.push(js.pageJS);
+      this.pageCode.displayJS.push(js.displayJS);
+    });
 
     this.constructDocument();
 
