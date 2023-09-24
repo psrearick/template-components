@@ -86,14 +86,66 @@ export default class PageBuilder {
       (async () => this.previewBuild())();
     });
 
-  registerResize = () =>
+  registerResize = () => {
     document
       .querySelectorAll('#preview-panel .responsive-button')
       .forEach((button) => {
-        button.addEventListener('click', (event) =>
-          handleResizeEvent(event, button),
-        );
+        button.addEventListener('click', (event) => {
+          handleResizeEvent(event, button);
+          this.hideScreenSizePanel();
+        });
       });
+
+    document
+      .querySelector('#preview-screen-size-toggle')
+      .addEventListener('click', () => {
+        if (
+          document
+            .querySelector('#preview-screen-size-toggle')
+            .getAttribute('data-open')
+        ) {
+          this.hideScreenSizePanel();
+
+          return;
+        }
+
+        this.showScreenSizePanel();
+      });
+  };
+
+  hideScreenSizePanel = () => {
+    const toggle = document.querySelector('#preview-screen-size-toggle');
+    document
+      .querySelector('#preview-screen-size-buttons')
+      .classList.remove('grid');
+    document
+      .querySelector('#preview-screen-size-buttons')
+      .classList.add('hidden');
+    toggle.removeAttribute('data-open');
+    toggle.querySelector('span').innerHTML = 'Change Screen Size';
+    document.querySelector('#preview-screen-size').classList.remove('h-full');
+    document.querySelector('#preview-screen-size').classList.add('h-16');
+    document
+      .querySelector('#preview-panel .component-container')
+      .classList.add('absolute');
+  };
+
+  showScreenSizePanel = () => {
+    const toggle = document.querySelector('#preview-screen-size-toggle');
+    document
+      .querySelector('#preview-screen-size-buttons')
+      .classList.remove('hidden');
+    document
+      .querySelector('#preview-screen-size-buttons')
+      .classList.add('grid');
+    toggle.setAttribute('data-open', 'true');
+    toggle.querySelector('span').innerHTML = 'Cancel';
+    document.querySelector('#preview-screen-size').classList.add('h-full');
+    document.querySelector('#preview-screen-size').classList.remove('h-16');
+    document
+      .querySelector('#preview-panel .component-container')
+      .classList.remove('absolute');
+  };
 
   registerLoadedListeners = () => {
     this.registerResize();
