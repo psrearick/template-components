@@ -13,3 +13,4 @@ src/js/vendor
 src/img
 src/fonts
 *.min.*
+*.sh

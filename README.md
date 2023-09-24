@@ -41,18 +41,16 @@ From here, `npm run start`, will run `npm run dev` to start a parcel development
 - `npm run test`: This does nothing because there are no tests
 - `npm run prepare`: installs husky pre-commit hooks - this is run when `npm install` is run, in case this is a new project
 
-## Process
+## Adding a Section
 
-### Adding a Section
-
-1. Create a section as an `.html` file in `/src/Sections` using the section template `/src/Templates/Section.html`.
+1. Create a section as an `.html` file in `/src/Sections` using the section template `/src/Templates/Section.html`. This can be shortcut with `sh bin/create-section.sh SECTION`.
 2. Modify the `html` file as needed, using template variables as described in [templates](#templates).
 3. Add two entries for the section in `index.html`, one for the navigation and one for the body display.
 4. Add an entry for the section to the `sections` object in `/src/js/elementDefinitions.js`.
 
-#### File Entries
+### File Entries
 
-##### index.html
+#### index.html
 
 **Navigation**
 
@@ -79,7 +77,7 @@ From here, `npm run start`, will run `npm run dev` to start a parcel development
 ></div>
 ```
 
-##### Element Definition
+#### Element Definition
 
 - the key is the section name, it should match the `data-import` value in `index.html`.
 - The value should be the URL to the `html` file. Use `URL` constructor with `import.meta.url` as the base url to convert the relative path in the `/src/Sections` directory to an absolute path to the `dist` directory, readable by the browser.
@@ -90,15 +88,15 @@ export const sections = {
 };
 ```
 
-### Adding a Component
+## Adding a Component
 
-1. Add an `.html` file for the component in `/src/Components/`
-2. If needed, add a `.js` file for the component in `src/js/Components`
-3. Add any template variables needed to the `js` and `html` files, see [templates](#templates)
-4. Add an entry for the component to the `components` object in `/src/js/elementDefinitions.js`
-5. Add an entry for the component to the "section components" `div` in the component's section `html` file
+1. Add an `.html` file for the component in `/src/Components/`. This can be shortcut with `sh bin/create-section.sh SECTION`.
+2. If needed, add a `.js` file for the component in `src/js/Components`. This can be shortcut with `sh bin/create-section.sh --js COMPONENT`.
+3. Add any template variables needed to the `js` and `html` files, see [templates](#templates).
+4. Add an entry for the component to the `components` object in `/src/js/elementDefinitions.js`.
+5. Add an entry for the component to the "section components" `div` in the component's section `html` file.
 
-**Element Definition**
+### Element Definition
 
 ```js
 export const components = {
@@ -122,4 +120,16 @@ export const components = {
 };
 ```
 
-### Templates
+### Section HTML File
+
+```html
+<div id="SECTION" class="flex-1">
+  <div class="component-section" data-import="COMPONENT"></div>
+</div>
+```
+
+## Templates
+
+### Section
+
+### Component
