@@ -150,7 +150,7 @@ export const components = {
 
 Variables can be used in component and section templates. This is most useful when a template is used multiple times.
 
-Use the {{variable}} syntax for the placeholder. Modifier can be used by appending a `|` to the variable, followed by the modifier:
+Use the Mustache syntax, `{{variable}}`, for the placeholder. Modifier can be used by appending a `|` to the variable, followed by the modifier:
 
 `|r` will add a random string to the end of the variable name that is unique to that component. So, `{{variable|u}}` would become something like `variable5Gu3s`. This ensures that variables are unique if a component of template shows up twice on a page.
 

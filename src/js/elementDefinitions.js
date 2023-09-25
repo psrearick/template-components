@@ -152,7 +152,7 @@ export const components = {
     },
     js: {
       code: fs.readFileSync(
-        path.join(__dirname, '/Components/faq1.js'),
+        path.join(__dirname, '/Components/accordion.js'),
         'utf8',
       ),
       properties: {
@@ -177,5 +177,31 @@ export const components = {
       },
     },
     js: {},
+  },
+  services2: {
+    html: {
+      code: new URL('../Components/services2.html', import.meta.url),
+      properties: {
+        selector: 'services-2',
+      },
+    },
+    js: {},
+  },
+  services3: {
+    html: {
+      code: new URL('../Components/services3.html', import.meta.url),
+      properties: {
+        selector: 'services-3',
+      },
+    },
+    js: {
+      code: fs.readFileSync(
+        path.join(__dirname, '/Components/accordion.js'),
+        'utf8',
+      ),
+      properties: {
+        selector: 'services-3',
+      },
+    },
   },
 };

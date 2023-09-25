@@ -3,6 +3,22 @@
 @tailwind utilities;
 
 @layer components {
+  .hover-float {
+    @apply transition-transform will-change-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-shadow {
+    @apply hover:shadow-2xl;
+  }
+
+  ul.list {
+    @apply list-disc list-inside pl-4;
+  }
+
+  ul.list > li {
+    @apply mb-1;
+  }
+
   .accordion-title {
     @apply cursor-pointer text-primary-600 hover:text-primary-800
             border-b border-primary-100 hover:border-primary-800

@@ -1,7 +1,7 @@
-const faqSelector = '#{{selector|r}}';
+const accordionSelector = '#{{selector|r}}';
 
 document
-  .querySelectorAll(faqSelector + ' .accordion > li > .accordion-title')
+  .querySelectorAll(accordionSelector + ' .accordion > li > .accordion-title')
   .forEach((title) => {
     title.addEventListener('click', (event) => {
       const listItem = event.target.closest('li');
