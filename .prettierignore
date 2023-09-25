@@ -1,6 +1,7 @@
 node_modules
 .parcel-cache
 dist
+playground
 .next
 .husky
 .prettierignore
@@ -14,3 +15,4 @@ src/img
 src/fonts
 *.min.*
 *.sh
+**/.gitignore

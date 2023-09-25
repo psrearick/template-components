@@ -1,5 +1,6 @@
 .parcel-cache
 dist
+playground
 doc
 node_modules
 src/js/vendor

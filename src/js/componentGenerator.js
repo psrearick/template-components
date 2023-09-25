@@ -1,7 +1,5 @@
-import {
-  components as componentDefinitions,
-  sections as sectionDefinitions,
-} from './elementDefinitions';
+import * as elementDefinitions from './elementDefinitions';
+
 import {
   createElement,
   encodeHTMLEntities,
@@ -14,6 +12,11 @@ export default class ComponentGenerator {
   sections = {};
   components = {};
   componentCode = {};
+
+  constructor(definitions = elementDefinitions) {
+    this.componentDefinitions = definitions.components;
+    this.sectionDefinitions = definitions.sections;
+  }
 
   addSectionsToDom = async () => {
     Object.keys(this.sections).forEach((sectionName) => {
@@ -66,12 +69,12 @@ export default class ComponentGenerator {
   };
 
   createSections = async () => {
-    for (const sectionName of Object.keys(sectionDefinitions)) {
-      const resp = await fetch(sectionDefinitions[sectionName].path);
+    for (const sectionName of Object.keys(this.sectionDefinitions)) {
+      const resp = await fetch(this.sectionDefinitions[sectionName].path);
       this.sections[sectionName] = createElement(
         this.replaceProps(
           await resp.text(),
-          sectionDefinitions[sectionName].properties,
+          this.sectionDefinitions[sectionName].properties,
         ),
       );
     }
@@ -103,7 +106,7 @@ export default class ComponentGenerator {
   };
 
   generateHTMLForComponent = async (name, id) => {
-    const html = componentDefinitions[name].html;
+    const html = this.componentDefinitions[name].html;
     const htmlCode = await this.fetchCode(html.code);
     const htmlProps = html.properties;
 
@@ -132,7 +135,7 @@ export default class ComponentGenerator {
       hasJS: false,
     };
 
-    const js = componentDefinitions[name].js;
+    const js = this.componentDefinitions[name].js;
 
     if (!js || !js.code) {
       return response;
@@ -174,7 +177,7 @@ export default class ComponentGenerator {
       new URL('../Templates/SectionComponent.html', import.meta.url),
     );
     const componentTemplate = await componentTemplateResponse.text();
-    const componentList = Object.keys(componentDefinitions);
+    const componentList = Object.keys(this.componentDefinitions);
     const componentListData =
       await this.generateDataForComponents(componentList);
 
