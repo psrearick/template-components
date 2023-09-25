@@ -20,6 +20,12 @@ export const sections = {
       section: 'hero',
     },
   },
+  about: {
+    path: new URL('../Sections/about.html', import.meta.url),
+    properties: {
+      section: 'about',
+    },
+  },
   text: {
     path: new URL('../Sections/text.html', import.meta.url),
     properties: {
@@ -238,5 +244,14 @@ export const components = {
         selector: 'services-3',
       },
     },
+  },
+  about1: {
+    html: {
+      code: new URL('../Components/about1.html', import.meta.url),
+      properties: {
+        selector: 'about-1',
+      },
+    },
+    js: {},
   },
 };
