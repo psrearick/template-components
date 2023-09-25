@@ -1,16 +1,17 @@
-import colors from "tailwindcss/colors";
+import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}", "./public/*.html"],
+  content: ['./src/**/*.{html,js}', './public/*.html'],
   theme: {
     extend: {
       fontFamily: {
-        'sans': ["Nunito", "Helvetica Neue", "Arial", "Noto Sans", "sans-serif"],
-        'serif': ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+        sans: ['Nunito', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+        serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
       },
       colors: {
         gray: colors.slate,
+        'gray-norm': colors.gray,
         // primary: colors.cyan,
         // secondary: colors.violet,
         // tertiary: colors.fuchsia,
@@ -53,8 +54,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/container-queries'),
-  ],
-}
-
+  plugins: [require('@tailwindcss/container-queries')],
+};

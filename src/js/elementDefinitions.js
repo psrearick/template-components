@@ -98,6 +98,23 @@ export const components = {
       },
     },
   },
+  header4: {
+    html: {
+      code: new URL('../Components/header4.html', import.meta.url),
+      properties: {
+        selector: 'header-4',
+      },
+    },
+    js: {
+      code: fs.readFileSync(
+        path.join(__dirname, '/Components/header.js'),
+        'utf8',
+      ),
+      properties: {
+        selector: 'header-4',
+      },
+    },
+  },
   hero1: {
     html: {
       code: new URL('../Components/hero1.html', import.meta.url),
@@ -139,6 +156,15 @@ export const components = {
       code: new URL('../Components/contact1.html', import.meta.url),
       properties: {
         selector: 'contact-1',
+      },
+    },
+    js: {},
+  },
+  contact2: {
+    html: {
+      code: new URL('../Components/contact2.html', import.meta.url),
+      properties: {
+        selector: 'contact-2',
       },
     },
     js: {},

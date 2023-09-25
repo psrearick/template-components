@@ -111,23 +111,30 @@
     color: theme('colors.primary.800');
   }
 
+  .link-text-light {
+    color: theme('colors.primary.50');
+  }
+
+  .link-text-light:hover,
   .link-text:hover {
     background-color: theme('colors.primary.700');
     color: theme('colors.white');
   }
 
+  .link-text-light-active,
   .link-text-active {
     background-color: theme('colors.primary.700');
     color: theme('colors.white');
   }
 
-  .secondary-link-text {
-    @apply text-secondary-600 hover:text-secondary-300 underline;
-  }
-
+  .link-text-light-active:hover,
   .link-text-active:hover {
     background-color: theme('colors.primary.800');
     color: theme('colors.white');
+  }
+
+  .secondary-link-text {
+    @apply text-secondary-600 hover:text-secondary-300 underline;
   }
 }
 
