@@ -136,6 +136,34 @@
   .secondary-link-text {
     @apply text-secondary-600 hover:text-secondary-300 underline;
   }
+
+  .card {
+    @apply border border-gray-200 rounded-lg p-4;
+  }
+
+  .card div.card-body > * {
+    @apply text-gray-600 mb-6;
+  }
+
+  .card p.card-heading {
+    @apply text-black text-xl font-serif mb-2 my-6;
+  }
+
+  .circle-box {
+    @apply w-20 h-20 rounded-full mx-auto flex items-center text-center;
+  }
+
+  .circle-box p {
+    @apply w-full p-0 m-0 text-lg;
+  }
+
+  .circle-box.circle-primary {
+    @apply bg-primary-50;
+  }
+
+  .circle-box.circle-primary p {
+    @apply text-primary-700;
+  }
 }
 
 .font-sans.fonts-loaded {
