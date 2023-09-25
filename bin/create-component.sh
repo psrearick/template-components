@@ -43,7 +43,7 @@ fi
 
 cp src/Templates/Component.html src/Components/"$1".html
 
-if [ $makeJS ]
+if [ $makeJS = true ]
   then
     cp src/Templates/Component.js src/js/Components/"$1".js
 fi

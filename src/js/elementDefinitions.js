@@ -2,16 +2,16 @@ import fs from 'fs';
 import path from 'path';
 
 export const sections = {
+  playground: {
+    path: new URL('../Sections/playground.html', import.meta.url),
+    properties: {
+      section: 'playground',
+    },
+  },
   headers: {
     path: new URL('../Sections/headers.html', import.meta.url),
     properties: {
       section: 'headers',
-    },
-  },
-  footers: {
-    path: new URL('../Sections/footers.html', import.meta.url),
-    properties: {
-      section: 'footers',
     },
   },
   hero: {
@@ -38,6 +38,12 @@ export const sections = {
       section: 'services',
     },
   },
+  process: {
+    path: new URL('../Sections/process.html', import.meta.url),
+    properties: {
+      section: 'process',
+    },
+  },
   contact: {
     path: new URL('../Sections/contact.html', import.meta.url),
     properties: {
@@ -48,6 +54,12 @@ export const sections = {
     path: new URL('../Sections/faq.html', import.meta.url),
     properties: {
       section: 'faq',
+    },
+  },
+  footers: {
+    path: new URL('../Sections/footers.html', import.meta.url),
+    properties: {
+      section: 'footers',
     },
   },
 };
@@ -253,6 +265,15 @@ export const components = {
         selector: 'services-3',
       },
     },
+  },
+  process1: {
+    html: {
+      code: new URL('../Components/process1.html', import.meta.url),
+      properties: {
+        selector: 'process-1',
+      },
+    },
+    js: {},
   },
   about1: {
     html: {

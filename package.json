@@ -18,6 +18,7 @@
     "rebuild": "npm run reset && npm run build",
     "reset": "rm -rf .parcel-cache && rm -rf dist",
     "start": "npm run rebuild && npm run dev",
+    "play": "rm -rf .parcel-cache && rm -rf playground && parcel build --dist-dir playground src/playground.html && parcel src/playground.html",
     "watch:css": "tailwindcss -i src/css/index.css -o src/css/tailwind.css -w",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
