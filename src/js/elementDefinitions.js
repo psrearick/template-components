@@ -130,6 +130,15 @@ export const components = {
     },
     js: {},
   },
+  hero2: {
+    html: {
+      code: new URL('../Components/hero2.html', import.meta.url),
+      properties: {
+        selector: 'hero-2',
+      },
+    },
+    js: {},
+  },
   text1: {
     html: {
       code: new URL('../Components/text1.html', import.meta.url),
