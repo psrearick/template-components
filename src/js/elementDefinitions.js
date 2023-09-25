@@ -178,6 +178,15 @@ export const components = {
     },
     js: {},
   },
+  text4: {
+    html: {
+      code: new URL('../Components/text4.html', import.meta.url),
+      properties: {
+        selector: 'text-4',
+      },
+    },
+    js: {},
+  },
   services2: {
     html: {
       code: new URL('../Components/services2.html', import.meta.url),
