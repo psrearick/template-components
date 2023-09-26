@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 export const sections = {
   playground: {
     path: new URL('../Sections/playground.html', import.meta.url),
@@ -8,13 +11,21 @@ export const sections = {
 };
 
 export const components = {
-  process1: {
+  header5: {
     html: {
-      code: new URL('../Components/process1.html', import.meta.url),
+      code: new URL('../Components/header5.html', import.meta.url),
       properties: {
-        selector: 'process-1',
+        selector: 'header-5',
       },
     },
-    js: {},
+    js: {
+      code: fs.readFileSync(
+        path.join(__dirname, '/Components/header.js'),
+        'utf8',
+      ),
+      properties: {
+        selector: 'header-5',
+      },
+    },
   },
 };
