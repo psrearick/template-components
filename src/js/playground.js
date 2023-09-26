@@ -1,4 +1,4 @@
 import * as definitions from './playgroundElementDefinitions';
 import { run } from './main';
 
-run(definitions);
+run(definitions, ['header5']);

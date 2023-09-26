@@ -9,11 +9,11 @@
   "license": "",
   "author": "Phillip Rearick",
   "scripts": {
-    "build": "parcel build src/index.html",
+    "build": "parcel build --target default",
     "deploy": "gh-pages -d dist",
     "fix": "eslint --fix src --ext .js && stylelint --allow-empty-input \"src/**/*.css\" --fix && prettier src --write",
     "lint": "eslint src --ext .js && stylelint --allow-empty-input \"src/**/*.css\" && prettier src --check",
-    "dev": "parcel src/index.html",
+    "dev": "parcel --target default",
     "predeploy": "npm run rebuild",
     "rebuild": "npm run reset && npm run build",
     "reset": "rm -rf .parcel-cache && rm -rf dist",
@@ -54,7 +54,11 @@
   "targets": {
     "default": {
       "distDir": "./dist",
-      "publicUrl": "."
+      "publicUrl": ".",
+      "source": [
+        "src/index.html",
+        "src/playground.html"
+      ]
     },
     "playground": {
       "distDir": "./playground",

@@ -6,12 +6,12 @@ import loadFonts from './loadFonts';
 import ComponentGenerator from './componentGenerator';
 import PageBuilder from './pageBuilder';
 
-export const run = (definitions) => {
+export const run = (definitions, components = []) => {
   const generator = new ComponentGenerator(definitions);
   const pageBuilder = new PageBuilder(generator);
 
   Promise.all([generator.createSections(), generator.createComponents()])
-    .then(async () => await generator.addElementsToDom())
+    .then(async () => await generator.addElementsToDom(components))
     .then(async () => addEventListeners(generator))
     .then(async () => updateResponsiveClasses())
     .then(async () => await addContainerQueries())

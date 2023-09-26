@@ -32,8 +32,8 @@ export default class ComponentGenerator {
     destination.eval(code);
   };
 
-  addComponentsToDom = async () => {
-    Object.keys(this.components).forEach((componentName) => {
+  addComponentsToDom = async (componentList = []) => {
+    componentList.forEach((componentName) => {
       const component = this.componentCode[componentName];
       const componentElement = this.components[componentName];
       const parents = document.querySelectorAll(
@@ -57,9 +57,9 @@ export default class ComponentGenerator {
     });
   };
 
-  addElementsToDom = async () => {
+  addElementsToDom = async (components = []) => {
     await this.addSectionsToDom();
-    await this.addComponentsToDom();
+    await this.addComponentsToDom(components);
 
     return {
       sections: this.sections,

@@ -209,6 +209,21 @@ const toggleSectionByElement = (element, value = null) => {
     '#' + element.getAttribute('id').replace('-section-header', ''),
   );
   const hidden = section.classList.contains('hidden');
+  const populated = section.getAttribute('populated');
+
+  if (!populated) {
+    const components = Array.from(
+      section.querySelectorAll('[data-import]'),
+    ).map((component) => component.getAttribute('data-import'));
+
+    generator.addComponentsToDom(components);
+
+    section.setAttribute('populated', 'true');
+
+    if (!hidden) {
+      return;
+    }
+  }
 
   if (value === null || value === undefined) {
     section.classList.remove(hidden ? 'hidden' : 'block');
