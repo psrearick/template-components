@@ -172,12 +172,16 @@ export default class ComponentGenerator {
     return componentData;
   };
 
-  createComponents = async () => {
+  createComponents = async (componentList = []) => {
     const componentTemplateResponse = await fetch(
       new URL('../Templates/SectionComponent.html', import.meta.url),
     );
     const componentTemplate = await componentTemplateResponse.text();
-    const componentList = Object.keys(this.componentDefinitions);
+
+    if (!componentList || componentList.length === 0) {
+      componentList = Object.keys(this.componentDefinitions);
+    }
+
     const componentListData =
       await this.generateDataForComponents(componentList);
 
