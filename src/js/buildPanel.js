@@ -1,19 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-import { bodyScroll, ElementGenerator } from './utilities';
-
-let generator;
-
-const loadNavbar = () => {
-  const navbarSelector = 'template-components-header';
-  let navBarJS = fs.readFileSync(
-    path.join(__dirname, '/Components/header.js'),
-    'utf8',
-  );
-  navBarJS = navBarJS.replaceAll('{{selector}}', navbarSelector);
-  navBarJS = navBarJS.replaceAll('{{selector|r}}', navbarSelector);
-  window.eval(navBarJS);
-};
+import { bodyScroll } from './utilities';
 
 const hideBuildPanelListener = () => {
   document
@@ -70,40 +55,6 @@ const hideBuildPanel = () => {
 
 const clearBuildList = () => {
   document.querySelector('#build-list').innerHTML = null;
-};
-
-const addComponentListener = async () => {
-  document.querySelectorAll('.add-component-button').forEach((element) => {
-    element.addEventListener('click', (event) => {
-      (async () => {
-        const component = event.target
-          .closest('button')
-          .getAttribute('id')
-          .replace('add-', '');
-
-        const list = document.querySelector('#build-list');
-        const entries = list.querySelectorAll('[data-component]');
-        const numberOfEntries = entries.length;
-
-        let html = await generator.fetchCode(
-          new URL('../Templates/componentBuilderEntry.html', import.meta.url),
-        );
-        html = html.replaceAll(`{{component}}`, component);
-
-        const element = new ElementGenerator()
-          .setContent(html)
-          .setAttributes({
-            'data-component': component,
-            'data-build-list-order': numberOfEntries.toString(),
-          })
-          .setClasses(['build-list-entry'])
-          .append('#build-list')
-          .get();
-
-        addListItemListeners(element);
-      })();
-    });
-  });
 };
 
 const reorderBuildListByOrder = () => {
@@ -198,17 +149,14 @@ const removeComponentListener = (element) => {
   element
     .querySelector('[data-action="remove"]')
     .addEventListener('click', () => {
-      const parentElement = element.closest('[data-build-list-order]');
-      parentElement.setAttribute('data-build-list-order', -1);
+      element.closest('[data-build-list-order]')
+        .setAttribute('data-build-list-order', -1);
       reorderBuildListByOrder();
     });
 };
 
-export const loadSiteJS = async (currentGenerator) => {
-  generator = currentGenerator;
-  loadNavbar();
+export const loadBuildPanel = () => {
   hideBuildPanelListener();
   toggleBuildPanelListener();
   cancelButtonListener();
-  await addComponentListener();
 };

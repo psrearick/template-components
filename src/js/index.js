@@ -1,4 +1,4 @@
-import * as definitions from './elementDefinitions';
+import { components, sections } from './elementDefinitions';
 import { run } from './main';
 
-run(definitions);
+(async () => run({components, sections}))();

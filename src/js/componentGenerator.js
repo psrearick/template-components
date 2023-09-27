@@ -1,30 +1,27 @@
 import * as elementDefinitions from './elementDefinitions';
 
-import {
-  createElement,
-  encodeHTMLEntities,
-  makeId,
-  ucFirst,
-} from './utilities';
-import { resizeScreenSize } from './addEventListeners';
+import { createElement, encodeHTMLEntities, makeId, ucFirst } from './utilities';
+import Section from './section';
+import Component from './component';
 
 export default class ComponentGenerator {
   sections = {};
   components = {};
   componentCode = {};
 
-  constructor(definitions = elementDefinitions) {
+  constructor(page, definitions = elementDefinitions) {
+    this.page = page;
     this.componentDefinitions = definitions.components;
     this.sectionDefinitions = definitions.sections;
   }
 
-  addSectionsToDom = async () => {
+  addSectionsToDom = async (containerSelector = '#component-sections') => {
     Object.keys(this.sections).forEach((sectionName) => {
-      const parents = document.querySelectorAll(
-        '.header-section[data-import = ' + sectionName + ']',
-      );
-
-      parents.forEach((parent) => parent.append(this.sections[sectionName]));
+      const section = this.sections[sectionName];
+      document.querySelector(containerSelector).append(section.element);
+      this.page.eventBus.publish('sectionAddedToDom', {
+        section: section.element,
+      });
     });
   };
 
@@ -32,24 +29,25 @@ export default class ComponentGenerator {
     destination.eval(code);
   };
 
-  addComponentsToDom = async (componentList = []) => {
+  addComponentsToDom = async (componentList = [], section = null) => {
+    const parent = section
+      ? section.querySelector('.section-container')
+      : document.querySelector('.section-container');
+
     componentList.forEach((componentName) => {
-      const component = this.componentCode[componentName];
-      const componentElement = this.components[componentName];
-      const parents = document.querySelectorAll(
-        '.component-section[data-import = ' + componentName + ']',
-      );
+      const componentCode = this.componentCode[componentName];
+      const component = this.components[componentName];
+      const componentElement = component.element;
+      const child = parent.appendChild(componentElement);
 
-      parents.forEach((parent) => {
-        const child = parent.appendChild(componentElement);
-        resizeScreenSize('reset', child.querySelector('.frame'));
-      });
+      component.registerListeners();
+      this.page.resizer.resizeScreenSize('reset', child.querySelector('.frame'));
 
-      if (!component.js.hasJS) {
+      if (!componentCode.js.hasJS) {
         return;
       }
 
-      this.runJS(component.js.code);
+      this.runJS(componentCode.js.code);
 
       componentElement
         .querySelector('#' + componentName + '-js-show-code')
@@ -57,26 +55,60 @@ export default class ComponentGenerator {
     });
   };
 
-  addElementsToDom = async (components = []) => {
-    await this.addSectionsToDom();
-    await this.addComponentsToDom(components);
+  createComponents = async (componentList = []) => {
+    if (!componentList || componentList.length === 0) {
+      return;
+    }
 
-    return {
-      sections: this.sections,
-      components: this.components,
-      componentCode: this.componentCode,
-    };
+    const componentTemplateResponse = await fetch(
+      new URL('../Templates/SectionComponent.html', import.meta.url),
+    );
+    const componentTemplate = await componentTemplateResponse.text();
+
+    const componentListData =
+      await this.generateDataForComponents(componentList);
+
+    for (const componentName of componentList) {
+      let componentContainer = componentTemplate;
+      componentContainer = componentContainer.replaceAll(
+        '{component}',
+        componentName,
+      );
+      componentContainer = componentContainer.replaceAll(
+        '{Component}',
+        ucFirst(componentName),
+      );
+
+      const containerEl = createElement(componentContainer);
+
+      const frame = containerEl.querySelector('#' + componentName + '-frame');
+
+      const componentData = componentListData[componentName];
+      frame.innerHTML = componentData.html.code;
+
+      this.components[componentName] = new Component(
+        componentName,
+        containerEl,
+        this.page
+      );
+
+      this.componentCode[componentName] = componentData;
+    }
   };
 
-  createSections = async () => {
-    for (const sectionName of Object.keys(this.sectionDefinitions)) {
-      const resp = await fetch(this.sectionDefinitions[sectionName].path);
-      this.sections[sectionName] = createElement(
+  createSections = async (sectionList = Object.keys(this.sectionDefinitions)) => {
+    for (const sectionName of sectionList) {
+      const section = new Section(sectionName, this.sectionDefinitions[sectionName], this.page);
+      const resp = await fetch(section.path);
+
+      section.setElement(createElement(
         this.replaceProps(
           await resp.text(),
           this.sectionDefinitions[sectionName].properties,
         ),
-      );
+      ));
+
+      this.sections[sectionName] = section;
     }
   };
 
@@ -170,41 +202,6 @@ export default class ComponentGenerator {
     }
 
     return componentData;
-  };
-
-  createComponents = async (componentList = []) => {
-    const componentTemplateResponse = await fetch(
-      new URL('../Templates/SectionComponent.html', import.meta.url),
-    );
-    const componentTemplate = await componentTemplateResponse.text();
-
-    if (!componentList || componentList.length === 0) {
-      componentList = Object.keys(this.componentDefinitions);
-    }
-
-    const componentListData =
-      await this.generateDataForComponents(componentList);
-
-    for (const componentName of componentList) {
-      let componentContainer = componentTemplate;
-      componentContainer = componentContainer.replaceAll(
-        '{component}',
-        componentName,
-      );
-      componentContainer = componentContainer.replaceAll(
-        '{Component}',
-        ucFirst(componentName),
-      );
-
-      const containerEl = createElement(componentContainer);
-
-      const frame = containerEl.querySelector('#' + componentName + '-frame');
-
-      const componentData = componentListData[componentName];
-      frame.innerHTML = componentData.html.code;
-      this.components[componentName] = containerEl;
-      this.componentCode[componentName] = componentData;
-    }
   };
 
   getHTMLDisplayCode = (code) => {

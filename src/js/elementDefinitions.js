@@ -3,64 +3,64 @@ import path from 'path';
 
 export const sections = {
   playground: {
-    path: new URL('../Sections/playground.html', import.meta.url),
     properties: {
       section: 'playground',
     },
+    components: ['header5'],
   },
   headers: {
-    path: new URL('../Sections/headers.html', import.meta.url),
     properties: {
       section: 'headers',
     },
+    components: ['header1', 'header2', 'header3', 'header4', 'header5'],
   },
   hero: {
-    path: new URL('../Sections/hero.html', import.meta.url),
     properties: {
       section: 'hero',
     },
+    components: ['hero1', 'hero2'],
   },
   about: {
-    path: new URL('../Sections/about.html', import.meta.url),
     properties: {
       section: 'about',
     },
+    components: ['about1'],
   },
   text: {
-    path: new URL('../Sections/text.html', import.meta.url),
     properties: {
       section: 'text',
     },
+    components: ['text1', 'text2', 'text3', 'text4'],
   },
   services: {
-    path: new URL('../Sections/services.html', import.meta.url),
     properties: {
       section: 'services',
     },
+    components: ['services1', 'services2', 'services3'],
   },
   process: {
-    path: new URL('../Sections/process.html', import.meta.url),
     properties: {
       section: 'process',
     },
+    components: ['process1'],
   },
   contact: {
-    path: new URL('../Sections/contact.html', import.meta.url),
     properties: {
       section: 'contact',
     },
+    components: ['contact1', 'contact2'],
   },
   faq: {
-    path: new URL('../Sections/faq.html', import.meta.url),
     properties: {
       section: 'faq',
     },
+    components: ['faq1'],
   },
   footers: {
-    path: new URL('../Sections/footers.html', import.meta.url),
     properties: {
       section: 'footers',
     },
+    components: ['footer1'],
   },
 };
 
