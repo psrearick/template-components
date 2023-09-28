@@ -1,8 +1,18 @@
-[[headers]]
-  for = "*.js" # js files should be set this way
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-[[headers]]
-  for = "*.css" # css files too
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
+  /*.js
+    cache-control: public
+    cache-control: max-age=31536000
+  /*.css
+    cache-control: public
+    cache-control: max-age=31536000
+  /*.ttf
+    cache-control: public
+    cache-control: max-age=31536000
+  /*.woff2
+    cache-control: public
+    cache-control: max-age=31536000
+  /*.woff
+    cache-control: public
+    cache-control: max-age=31536000
+  /*.webp
+    cache-control: public
+    cache-control: max-age=31536000
