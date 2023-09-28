@@ -5,6 +5,7 @@ const checkbox = document.querySelector(
 );
 
 checkbox.addEventListener('change', function () {
+  console.log(this.checked);
   if (this.checked) {
     navbar.setAttribute('data-checked', '');
   } else {
@@ -14,6 +15,7 @@ checkbox.addEventListener('change', function () {
 
 navbar.querySelectorAll('li, button').forEach((element) => {
   element.addEventListener('click', (event) => {
+    console.log(event.target);
     if (event.target.closest('.noclick')) {
       return;
     }

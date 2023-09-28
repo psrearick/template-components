@@ -170,6 +170,13 @@
   }
 }
 
+@layer utilities {
+
+  .radial-gradient {
+    background: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+
 .font-sans.fonts-loaded {
   font-family: Inter, Nunito, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
 }
