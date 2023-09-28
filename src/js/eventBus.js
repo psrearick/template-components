@@ -20,7 +20,7 @@ export default class EventBus {
     for (let id in callbackObject) {
       callbackObject[id](...args);
 
-      if (id[0] === "d") {
+      if (id[0] === 'd') {
         delete callbackObject[id];
       }
     }
@@ -30,7 +30,7 @@ export default class EventBus {
     return this.subscribeMarked(eventName, callback);
   }
 
-  subscribeMarked(eventName, callback, marker = "") {
+  subscribeMarked(eventName, callback, marker = '') {
     if (!this.eventObject[eventName]) {
       this.eventObject[eventName] = {};
     }
@@ -51,7 +51,7 @@ export default class EventBus {
   }
 
   subscribeOnce(eventName, callback) {
-    return this.subscribeMarked(eventName, callback, "d");
+    return this.subscribeMarked(eventName, callback, 'd');
   }
 
   clear(eventName) {

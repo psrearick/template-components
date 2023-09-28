@@ -12,7 +12,7 @@ export default class EventHandler {
     }
   }
 
-  getElement = () => this.element !== undefined ? this.element : document;
+  getElement = () => (this.element !== undefined ? this.element : document);
 
   getEventBus = () => this.eventBus;
 
@@ -44,5 +44,5 @@ export default class EventHandler {
     });
   };
 
-  setElement = (element) => this.element = element;
+  setElement = (element) => (this.element = element);
 }

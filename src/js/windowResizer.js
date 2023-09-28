@@ -106,7 +106,8 @@ export default class WindowResizer {
 
     wrapper.style.height =
       element.getBoundingClientRect().height.toString() + 'px';
-    wrapper.style.width = element.getBoundingClientRect().width.toString() + 'px';
+    wrapper.style.width =
+      element.getBoundingClientRect().width.toString() + 'px';
   };
 
   resizeObserver = new ResizeObserver((entries) => {
@@ -127,7 +128,10 @@ export default class WindowResizer {
 
     const attribute = element.getAttribute('data-exact-size');
 
-    if (attribute.indexOf('-reset') > -1 || attribute.indexOf('-rotated') > -1) {
+    if (
+      attribute.indexOf('-reset') > -1 ||
+      attribute.indexOf('-rotated') > -1
+    ) {
       element.setAttribute('data-exact-size', screen);
       rotate = false;
     } else {

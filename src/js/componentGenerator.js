@@ -1,6 +1,11 @@
 import * as elementDefinitions from './elementDefinitions';
 
-import { createElement, encodeHTMLEntities, makeId, ucFirst } from './utilities';
+import {
+  createElement,
+  encodeHTMLEntities,
+  makeId,
+  ucFirst,
+} from './utilities';
 import Section from './section';
 import Component from './component';
 
@@ -89,10 +94,7 @@ export default class ComponentGenerator {
       const componentData = componentListData[componentName];
       frame.innerHTML = componentData.html.code;
 
-      const component = new Component(
-        this.app,
-        componentName
-      );
+      const component = new Component(this.app, componentName);
 
       component.setElement(containerEl);
 
@@ -104,7 +106,9 @@ export default class ComponentGenerator {
     }
   };
 
-  createSections = async (sectionList = Object.keys(this.sectionDefinitions)) => {
+  createSections = async (
+    sectionList = Object.keys(this.sectionDefinitions),
+  ) => {
     for (const sectionName of sectionList) {
       const section = new Section(this.app, sectionName);
 
@@ -112,12 +116,14 @@ export default class ComponentGenerator {
 
       const resp = await fetch(section.path);
 
-      section.setElement(createElement(
-        this.replaceProps(
-          await resp.text(),
-          this.sectionDefinitions[sectionName].properties,
+      section.setElement(
+        createElement(
+          this.replaceProps(
+            await resp.text(),
+            this.sectionDefinitions[sectionName].properties,
+          ),
         ),
-      ));
+      );
 
       this.sections[sectionName] = section;
     }
