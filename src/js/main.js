@@ -14,4 +14,6 @@ export const run = async (definitions) => {
 
   await pageBuilder.registerListeners();
   await loadFonts(document);
+
+  return app;
 };

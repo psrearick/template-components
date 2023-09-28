@@ -2,12 +2,6 @@ import fs from 'fs';
 import path from 'path';
 
 export const sections = {
-  playground: {
-    properties: {
-      section: 'playground',
-    },
-    components: ['header5'],
-  },
   headers: {
     properties: {
       section: 'headers',

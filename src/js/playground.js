@@ -1,4 +1,8 @@
-import * as definitions from './playgroundElementDefinitions';
+import { components, sections } from './playgroundElementDefinitions';
 import { run } from './main';
 
-(async () => await run(definitions))();
+(async () => {
+  const app = await run({ components, sections });
+
+  app.toggleAllSections();
+})();

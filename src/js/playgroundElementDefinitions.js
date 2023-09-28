@@ -3,10 +3,10 @@ import path from 'path';
 
 export const sections = {
   playground: {
-    path: new URL('../Sections/playground.html', import.meta.url),
     properties: {
       section: 'playground',
     },
+    components: ['header5'],
   },
 };
 
