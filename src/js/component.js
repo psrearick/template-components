@@ -1,49 +1,42 @@
 import hljs from './vendor/highlight.min';
+import EventHandler from './eventHandler';
+import { updateResponsiveClasses } from './updateResponsiveClasses';
 
 export default class Component {
-  listeners = [];
   element;
 
-  constructor(name, el = null, page) {
+  constructor(app, name) {
+    this.app = app;
     this.name = name;
-    this.element = el;
-    this.page = page;
+
+    this.eventHandler = new EventHandler();
+    this.registerAddToDomHandler();
   }
 
-  addListener = (listener, target, all = false, type = 'click') => {
-    const targets = all
-      ? this.element.querySelectorAll(target)
-      : [this.element.querySelector(target)];
+  onAddedToDom = (event) => {
+    if (event.component !== this) {
+      return;
+    }
 
-    targets.forEach((targetElement) => {
-      targetElement.addEventListener(type, listener);
-      this.listeners.push({
-        element: targetElement,
-        type: type,
-        value: listener,
-      });
-    });
+    this.eventHandler.setElement(this.element);
+
+    this.eventHandler.addListener(this.toggleCodeSection, '[id$="-show-code"]', true);
+    this.eventHandler.addListener(this.resizeComponentFrame, '.responsive-button', true);
+
+    this.app.resizer.resizeScreenSize('reset', this.element.querySelector('.frame'));
+
+    updateResponsiveClasses(this.element);
   };
 
-  addListeners = () => {
-    this.addListener(this.toggleCodeSection, '[id$="-show-code"]', true);
-    this.addListener(this.resizeComponentFrame, '.responsive-button', true);
-  };
-
-  registerListeners = () => {
-    this.removeListeners();
-    this.addListeners();
-  };
-
-  removeListeners = () => {
-    this.listeners.forEach((listener) => {
-      listener.element.removeEventListener(listener.type, listener.value);
-    });
+  registerAddToDomHandler = () => {
+    this.app.eventBus.subscribe("componentAddedToDom", this.onAddedToDom);
   };
 
   resizeComponentFrame = (event) => {
-    this.page.resizer.handleResizeEvent(event, event.target.closest('.responsive-button'));
+    this.app.resizer.handleResizeEvent(event, event.target.closest('.responsive-button'));
   };
+
+  setElement = (element) => this.element = element;
 
   toggleCodeSection = (event) => {
     const codeToggle = event.target.closest('[id$="-show-code"]');
@@ -59,7 +52,7 @@ export default class Component {
     );
 
     codeElement.innerHTML =
-          this.page.generator.componentCode[this.name][componentType].display;
+          this.app.generator.componentCode[this.name][componentType].display;
 
       hljs.highlightElement(codeElement);
 

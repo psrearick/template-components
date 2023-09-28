@@ -1,162 +1,166 @@
 import { bodyScroll } from './utilities';
 
-const hideBuildPanelListener = () => {
-  document
-    .querySelector('#hide-build-panel')
-    .addEventListener('click', function () {
-      hideBuildPanel();
-    });
-};
+export default class BuildPanel {
+  constructor(app = document) {
+    this.app = app;
 
-const toggleBuildPanel = () => {
-  if (document.querySelector('#build-panel').classList.contains('hidden')) {
-    showBuildPanel();
-
-    return;
+    this.hideBuildPanelListener();
+    this.toggleBuildPanelListener();
+    this.cancelButtonListener();
   }
 
-  hideBuildPanel();
-};
+  hideBuildPanelListener = () => {
+    this.app
+      .querySelector('#hide-build-panel')
+      .addEventListener('click',  () => {
+        this.hideBuildPanel();
+      });
+  };
 
-const toggleBuildPanelListener = () => {
-  document
-    .querySelector('#show-build-panel')
-    .addEventListener('click', toggleBuildPanel);
-};
+  toggleBuildPanel = () => {
+    if (this.app.querySelector('#build-panel').classList.contains('hidden')) {
+      this.showBuildPanel();
 
-const cancelBuild = () => {
-  document.querySelectorAll('.add-component-button').forEach((element) => {
-    element.closest('button').classList.add('hidden');
-  });
+      return;
+    }
 
-  clearBuildList();
+    this.hideBuildPanel();
+  };
 
-  hideBuildPanel();
-};
+  toggleBuildPanelListener = () => {
+    this.app
+      .querySelector('#show-build-panel')
+      .addEventListener('click', this.toggleBuildPanel);
+  };
 
-const cancelButtonListener = () => {
-  document
-    .querySelector('#cancel-build')
-    .addEventListener('click', cancelBuild);
-};
-
-const showBuildPanel = () => {
-  bodyScroll(true);
-  document.querySelector('#build-panel').classList.remove('hidden');
-  document.querySelectorAll('.add-component-button').forEach((element) => {
-    element.closest('button').classList.remove('hidden');
-  });
-};
-
-const hideBuildPanel = () => {
-  bodyScroll(false);
-  document.querySelector('#build-panel').classList.add('hidden');
-};
-
-const clearBuildList = () => {
-  document.querySelector('#build-list').innerHTML = null;
-};
-
-const reorderBuildListByOrder = () => {
-  const buildList = document.querySelector('#build-list');
-  const items = Array.from(buildList.children)
-    .filter((item) => item.getAttribute('data-build-list-order') > -1)
-    .sort((a, b) =>
-      a.getAttribute('data-build-list-order') >
-      b.getAttribute('data-build-list-order')
-        ? 1
-        : -1,
-    );
-
-  const elements = document.createDocumentFragment();
-
-  items.forEach((item) => {
-    const clone = item.cloneNode(true);
-    addListItemListeners(clone);
-    elements.append(clone);
-  });
-
-  buildList.innerHTML = null;
-  buildList.append(elements);
-};
-
-const addListItemListeners = (element) => {
-  moveComponentUpListener(element);
-  moveComponentDownListener(element);
-  removeComponentListener(element);
-};
-
-const moveComponentUpListener = (element) => {
-  element
-    .querySelector('[data-action="move-up"]')
-    .addEventListener('click', () => {
-      const parentElement = element.closest('[data-build-list-order]');
-      const currentOrder = parseInt(
-        parentElement.getAttribute('data-build-list-order'),
-      );
-      const previousOrder = currentOrder - 1;
-
-      if (currentOrder === 0) {
-        return;
-      }
-
-      const previousElement = document.querySelector(
-        '[data-build-list-order="' + previousOrder + '"]',
-      );
-      previousElement.setAttribute(
-        'data-build-list-order',
-        currentOrder.toString(),
-      );
-      parentElement.setAttribute(
-        'data-build-list-order',
-        previousOrder.toString(),
-      );
-
-      reorderBuildListByOrder();
+  cancelBuild = () => {
+    this.app.querySelectorAll('.add-component-button').forEach((element) => {
+      element.closest('button').classList.add('hidden');
     });
-};
 
-const moveComponentDownListener = (element) => {
-  element
-    .querySelector('[data-action="move-down"]')
-    .addEventListener('click', () => {
-      const parentElement = element.closest('[data-build-list-order]');
-      const currentOrder = parseInt(
-        parentElement.getAttribute('data-build-list-order'),
-      );
-      const listItemCount =
-        document.querySelector('#build-list').children.length;
-      const nextOrder = currentOrder + 1;
+    this.clearBuildList();
 
-      if (nextOrder === listItemCount) {
-        return;
-      }
+    this.hideBuildPanel();
+  };
 
-      const nextElement = document.querySelector(
-        '[data-build-list-order="' + nextOrder + '"]',
-      );
-      nextElement.setAttribute(
-        'data-build-list-order',
-        currentOrder.toString(),
-      );
-      parentElement.setAttribute('data-build-list-order', nextOrder.toString());
+  cancelButtonListener = () => {
+    this.app
+      .querySelector('#cancel-build')
+      .addEventListener('click', this.cancelBuild);
+  };
 
-      reorderBuildListByOrder();
+  showBuildPanel = () => {
+    bodyScroll(true);
+    this.app.querySelector('#build-panel').classList.remove('hidden');
+    this.app.querySelectorAll('.add-component-button').forEach((element) => {
+      element.closest('button').classList.remove('hidden');
     });
-};
+  };
 
-const removeComponentListener = (element) => {
-  element
-    .querySelector('[data-action="remove"]')
-    .addEventListener('click', () => {
-      element.closest('[data-build-list-order]')
-        .setAttribute('data-build-list-order', -1);
-      reorderBuildListByOrder();
+  hideBuildPanel = () => {
+    bodyScroll(false);
+    this.app.querySelector('#build-panel').classList.add('hidden');
+  };
+
+  clearBuildList = () => {
+    this.app.querySelector('#build-list').innerHTML = null;
+  };
+
+  reorderBuildListByOrder = () => {
+    const buildList = this.app.querySelector('#build-list');
+    const items = Array.from(buildList.children)
+      .filter((item) => item.getAttribute('data-build-list-order') > -1)
+      .sort((a, b) =>
+        a.getAttribute('data-build-list-order') >
+        b.getAttribute('data-build-list-order')
+          ? 1
+          : -1,
+      );
+
+    const elements = this.app.createDocumentFragment();
+
+    items.forEach((item) => {
+      const clone = item.cloneNode(true);
+      this.addListItemListeners(clone);
+      elements.append(clone);
     });
-};
 
-export const loadBuildPanel = () => {
-  hideBuildPanelListener();
-  toggleBuildPanelListener();
-  cancelButtonListener();
-};
+    buildList.innerHTML = null;
+    buildList.append(elements);
+  };
+
+  addListItemListeners = (element) => {
+    this.moveComponentUpListener(element);
+    this.moveComponentDownListener(element);
+    this.removeComponentListener(element);
+  };
+
+  moveComponentUpListener = (element) => {
+    element
+      .querySelector('[data-action="move-up"]')
+      .addEventListener('click', () => {
+        const parentElement = element.closest('[data-build-list-order]');
+        const currentOrder = parseInt(
+          parentElement.getAttribute('data-build-list-order'),
+        );
+        const previousOrder = currentOrder - 1;
+
+        if (currentOrder === 0) {
+          return;
+        }
+
+        const previousElement = this.app.querySelector(
+          '[data-build-list-order="' + previousOrder + '"]',
+        );
+        previousElement.setAttribute(
+          'data-build-list-order',
+          currentOrder.toString(),
+        );
+        parentElement.setAttribute(
+          'data-build-list-order',
+          previousOrder.toString(),
+        );
+
+        this.reorderBuildListByOrder();
+      });
+  };
+
+  moveComponentDownListener = (element) => {
+    element
+      .querySelector('[data-action="move-down"]')
+      .addEventListener('click', () => {
+        const parentElement = element.closest('[data-build-list-order]');
+        const currentOrder = parseInt(
+          parentElement.getAttribute('data-build-list-order'),
+        );
+        const listItemCount =
+          this.app.querySelector('#build-list').children.length;
+        const nextOrder = currentOrder + 1;
+
+        if (nextOrder === listItemCount) {
+          return;
+        }
+
+        const nextElement = this.app.querySelector(
+          '[data-build-list-order="' + nextOrder + '"]',
+        );
+        nextElement.setAttribute(
+          'data-build-list-order',
+          currentOrder.toString(),
+        );
+        parentElement.setAttribute('data-build-list-order', nextOrder.toString());
+
+        this.reorderBuildListByOrder();
+      });
+  };
+
+  removeComponentListener = (element) => {
+    element
+      .querySelector('[data-action="remove"]')
+      .addEventListener('click', () => {
+        element.closest('[data-build-list-order]')
+          .setAttribute('data-build-list-order', -1);
+        this.reorderBuildListByOrder();
+      });
+  };
+}

@@ -1,32 +1,30 @@
+import EventHandler from './eventHandler';
+
 export default class Section {
   listeners = [];
   element;
   body;
 
-  constructor(name, definition, page) {
+  constructor(app, name) {
+    this.app = app;
     this.name = name;
-    this.definition = definition;
-    this.page = page;
-    this.path = definition.path || new URL('../Templates/Section.html', import.meta.url);
+    this.eventHandler = new EventHandler();
+
+    this.definition = this.app.generator.sectionDefinitions[name];
+    this.path = this.definition.path || new URL('../Templates/Section.html', import.meta.url);
+
+    this.registerAddToDomHandler();
   }
 
-  addListener = (listener, target, all = false, type = 'click') => {
-    const targets = all
-      ? this.element.querySelectorAll(target)
-      : [this.element.querySelector(target)];
 
-    targets.forEach((targetElement) => {
-      targetElement.addEventListener(type, listener);
-      this.listeners.push({
-        element: targetElement,
-        type: type,
-        value: listener,
-      });
-    });
-  };
+  onAddedToDom = (event) => {
+    if (event.section !== this) {
+      return;
+    }
 
-  addListeners = () => {
-    this.addListener(this.toggleSection, '[id$="-section-header"]');
+    this.eventHandler.setElement(this.element);
+
+    this.eventHandler.addListener(this.toggleSection, '[id$="-section-header"]');
   };
 
   collapseSection = () => {
@@ -50,27 +48,19 @@ export default class Section {
 
     this.element.classList.add('populated')
 
-    return this.page.generator.createComponents(this.definition.components)
-      .then(() => this.page.generator
+    return this.app.generator.createComponents(this.definition.components)
+      .then(() => this.app.generator
         .addComponentsToDom(this.definition.components, this.element)
       );
   };
 
-  registerListeners = () => {
-    this.removeListeners();
-    this.addListeners();
-  };
-
-  removeListeners = () => {
-    this.listeners.forEach((listener) => {
-      listener.element.removeEventListener(listener.type, listener.value);
-    });
+  registerAddToDomHandler = () => {
+    this.app.eventBus.subscribe("sectionAddedToDom", this.onAddedToDom);
   };
 
   setElement = (element) => {
     this.element = element;
     this.body = this.element.querySelector('.section-container');
-    this.element.addEventListener('');
   };
 
   toggleSection = () => {

@@ -1,14 +1,20 @@
-class EventBus {
+export default class EventBus {
   constructor() {
+    if (EventBus.instance) {
+      return EventBus.instance;
+    }
+
     this.eventObject = {};
     this.callbackId = 0;
+
+    EventBus.instance = this;
   }
 
   publish(eventName, ...args) {
     const callbackObject = this.eventObject[eventName];
 
     if (!callbackObject) {
-      return console.warn(eventName + " not found!");
+      return;
     }
 
     for (let id in callbackObject) {

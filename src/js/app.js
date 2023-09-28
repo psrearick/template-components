@@ -2,38 +2,25 @@ import ComponentGenerator from './componentGenerator';
 import WindowResizer from './windowResizer';
 import fs from 'fs';
 import path from 'path';
-import { loadBuildPanel } from './buildPanel';
+import EventHandler from './eventHandler';
+import BuildPanel from './buildPanel';
 
-export default class Page {
-  listeners = [];
+export default class App {
 
   constructor(config) {
     this.generator = new ComponentGenerator(this, config.definitions);
     this.resizer = new WindowResizer();
-    this.eventBus = config.eventBus;
+    this.eventHandler = new EventHandler();
+    this.eventBus = this.eventHandler.getEventBus();
 
     this.loadNavbar();
-    loadBuildPanel();
-    this.registerListeners();
+    new BuildPanel();
+
+    this.addListeners();
   }
 
-  addListener = (listener, target, all = false, type = 'click') => {
-    const targets = all
-      ? document.querySelectorAll(target)
-      : [document.querySelector(target)];
-
-    targets.forEach((targetElement) => {
-      targetElement.addEventListener(type, listener);
-      this.listeners.push({
-        element: targetElement,
-        type: type,
-        value: listener,
-      });
-    });
-  };
-
   addListeners = () => {
-    this.addListener(this.toggleAllSections, '#toggle-sections-button');
+    this.eventHandler.addListener(this.toggleAllSections, '#toggle-sections-button');
   };
 
   loadNavbar = () => {
@@ -48,18 +35,7 @@ export default class Page {
     window.eval(navBarJS);
   };
 
-  registerListeners = () => {
-    this.removeListeners();
-    this.addListeners();
-  };
-
-  removeListeners = () => {
-    this.listeners.forEach((listener) => {
-      listener.element.removeEventListener(listener.type, listener.value);
-    });
-  };
-
-  toggleAllSections = async () => {
+  toggleAllSections = () => {
     const sections = Object.keys(this.generator.sections).map(
       (sectionName) => this.generator.sections[sectionName]
     );

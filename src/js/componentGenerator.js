@@ -9,8 +9,8 @@ export default class ComponentGenerator {
   components = {};
   componentCode = {};
 
-  constructor(page, definitions = elementDefinitions) {
-    this.page = page;
+  constructor(app, definitions = elementDefinitions) {
+    this.app = app;
     this.componentDefinitions = definitions.components;
     this.sectionDefinitions = definitions.sections;
   }
@@ -19,8 +19,8 @@ export default class ComponentGenerator {
     Object.keys(this.sections).forEach((sectionName) => {
       const section = this.sections[sectionName];
       document.querySelector(containerSelector).append(section.element);
-      this.page.eventBus.publish('sectionAddedToDom', {
-        section: section.element,
+      this.app.eventBus.publish('sectionAddedToDom', {
+        section,
       });
     });
   };
@@ -38,10 +38,13 @@ export default class ComponentGenerator {
       const componentCode = this.componentCode[componentName];
       const component = this.components[componentName];
       const componentElement = component.element;
-      const child = parent.appendChild(componentElement);
 
-      component.registerListeners();
-      this.page.resizer.resizeScreenSize('reset', child.querySelector('.frame'));
+      parent.append(componentElement);
+      component.setElement(componentElement);
+
+      this.app.eventBus.publish('componentAddedToDom', {
+        component,
+      });
 
       if (!componentCode.js.hasJS) {
         return;
@@ -86,11 +89,16 @@ export default class ComponentGenerator {
       const componentData = componentListData[componentName];
       frame.innerHTML = componentData.html.code;
 
-      this.components[componentName] = new Component(
-        componentName,
-        containerEl,
-        this.page
+      const component = new Component(
+        this.app,
+        componentName
       );
+
+      component.setElement(containerEl);
+
+      this.components[componentName] = component;
+
+      this.app.eventBus.publish('componentCreated', { component });
 
       this.componentCode[componentName] = componentData;
     }
@@ -98,7 +106,10 @@ export default class ComponentGenerator {
 
   createSections = async (sectionList = Object.keys(this.sectionDefinitions)) => {
     for (const sectionName of sectionList) {
-      const section = new Section(sectionName, this.sectionDefinitions[sectionName], this.page);
+      const section = new Section(this.app, sectionName);
+
+      this.app.eventBus.publish('sectionCreated', { section });
+
       const resp = await fetch(section.path);
 
       section.setElement(createElement(
