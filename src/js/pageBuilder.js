@@ -1,10 +1,10 @@
-import { handleResizeEvent } from './addEventListeners';
 import {
   bodyScroll,
   createElement,
   ElementGenerator,
   makeId,
 } from './utilities';
+import WindowResizer from './windowResizer';
 const acorn = require('acorn');
 const walk = require('acorn-walk');
 
@@ -18,6 +18,7 @@ export default class PageBuilder {
 
   constructor(generator) {
     this.generator = generator;
+    this.resizer = new WindowResizer();
   }
 
   getBuildList = () => {
@@ -91,7 +92,7 @@ export default class PageBuilder {
       .querySelectorAll('#preview-panel .responsive-button')
       .forEach((button) => {
         button.addEventListener('click', (event) => {
-          handleResizeEvent(event, button);
+          this.resizer.handleResizeEvent(event, button);
           this.hideScreenSizePanel();
         });
       });

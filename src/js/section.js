@@ -1,7 +1,7 @@
 import EventHandler from './eventHandler';
+import loadFonts from './loadFonts';
 
 export default class Section {
-  listeners = [];
   element;
   body;
 
@@ -11,11 +11,12 @@ export default class Section {
     this.eventHandler = new EventHandler();
 
     this.definition = this.app.generator.sectionDefinitions[name];
-    this.path = this.definition.path || new URL('../Templates/Section.html', import.meta.url);
+    this.path =
+      this.definition.path ||
+      new URL('../Templates/Section.html', import.meta.url);
 
     this.registerAddToDomHandler();
   }
-
 
   onAddedToDom = (event) => {
     if (event.section !== this) {
@@ -23,8 +24,12 @@ export default class Section {
     }
 
     this.eventHandler.setElement(this.element);
+    this.eventHandler.addListener(
+      this.toggleSection,
+      '[id$="-section-header"]',
+    );
 
-    this.eventHandler.addListener(this.toggleSection, '[id$="-section-header"]');
+    loadFonts(this.element);
   };
 
   collapseSection = () => {
@@ -41,21 +46,24 @@ export default class Section {
   isPopulated = () => this.element.classList.contains('populated');
 
   populateComponents = () => {
-
     if (this.isPopulated()) {
       return;
     }
 
-    this.element.classList.add('populated')
+    this.element.classList.add('populated');
 
-    return this.app.generator.createComponents(this.definition.components)
-      .then(() => this.app.generator
-        .addComponentsToDom(this.definition.components, this.element)
+    return this.app.generator
+      .createComponents(this.definition.components)
+      .then(() =>
+        this.app.generator.addComponentsToDom(
+          this.definition.components,
+          this.element,
+        ),
       );
   };
 
   registerAddToDomHandler = () => {
-    this.app.eventBus.subscribe("sectionAddedToDom", this.onAddedToDom);
+    this.app.eventBus.subscribe('sectionAddedToDom', this.onAddedToDom);
   };
 
   setElement = (element) => {

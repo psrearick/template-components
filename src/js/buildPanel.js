@@ -7,12 +7,13 @@ export default class BuildPanel {
     this.hideBuildPanelListener();
     this.toggleBuildPanelListener();
     this.cancelButtonListener();
+    this.open = false;
   }
 
   hideBuildPanelListener = () => {
     this.app
       .querySelector('#hide-build-panel')
-      .addEventListener('click',  () => {
+      .addEventListener('click', () => {
         this.hideBuildPanel();
       });
   };
@@ -34,6 +35,7 @@ export default class BuildPanel {
   };
 
   cancelBuild = () => {
+    this.open = false;
     this.app.querySelectorAll('.add-component-button').forEach((element) => {
       element.closest('button').classList.add('hidden');
     });
@@ -51,6 +53,7 @@ export default class BuildPanel {
 
   showBuildPanel = () => {
     bodyScroll(true);
+    this.open = true;
     this.app.querySelector('#build-panel').classList.remove('hidden');
     this.app.querySelectorAll('.add-component-button').forEach((element) => {
       element.closest('button').classList.remove('hidden');
@@ -148,7 +151,10 @@ export default class BuildPanel {
           'data-build-list-order',
           currentOrder.toString(),
         );
-        parentElement.setAttribute('data-build-list-order', nextOrder.toString());
+        parentElement.setAttribute(
+          'data-build-list-order',
+          nextOrder.toString(),
+        );
 
         this.reorderBuildListByOrder();
       });
@@ -158,7 +164,8 @@ export default class BuildPanel {
     element
       .querySelector('[data-action="remove"]')
       .addEventListener('click', () => {
-        element.closest('[data-build-list-order]')
+        element
+          .closest('[data-build-list-order]')
           .setAttribute('data-build-list-order', -1);
         this.reorderBuildListByOrder();
       });
