@@ -16,3 +16,4 @@ src/fonts
 *.min.*
 *.sh
 **/.gitignore
+**/_headers
