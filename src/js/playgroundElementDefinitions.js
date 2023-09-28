@@ -6,25 +6,25 @@ export const sections = {
     properties: {
       section: 'playground',
     },
-    components: ['header5'],
+    components: ['header6'],
   },
 };
 
 export const components = {
-  header5: {
+  header6: {
     html: {
-      code: new URL('../Components/header5.html', import.meta.url),
+      code: new URL('../Components/header6.html', import.meta.url),
       properties: {
-        selector: 'header-5',
+        selector: 'header-6',
       },
     },
     js: {
       code: fs.readFileSync(
-        path.join(__dirname, '/Components/header.js'),
+        path.join(__dirname, '/Components/headerMegaMenu.js'),
         'utf8',
       ),
       properties: {
-        selector: 'header-5',
+        selector: 'header-6',
       },
     },
   },
