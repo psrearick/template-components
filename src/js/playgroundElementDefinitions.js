@@ -1,31 +1,20 @@
-import fs from 'fs';
-import path from 'path';
-
 export const sections = {
   playground: {
     properties: {
       section: 'playground',
     },
-    components: ['header6'],
+    components: ['hero3'],
   },
 };
 
 export const components = {
-  header6: {
+  hero3: {
     html: {
-      code: new URL('../Components/header6.html', import.meta.url),
+      code: new URL('../Components/hero3.html', import.meta.url),
       properties: {
-        selector: 'header-6',
+        selector: 'hero-3',
       },
     },
-    js: {
-      code: fs.readFileSync(
-        path.join(__dirname, '/Components/headerMegaMenu.js'),
-        'utf8',
-      ),
-      properties: {
-        selector: 'header-6',
-      },
-    },
+    js: {},
   },
 };

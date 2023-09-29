@@ -19,7 +19,7 @@ export const sections = {
     properties: {
       section: 'hero',
     },
-    components: ['hero1', 'hero2'],
+    components: ['hero1', 'hero2', 'hero3'],
   },
   about: {
     properties: {
@@ -182,6 +182,15 @@ export const components = {
       code: new URL('../Components/hero2.html', import.meta.url),
       properties: {
         selector: 'hero-2',
+      },
+    },
+    js: {},
+  },
+  hero3: {
+    html: {
+      code: new URL('../Components/hero3.html', import.meta.url),
+      properties: {
+        selector: 'hero-3',
       },
     },
     js: {},
