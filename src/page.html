@@ -1,0 +1,131 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test Page</title>
+    <meta name="description" content="Test Page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="Test Page" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="apple-touch-icon" href="./icon.png" />
+
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+
+    <meta name="theme-color" content="#fafafa" />
+
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-weight: 300;
+        src: url('./fonts/Inter-Light.woff2') format('woff2');
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-weight: 400;
+        src: url('./fonts/Inter-Regular.woff2') format('woff2');
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Inter';
+        font-weight: bold;
+        src: url('./fonts/Inter-Bold.woff2') format('woff2');
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Montserrat';
+        font-weight: 300;
+        src: url('./fonts/Montserrat-Light.woff2') format('woff2');
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Montserrat';
+        font-weight: 400;
+        src: url('./fonts/Montserrat-Regular.woff2') format('woff2');
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Montserrat';
+        font-weight: bold;
+        src: url('./fonts/Montserrat-Bold.woff2') format('woff2');
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body class="font-sans bg-white">
+    <div>Test</div>
+    <div
+      class="group fixed right-0 rounded-l-xl flex justify-end max-w-7xl mx-auto gap-4 bg-gray-200 shadow-2xl p-4 ease-in-out will-change-transform transition-transform duration-500 data-[closed]:translate-x-[75%] translate-x-0 master-nav"
+      data-open
+    >
+      <button class="btn btn-md hide-buttons">
+        <!-- Right Chevron -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 group-data-[closed]:hidden"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+        <!-- End Right Chevron -->
+
+        <!-- Left Chevron -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6 group-data-[open]:hidden"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+          />
+        </svg>
+        <!-- End Left Chevron -->
+      </button>
+
+      <a href="./index.html">
+        <button class="btn btn-md">Home</button>
+      </a>
+
+      <a href="./playground.html">
+        <button class="btn btn-md">Playground</button>
+      </a>
+    </div>
+    <script>
+      document.querySelector('.hide-buttons').addEventListener('click', () => {
+        const masterNav = document.querySelector('.master-nav');
+
+        if (!masterNav.hasAttribute('data-closed')) {
+          masterNav.setAttribute('data-closed', '');
+          masterNav.removeAttribute('data-open');
+
+          return;
+        }
+
+        masterNav.removeAttribute('data-closed');
+        masterNav.setAttribute('data-open', '');
+      });
+    </script>
+  </body>
+</html>
