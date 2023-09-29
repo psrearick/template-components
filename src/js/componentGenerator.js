@@ -146,6 +146,10 @@ export default class ComponentGenerator {
         ucFirst(props[propKey]),
       );
       replacedCode = replacedCode.replaceAll(
+        `{{${propKey}|u}}`,
+        props[propKey].toUpperCase(),
+      );
+      replacedCode = replacedCode.replaceAll(
         `{{${propKey}|r}}`,
         props[propKey] + id,
       );

@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import EventHandler from './eventHandler';
 import BuildPanel from './buildPanel';
+import { createElement } from './utilities';
 
 export default class App {
   constructor(config) {
@@ -12,10 +13,9 @@ export default class App {
     this.eventHandler = new EventHandler();
     this.eventBus = this.eventHandler.getEventBus();
 
-    this.loadNavbar();
-    this.buildPanel = new BuildPanel();
-
-    this.addListeners();
+    this.loadNavbar()
+      .then(() => (this.buildPanel = new BuildPanel()))
+      .then(() => this.addListeners());
   }
 
   addListeners = () => {
@@ -25,7 +25,7 @@ export default class App {
     );
   };
 
-  loadNavbar = () => {
+  loadNavbar = async () => {
     const navbarSelector = 'template-components-header';
     let navBarJS = fs.readFileSync(
       path.join(__dirname, '/Components/header.js'),
@@ -34,6 +34,32 @@ export default class App {
 
     navBarJS = navBarJS.replaceAll('{{selector}}', navbarSelector);
     navBarJS = navBarJS.replaceAll('{{selector|r}}', navbarSelector);
+
+    const navBarMenuItemPath = new URL(
+      '../Templates/NavigationMenuItem.html',
+      import.meta.url,
+    );
+
+    const menuItem = await fetch(navBarMenuItemPath);
+    const menuItemHTML = await menuItem.text();
+
+    const sections = Object.keys(this.generator.sectionDefinitions);
+
+    for (const sectionName of sections) {
+      const section = this.generator.sectionDefinitions[sectionName];
+      const html = this.generator.replaceProps(
+        menuItemHTML,
+        section.properties,
+      );
+      createElement(
+        html,
+        true,
+        'li',
+        document,
+        '#' + navbarSelector + ' .section-navigation',
+      );
+    }
+
     window.eval(navBarJS);
   };
 
