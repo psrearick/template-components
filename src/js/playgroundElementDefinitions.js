@@ -3,16 +3,16 @@ export const sections = {
     properties: {
       section: 'playground',
     },
-    components: ['hero3'],
+    components: ['hero4'],
   },
 };
 
 export const components = {
-  hero3: {
+  hero4: {
     html: {
-      code: new URL('../Components/hero3.html', import.meta.url),
+      code: new URL('../Components/hero4.html', import.meta.url),
       properties: {
-        selector: 'hero-3',
+        selector: 'hero-4',
       },
     },
     js: {},
