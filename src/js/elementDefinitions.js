@@ -13,6 +13,7 @@ export const sections = {
       'header4',
       'header5',
       'header6',
+      'header7',
     ],
   },
   hero: {
@@ -165,6 +166,23 @@ export const components = {
       ),
       properties: {
         selector: 'header-6',
+      },
+    },
+  },
+  header7: {
+    html: {
+      code: new URL('../Components/header7.html', import.meta.url),
+      properties: {
+        selector: 'header-7',
+      },
+    },
+    js: {
+      code: fs.readFileSync(
+        path.join(__dirname, '/Components/header.js'),
+        'utf8',
+      ),
+      properties: {
+        selector: 'header-7',
       },
     },
   },

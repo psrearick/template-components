@@ -1,20 +1,31 @@
+import fs from 'fs';
+import path from 'path';
+
 export const sections = {
   playground: {
     properties: {
       section: 'playground',
     },
-    components: ['about2'],
+    components: ['header7'],
   },
 };
 
 export const components = {
-  about2: {
+  header7: {
     html: {
-      code: new URL('../Components/about2.html', import.meta.url),
+      code: new URL('../Components/header7.html', import.meta.url),
       properties: {
-        selector: 'about-2',
+        selector: 'header-7',
       },
     },
-    js: {},
+    js: {
+      code: fs.readFileSync(
+        path.join(__dirname, '/Components/header.js'),
+        'utf8',
+      ),
+      properties: {
+        selector: 'header-7',
+      },
+    },
   },
 };
