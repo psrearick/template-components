@@ -22,7 +22,7 @@ export default class EventHandler {
       : [this.getElement().querySelector(target)];
 
     targets.forEach((targetElement) => {
-      targetElement.addEventListener(type, listener);
+      targetElement?.addEventListener(type, listener);
       this.listeners.push({
         element: targetElement,
         type: type,

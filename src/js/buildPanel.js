@@ -13,7 +13,7 @@ export default class BuildPanel {
   hideBuildPanelListener = () => {
     this.app
       .querySelector('#hide-build-panel')
-      .addEventListener('click', () => {
+      ?.addEventListener('click', () => {
         this.hideBuildPanel();
       });
   };
@@ -31,7 +31,7 @@ export default class BuildPanel {
   toggleBuildPanelListener = () => {
     this.app
       .querySelector('#show-build-panel')
-      .addEventListener('click', this.toggleBuildPanel);
+      ?.addEventListener('click', this.toggleBuildPanel);
   };
 
   cancelBuild = () => {
@@ -48,7 +48,7 @@ export default class BuildPanel {
   cancelButtonListener = () => {
     this.app
       .querySelector('#cancel-build')
-      .addEventListener('click', this.cancelBuild);
+      ?.addEventListener('click', this.cancelBuild);
   };
 
   showBuildPanel = () => {

@@ -4,18 +4,24 @@ const checkbox = document.querySelector(
   navbarSelector + ' input[type=checkbox]',
 );
 
-checkbox.addEventListener('change', function () {
-  if (this.checked) {
-    navbar.setAttribute('data-checked', '');
-  } else {
-    navbar.removeAttribute('data-checked');
+(() => {
+  if (!checkbox || !navbar) {
+    return;
   }
-});
 
-navbar.querySelectorAll('li, button').forEach((element) => {
-  element.addEventListener('click', () => {
-    checkbox.checked = false;
-    const evt = new Event('change');
-    checkbox.dispatchEvent(evt);
+  checkbox.addEventListener('change', function () {
+    if (this.checked) {
+      navbar.setAttribute('data-checked', '');
+    } else {
+      navbar.removeAttribute('data-checked');
+    }
   });
-});
+
+  navbar.querySelectorAll('li, button').forEach((element) => {
+    element.addEventListener('click', () => {
+      checkbox.checked = false;
+      const evt = new Event('change');
+      checkbox?.dispatchEvent(evt);
+    });
+  });
+})();
