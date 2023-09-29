@@ -25,7 +25,7 @@ export const sections = {
     properties: {
       section: 'about',
     },
-    components: ['about1'],
+    components: ['about1', 'about2'],
   },
   text: {
     properties: {
@@ -333,6 +333,15 @@ export const components = {
       code: new URL('../Components/about1.html', import.meta.url),
       properties: {
         selector: 'about-1',
+      },
+    },
+    js: {},
+  },
+  about2: {
+    html: {
+      code: new URL('../Components/about2.html', import.meta.url),
+      properties: {
+        selector: 'about-2',
       },
     },
     js: {},
