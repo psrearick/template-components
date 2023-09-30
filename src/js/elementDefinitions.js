@@ -382,4 +382,13 @@ export const components = {
     },
     js: {},
   },
+  about3: {
+    html: {
+      code: new URL('../Components/about3.html', import.meta.url),
+      properties: {
+        selector: 'about-3',
+      },
+    },
+    js: {},
+  },
 };
