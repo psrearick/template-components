@@ -24,4 +24,55 @@ const checkbox = document.querySelector(
       checkbox?.dispatchEvent(evt);
     });
   });
+
+  let previousScroll = window.scrollY;
+  let directionDown = true;
+  let directionChangeScroll = window.scrollY;
+  document.addEventListener('scroll', () => {
+    const scroll = window.scrollY;
+    const header = document.querySelector('#header');
+    const previousDirectionDown = directionDown;
+
+    directionDown = scroll - previousScroll > 0;
+
+    if (scroll < 100) {
+      header.setAttribute('data-scroll', 'top');
+
+      previousScroll = scroll;
+
+      return;
+    }
+
+    if (scroll < 600 && directionDown) {
+      previousScroll = scroll;
+
+      return;
+    }
+
+    if (directionDown !== previousDirectionDown) {
+      directionChangeScroll = scroll;
+    }
+
+    const changeInScroll = scroll - directionChangeScroll;
+
+    if (changeInScroll > 60) {
+      header.setAttribute('data-scroll', 'down');
+
+      previousScroll = scroll;
+
+      return;
+    }
+
+    if (changeInScroll < -60) {
+      header.setAttribute('data-scroll', 'up');
+
+      previousScroll = scroll;
+
+      return;
+    }
+
+    header.setAttribute('data-scroll', 'none');
+
+    previousScroll = scroll;
+  });
 })();
