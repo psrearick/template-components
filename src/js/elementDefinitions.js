@@ -38,7 +38,7 @@ export const sections = {
     properties: {
       section: 'services',
     },
-    components: ['services1', 'services2', 'services3'],
+    components: ['services1', 'services2', 'services3', 'services4'],
   },
   process: {
     properties: {
@@ -345,6 +345,15 @@ export const components = {
         selector: 'services-3',
       },
     },
+  },
+  services4: {
+    html: {
+      code: new URL('../Components/services4.html', import.meta.url),
+      properties: {
+        selector: 'services-4',
+      },
+    },
+    js: {},
   },
   process1: {
     html: {
