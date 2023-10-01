@@ -44,7 +44,7 @@ export const sections = {
     properties: {
       section: 'process',
     },
-    components: ['process1'],
+    components: ['process1', 'process2'],
   },
   contact: {
     properties: {
@@ -375,6 +375,15 @@ export const components = {
       code: new URL('../Components/process1.html', import.meta.url),
       properties: {
         selector: 'process-1',
+      },
+    },
+    js: {},
+  },
+  process2: {
+    html: {
+      code: new URL('../Components/process2.html', import.meta.url),
+      properties: {
+        selector: 'process-2',
       },
     },
     js: {},
