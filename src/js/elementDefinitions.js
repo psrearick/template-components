@@ -26,7 +26,7 @@ export const sections = {
     properties: {
       section: 'about',
     },
-    components: ['about1', 'about2'],
+    components: ['about1', 'about2', 'about3', 'about4'],
   },
   text: {
     properties: {
@@ -50,7 +50,7 @@ export const sections = {
     properties: {
       section: 'contact',
     },
-    components: ['contact1', 'contact2'],
+    components: ['contact1', 'contact2', 'contact3'],
   },
   faq: {
     properties: {
@@ -63,6 +63,12 @@ export const sections = {
       section: 'footers',
     },
     components: ['footer1'],
+  },
+  testimonials: {
+    properties: {
+      section: 'testimonials',
+    },
+    components: ['testimonials1'],
   },
 };
 
@@ -276,6 +282,15 @@ export const components = {
     },
     js: {},
   },
+  contact3: {
+    html: {
+      code: new URL('../Components/contact3.html', import.meta.url),
+      properties: {
+        selector: 'contact-3',
+      },
+    },
+    js: {},
+  },
   faq1: {
     html: {
       code: new URL('../Components/faq1.html', import.meta.url),
@@ -396,6 +411,15 @@ export const components = {
       code: new URL('../Components/about4.html', import.meta.url),
       properties: {
         selector: 'about-4',
+      },
+    },
+    js: {},
+  },
+  testimonials1: {
+    html: {
+      code: new URL('../Components/testimonials1.html', import.meta.url),
+      properties: {
+        selector: 'testimonials-1',
       },
     },
     js: {},

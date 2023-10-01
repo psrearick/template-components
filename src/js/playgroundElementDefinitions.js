@@ -6,16 +6,16 @@ export const sections = {
     properties: {
       section: 'playground',
     },
-    components: ['about4'],
+    components: ['testimonials1'],
   },
 };
 
 export const components = {
-  about4: {
+  testimonials1: {
     html: {
-      code: new URL('../Components/about4.html', import.meta.url),
+      code: new URL('../Components/testimonials1.html', import.meta.url),
       properties: {
-        selector: 'about-4',
+        selector: 'testimonials-1',
       },
     },
     js: {},
