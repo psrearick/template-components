@@ -391,4 +391,13 @@ export const components = {
     },
     js: {},
   },
+  about4: {
+    html: {
+      code: new URL('../Components/about4.html', import.meta.url),
+      properties: {
+        selector: 'about-4',
+      },
+    },
+    js: {},
+  },
 };
