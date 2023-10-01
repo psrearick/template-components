@@ -20,7 +20,7 @@ export const sections = {
     properties: {
       section: 'hero',
     },
-    components: ['hero1', 'hero2', 'hero3', 'hero4', 'hero5'],
+    components: ['hero1', 'hero2', 'hero3', 'hero4', 'hero5', 'hero6'],
   },
   about: {
     properties: {
@@ -32,7 +32,7 @@ export const sections = {
     properties: {
       section: 'text',
     },
-    components: ['text1', 'text2', 'text3', 'text4'],
+    components: ['text1', 'text2', 'text3', 'text4', 'text5'],
   },
   services: {
     properties: {
@@ -234,6 +234,15 @@ export const components = {
     },
     js: {},
   },
+  hero6: {
+    html: {
+      code: new URL('../Components/hero6.html', import.meta.url),
+      properties: {
+        selector: 'hero-6',
+      },
+    },
+    js: {},
+  },
   hero5: {
     html: {
       code: new URL('../Components/hero5.html', import.meta.url),
@@ -257,6 +266,15 @@ export const components = {
       code: new URL('../Components/text2.html', import.meta.url),
       properties: {
         selector: 'text-2',
+      },
+    },
+    js: {},
+  },
+  text5: {
+    html: {
+      code: new URL('../Components/text5.html', import.meta.url),
+      properties: {
+        selector: 'text-5',
       },
     },
     js: {},
