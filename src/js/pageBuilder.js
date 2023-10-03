@@ -94,6 +94,9 @@ export default class PageBuilder {
         button.addEventListener('click', (event) => {
           this.resizer.handleResizeEvent(event, button);
           this.hideScreenSizePanel();
+          document
+            .querySelector('#preview-panel .component-container')
+            .classList.remove('invisible');
         });
       });
 
@@ -106,6 +109,9 @@ export default class PageBuilder {
             .getAttribute('data-open')
         ) {
           this.hideScreenSizePanel();
+          document
+            .querySelector('#preview-panel .component-container')
+            .classList.remove('invisible');
 
           return;
         }
@@ -145,7 +151,10 @@ export default class PageBuilder {
     document.querySelector('#preview-screen-size').classList.remove('h-16');
     document
       .querySelector('#preview-panel .component-container')
-      .classList.remove('absolute');
+      .classList.add('invisible');
+    // document
+    //   .querySelector('#preview-panel .component-container')
+    //   .classList.remove('absolute');
   };
 
   registerLoadedListeners = () => {

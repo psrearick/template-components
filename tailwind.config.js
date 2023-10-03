@@ -12,11 +12,18 @@ module.exports = {
       colors: {
         gray: colors.slate,
         'gray-norm': colors.gray,
+
+        // primary: colors.red,
+        // secondary: colors.lime,
+        // tertiary: colors.amber,
+
         // primary: colors.amber,
         // primary: colors.cyan,
+        // secondary: colors.teal,
         // secondary: colors.cyan,
         // secondary: colors.violet,
         // tertiary: colors.fuchsia,
+
         primary: {
           900: '#001f26',
           800: '#003640',

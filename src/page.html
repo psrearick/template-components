@@ -20,17 +20,10 @@
 
     <style>
       .hero-bg-img {
-        background-size: cover;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0) 25%,
-            #09090b 100%
-          ),
-          url(./img/man-in-chair.jpg?as=webp&width=1440),
-          url(./img/man-in-chair.jpg?as=webp&height=768),
-          url(./img/man-in-chair.jpg?as=webp&&height=667);
-        background-repeat: no-repeat;
-        background-position: center;
+        background-image: url('./img/car1.jpg?as=webp&width=1440'),
+          url('./img/car1.jpg?as=webp&width=768'),
+          url('./img/car1.jpg?as=webp&width=667');
+        box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.7);
       }
 
       @font-face {
@@ -77,6 +70,440 @@
     </style>
   </head>
   <body class="font-sans">
+    <div
+      id="header"
+      class="group data-[checked]:z-20 z-10 sticky top-0 transition-[z-index] duration-500 ease-[steps(2, jump-both)]"
+    >
+      <nav aria-label="header navbar" class="bg-white h-16">
+        <div
+          class="w-11/12 max-w-[64rem] m-auto flex flex-row-reverse justify-between items-center relative h-full"
+        >
+          <div>
+            <!-- Menu Toggle -->
+            <div class="h-[1.626rem] w-8 relative lg:hidden">
+              <!-- Lines -->
+              <div class="flex flex-col justify-between h-full w-full absolute">
+                <span
+                  class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-top-left ease-in-out duration-300 group-data-[checked]:rotate-45"
+                ></span>
+                <span
+                  class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform ease-in-out duration-300 group-data-[checked]:scale-y-0"
+                ></span>
+                <span
+                  class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-bottom-left ease-in-out duration-300 group-data-[checked]:-rotate-45"
+                ></span>
+              </div>
+              <!-- End Lines-->
+              <!-- Checkbox-->
+              <label
+                id="header-menu-toggle"
+                class="cursor-pointer w-8 group-data-[checked]:fixed absolute group-data-[checked]:h-auto h-[1.626rem] group-data-[checked]:lg:w-2/3 group-data-[checked]:w-1/3 group-data-[checked]:right-0 group-data-[checked]:inset-y-0"
+              >
+                <input
+                  type="checkbox"
+                  class="opacity-0 cursor-pointer"
+                  aria-label="Menu Toggle"
+                  aria-labelledby="header-menu-toggle"
+                />
+              </label>
+              <!-- End Checkbox-->
+            </div>
+            <!-- End Menu Toggle -->
+          </div>
+
+          <!-- navigation links -->
+          <div
+            class="bg-white shadow-2xl lg:shadow-none text-center fixed left-0 top-0 bottom-0 w-2/3 lg:w-auto lg:p-0 lg:min-h-0 overflow-auto scrollbar-hidden ease-out duration-500 opacity-0 translate-x-[-150%] group-data-[checked]:opacity-100 group-data-[checked]:translate-x-0 lg:relative lg:opacity-100 lg:translate-x-0 lg:h-auto lg:duration-0"
+            style="
+              will-change: transform, opacity, scroll-position;
+              transition-property: transform, opacity;
+            "
+          >
+            <ul
+              class="flex flex-col lg:flex-row h-full lg:gap-2 text-gray-700 text-lg pt-8 lg:pt-0"
+            >
+              <li class="flex items-center text-white">
+                Lead generation. A web designer can help you create landing
+                pages and other marketing materials that generate leads for your
+                business. Conversion optimization. A web designer can help you
+                improve your website's conversion rate by optimizing your
+                landing pages and checkout process. Analytics. A web designer
+                can help you set up and track analytics on your website so you
+                can see what's working and what's not. By working with a web
+                designer, you can get the help you need to optimize your
+                business without breaking the bank. Here are some specific
+                examples of how a web designer can help you solve your business
+                optimization problems: If you're struggling to generate leads, a
+                web designer can help you create landing pages that are
+                specifically designed to convert visitors into leads. If your
+                conversion rate is low, a web designer can help you identify and
+                fix the areas of your website that are causing people to abandon
+                their shopping carts. If you're not sure what analytics to track
+                or how to interpret the data, a web designer can help you set up
+                and track the right metrics so you can see what's working and
+                what's not. If you're serious about optimizing your business,
+                don't hesitate to contact a web designer. They can help you
+                create a website and marketing strategy that will help you
+                achieve your business goals. >
+                <a
+                  class="px-2 py-2 lg:py-1 w-full lg:w-auto lg:rounded-lg bg-primary-700 hover:bg-primary-900"
+                  href="#"
+                  >Home</a
+                >
+              </li>
+              <li class="flex items-center text-primary-800">
+                <a
+                  class="px-2 py-2 lg:py-1 w-full lg:w-auto lg:rounded-lg hover:text-white hover:bg-primary-700"
+                  href="#"
+                  >About</a
+                >
+              </li>
+              <li class="flex items-center text-primary-800">
+                <a
+                  class="px-2 py-2 lg:py-1 w-full lg:w-auto lg:rounded-lg hover:text-white hover:bg-primary-700"
+                  href="#"
+                  >Services</a
+                >
+              </li>
+              <li class="flex items-center text-primary-800">
+                <a
+                  class="px-2 py-2 lg:py-1 w-full lg:w-auto lg:rounded-lg hover:text-white hover:bg-primary-700"
+                  href="#"
+                  >Reviews</a
+                >
+              </li>
+              <li class="flex items-center text-primary-800">
+                <a
+                  class="px-2 py-2 lg:py-1 w-full lg:w-auto lg:rounded-lg hover:text-white hover:bg-primary-700"
+                  href="#"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- end navigation links -->
+
+          <!-- site title -->
+          <div>
+            <a href="#">
+              <h1 class="text-primary-700 font-bold text-2xl">
+                Frank's Mobile Detailing
+              </h1>
+            </a>
+          </div>
+          <!-- end site title -->
+        </div>
+      </nav>
+    </div>
+
+    <div id="hero" class="h-full w-full">
+      <div
+        class="hero-bg-img min-h-[667px] md:min-h-[768px] bg-center h-full bg-cover bg-no-repeat relative pt-32 md:pt-42 lg:pt-48"
+      >
+        <div class="text-white px-4 max-w-xl md:max-w-3xl lg:max-w-6xl mx-auto">
+          <p
+            class="text-5xl md:text-6xl lg:text-6xl font-serif mb-8 text-center"
+          >
+            Frank's Mobile Detailing
+          </p>
+          <p
+            class="text-xl sm:text-2xl md:text-3xl text-secondary-600 text-center"
+          >
+            Your car, our passion. Your convenience, our priority.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="services">
+      <div class="py-32 max-w-7xl mx-auto">
+        <p class="text-gray-600 text-center mb-8 max-w-5xl mx-auto text-lg">
+          We offer a wide range of mobile auto detailing services to meet your
+          needs, from a basic wash and wax to a complete interior and exterior
+          detail. Our experienced detailers use only the highest quality
+          products and techniques to ensure that your car looks its best.
+        </p>
+        <div class="grid grid-cols-12 gap-6 px-6 mb-12">
+          <!-- box 1 -->
+          <div
+            class="col-span-12 lg:col-span-4 text-center rounded-lg shadow-xl"
+          >
+            <div class="rounded-lg px-6 py-8">
+              <p
+                class="text-sm font-bold uppercase tracking-wide mb-8 text-primary-500"
+              >
+                Wash and Wax
+              </p>
+              <ul class="text-gray-600 mt-4">
+                <li class="mb-1">Window Cleaning</li>
+                <li class="mb-1">Wash</li>
+                <li class="mb-1">Wax</li>
+                <li>Wheel Cleaning</li>
+              </ul>
+            </div>
+          </div>
+          <!-- end box 1 -->
+          <!-- box 2 -->
+          <div
+            class="col-span-12 lg:col-span-4 text-center rounded-lg shadow-xl"
+          >
+            <div class="rounded-lg px-6 py-8">
+              <p
+                class="text-sm font-bold uppercase tracking-wide mb-8 text-primary-500"
+              >
+                Interior Detailing
+              </p>
+              <ul class="text-gray-600 mt-4">
+                <li class="mb-1">Vacuuming and Shampooing</li>
+                <li class="mb-1">Seat Cleaning and Conditioning</li>
+                <li class="mb-1">Glass Cleaning and Polishing</li>
+                <li class="mb-1">Odor Removal</li>
+                <li>Door Panel Cleaning</li>
+              </ul>
+            </div>
+          </div>
+          <!-- end box 2 -->
+          <!-- box 3 -->
+          <div
+            class="col-span-12 lg:col-span-4 text-center rounded-lg shadow-xl"
+          >
+            <div class="rounded-lg px-6 py-8">
+              <p
+                class="text-sm font-bold uppercase tracking-wide mb-8 text-primary-500"
+              >
+                Exterior Detailing
+              </p>
+              <ul class="text-gray-600">
+                <li class="mb-1">Clay Bar Treatment</li>
+                <li class="mb-1">Paint Correction</li>
+                <li class="mb-1">Polishing</li>
+                <li class="mb-1">Wheel Cleaning and Protection</li>
+                <li>Headlight Restoration</li>
+              </ul>
+            </div>
+          </div>
+          <!-- end box 3 -->
+          <!-- box 4 - wide -->
+          <div
+            class="col-span-12 lg:col-span-6 lg:col-start-4 bg-primary-50 text-left rounded-lg shadow-xl"
+          >
+            <div class="rounded-lg px-6 py-8">
+              <p
+                class="text-sm uppercase mb-1 font-bold text-center text-primary-500"
+              >
+                Other Services
+              </p>
+              <ul class="text-center">
+                <li class="mb-1">Ceramic Coating</li>
+                <li class="mb-1">PPF (Paint Protection Film)</li>
+                <li class="mb-1">Interior Protection</li>
+                <li>Emergency Detailing</li>
+              </ul>
+            </div>
+          </div>
+          <!-- end box 4 - wide -->
+        </div>
+        <div class="text-center">
+          <a href="#">
+            <button
+              class="btn-md bg-primary-500 hover:bg-primary-400 hover-float"
+            >
+              More Details
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="text-2BZnO9" class="bg-secondary-950">
+      <div class="grid grid-cols-12 py-32 max-w-7xl mx-auto px-8 gap-4">
+        <div class="lg:col-span-7 col-span-12 order-2 lg:order-1">
+          <p class="text-gray-100 mb-8">
+            Book your detail today and see the difference our mobile detailing
+            service can make!
+          </p>
+          <a href="#">
+            <button
+              class="btn-md bg-primary-500 hover:bg-primary-400 hover-float"
+            >
+              Book Your Visit
+            </button>
+          </a>
+        </div>
+        <div
+          class="lg:col-span-5 col-span-12 text-gray-100 lg:text-right order-1 lg:order-2"
+        >
+          <p class="text-secondary-200 uppercase">Schedule Your Appointment</p>
+          <h2 class="text-3xl font-serif">Call Us Today</h2>
+        </div>
+      </div>
+    </div>
+
+    <div id="about">
+      <div class="max-w-4xl mx-auto py-16 px-6 md:px-0">
+        <p class="text-5xl font-bold font-serif pb-16 text-center">About Us</p>
+        <div class="text-left grid grid-cols-6 gap-8">
+          <div
+            class="bg-primary-500 text-white px-4 py-8 rounded col-span-6 md:col-span-3"
+          >
+            <p class="text-2xl font-serif font-bold mb-2">Mission Statement</p>
+            <p>
+              To provide our customers with the highest quality mobile auto
+              detailing services, conveniently delivered to their door. We are
+              committed to using only the finest products and techniques to
+              ensure that your car looks its best and is protected for the long
+              term.
+            </p>
+          </div>
+          <div
+            class="bg-secondary-600 text-white px-6 py-8 rounded col-span-6 md:col-span-3"
+          >
+            <p class="text-2xl font-serif font-bold mb-2">Vision Statement</p>
+            <p>
+              To be the leading provider of mobile auto detailing services in
+              the world. We envision a future where everyone has access to
+              professional detailing services, without having to leave their
+              home or office. We are committed to providing our customers with
+              an exceptional experience, every time.
+            </p>
+          </div>
+          <div
+            class="bg-gray-200 text-gray-800 p-4 rounded col-span-6 md:col-span-2 flex flex-col justify-between"
+          >
+            <div>
+              <p class="text-2xl font-serif font-bold md:mb-2">
+                How We Can Help
+              </p>
+              <p class="">
+                We offer professional detailing services at affordable prices,
+                so you can get the look you want without breaking the bank.
+              </p>
+            </div>
+            <div>
+              <img
+                srcset="
+                  ./img/ani-pro-sim-14-removebg-preview.png?as=webp&width=122&height=122,
+                  ./img/ani-pro-sim-14-removebg-preview.png?as=webp&width=183height=183  1.5x,
+                  ./img/ani-pro-sim-14-removebg-preview.png?as=webp&width=245&height=245 2x
+                "
+                src="./img/ani-pro-sim-14-removebg-preview.png?as=webp&width=245&height=245"
+                alt="Friends"
+                class="float-right max-w-[183px] md:max-w-[245px]"
+                width="245"
+                height="245"
+              />
+            </div>
+          </div>
+          <div class="text-white col-span-6 md:col-span-4 flex flex-col">
+            <div class="bg-primary-800 mb-8 px-4 py-8 rounded h-1/2">
+              <p class="text-2xl font-serif font-bold mb-2">Core Values</p>
+              <div class="flex justify-between">
+                <div class="text-center">
+                  <img
+                    class="mx-auto"
+                    src="./img/core-values-1.png?as=webp&width=100&height=100"
+                    alt="core value 1"
+                    width="100"
+                    height="100"
+                  />
+                  <p>Excellence</p>
+                </div>
+                <div class="text-center">
+                  <img
+                    class="mx-auto"
+                    src="./img/core-values-2.png?as=webp&width=100&height=100"
+                    alt="core value 2"
+                    width="100"
+                    height="100"
+                  />
+                  <p>Community</p>
+                </div>
+                <div class="text-center">
+                  <img
+                    class="mx-auto"
+                    src="./img/core-values-3.png?as=webp&width=100&height=100"
+                    alt="core value 3"
+                    width="100"
+                    height="100"
+                  />
+                  <p>Convenience</p>
+                </div>
+                <div class="text-center">
+                  <img
+                    class="mx-auto"
+                    src="./img/core-values-4.png?as=webp&width=100&height=100"
+                    alt="core value 4"
+                    width="100"
+                    height="100"
+                  />
+                  <p>Customer Satisfaction</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-tertiary-400 px-4 py-8 rounded h-1/2">
+              <p class="text-2xl font-serif font-bold mb-2">
+                Brief Company History
+              </p>
+              <p>
+                Founded in 2010, Mobile Auto Detailing Service has quickly grown
+                to become the leading provider of mobile auto detailing services
+                in the region. The company's commitment to providing
+                high-quality services, convenient delivery, and using the finest
+                products and techniques has earned it a loyal customer base.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn-md w-full bg-black hover:bg-gray-700 py-6 text-white mt-8"
+        >
+          Learn More About Us
+        </button>
+      </div>
+    </div>
+
+    <div id="footer-1tLwRm">
+      <div
+        class="bg-primary-950 text-gray-200 pt-32 pb-16 grid grid-cols-2 gap-4"
+      >
+        <div class="col-span-2 lg:col-span-1 text-center">
+          <p class="text-3xl uppercase font-bold font-serif mb-2">
+            Frank's Mobile Detailing
+          </p>
+          <div>
+            <a class="hover:text-secondary-500" href="#">Home</a>
+            <span> - </span>
+            <a class="hover:text-secondary-500" href="#">About</a>
+            <span> - </span>
+            <a class="hover:text-secondary-500" href="#">Services</a>
+            <span> - </span>
+            <a class="hover:text-secondary-500" href="#">Reviews</a>
+            <span> - </span>
+            <a class="hover:text-secondary-500" href="#">Contact</a>
+          </div>
+        </div>
+        <div
+          class="col-span-2 lg:col-span-1 text-center flex flex-col justify-center"
+        >
+          <p class="mb-2">
+            <a href="tel:2705515073" class="hover:text-primary-400"
+              >(270) 551-5073</a
+            >
+          </p>
+          <p>
+            <a
+              href="mailto:frank@franksmobiledetailing.com"
+              class="hover:text-primary-500"
+              >frank@franksmobiledetailing.com</a
+            >
+          </p>
+        </div>
+        <div class="col-span-2 text-gray-400 text-center pt-16">
+          © 2023 PR Web Consulting, All Rights Reserved.
+        </div>
+      </div>
+    </div>
+
     <div
       class="group z-40 fixed top-16 right-0 rounded-l-xl flex justify-end max-w-7xl mx-auto gap-4 bg-gray-200 shadow-2xl p-4 ease-in-out will-change-transform transition-transform duration-500 data-[closed]:translate-x-[75%] translate-x-0 master-nav"
       data-closed
@@ -125,6 +552,87 @@
         <button class="btn btn-md">Playground</button>
       </a>
     </div>
+
+    <script>
+      const navbarSelector = '#header';
+      const navbar = document.querySelector(navbarSelector);
+      const checkbox = document.querySelector(
+        navbarSelector + ' input[type=checkbox]',
+      );
+
+      (() => {
+        if (!checkbox || !navbar) {
+          return;
+        }
+
+        checkbox.addEventListener('change', function () {
+          if (this.checked) {
+            navbar.setAttribute('data-checked', '');
+          } else {
+            navbar.removeAttribute('data-checked');
+          }
+        });
+
+        navbar.querySelectorAll('li, button').forEach((element) => {
+          element.addEventListener('click', () => {
+            checkbox.checked = false;
+            const evt = new Event('change');
+            checkbox?.dispatchEvent(evt);
+          });
+        });
+
+        let previousScroll = window.scrollY;
+        let directionDown = true;
+        let directionChangeScroll = window.scrollY;
+        document.addEventListener('scroll', () => {
+          const scroll = window.scrollY;
+          const header = document.querySelector('#header');
+          const previousDirectionDown = directionDown;
+
+          directionDown = scroll - previousScroll > 0;
+
+          if (scroll < 100) {
+            header.setAttribute('data-scroll', 'top');
+
+            previousScroll = scroll;
+
+            return;
+          }
+
+          if (scroll < 600 && directionDown) {
+            previousScroll = scroll;
+
+            return;
+          }
+
+          if (directionDown !== previousDirectionDown) {
+            directionChangeScroll = scroll;
+          }
+
+          const changeInScroll = scroll - directionChangeScroll;
+
+          if (changeInScroll > 60) {
+            header.setAttribute('data-scroll', 'down');
+
+            previousScroll = scroll;
+
+            return;
+          }
+
+          if (changeInScroll < -60) {
+            header.setAttribute('data-scroll', 'up');
+
+            previousScroll = scroll;
+
+            return;
+          }
+
+          header.setAttribute('data-scroll', 'none');
+
+          previousScroll = scroll;
+        });
+      })();
+    </script>
 
     <script>
       document.querySelector('.hide-buttons').addEventListener('click', () => {
@@ -191,34 +699,6 @@
 
         previousScroll = scroll;
       });
-
-      const navbarSelector = '#header';
-      const navbar = document.querySelector(navbarSelector);
-      const checkbox = document.querySelector(
-        navbarSelector + ' input[type=checkbox]',
-      );
-
-      (() => {
-        if (!checkbox || !navbar) {
-          return;
-        }
-
-        checkbox.addEventListener('change', function () {
-          if (this.checked) {
-            navbar.setAttribute('data-checked', '');
-          } else {
-            navbar.removeAttribute('data-checked');
-          }
-        });
-
-        navbar.querySelectorAll('li, button').forEach((element) => {
-          element.addEventListener('click', () => {
-            checkbox.checked = false;
-            const evt = new Event('change');
-            checkbox?.dispatchEvent(evt);
-          });
-        });
-      })();
     </script>
     <script type="module">
       import loadFonts from './js/loadFonts';
