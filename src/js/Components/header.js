@@ -30,13 +30,12 @@ const checkbox = document.querySelector(
   let directionChangeScroll = window.scrollY;
   document.addEventListener('scroll', () => {
     const scroll = window.scrollY;
-    const header = document.querySelector('#header');
     const previousDirectionDown = directionDown;
 
     directionDown = scroll - previousScroll > 0;
 
     if (scroll < 100) {
-      header.setAttribute('data-scroll', 'top');
+      navbar.setAttribute('data-scroll', 'top');
 
       previousScroll = scroll;
 
@@ -56,7 +55,7 @@ const checkbox = document.querySelector(
     const changeInScroll = scroll - directionChangeScroll;
 
     if (changeInScroll > 60) {
-      header.setAttribute('data-scroll', 'down');
+      navbar.setAttribute('data-scroll', 'down');
 
       previousScroll = scroll;
 
@@ -64,14 +63,14 @@ const checkbox = document.querySelector(
     }
 
     if (changeInScroll < -60) {
-      header.setAttribute('data-scroll', 'up');
+      navbar.setAttribute('data-scroll', 'up');
 
       previousScroll = scroll;
 
       return;
     }
 
-    header.setAttribute('data-scroll', 'none');
+    navbar.setAttribute('data-scroll', 'none');
 
     previousScroll = scroll;
   });

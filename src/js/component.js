@@ -2,7 +2,6 @@ import hljs from './vendor/highlight.min';
 import EventHandler from './eventHandler';
 import { updateResponsiveClasses } from './updateResponsiveClasses';
 import loadFonts from './loadFonts';
-import { ElementGenerator } from './utilities';
 
 export default class Component {
   element;
@@ -96,26 +95,7 @@ export default class Component {
         .getAttribute('id')
         .replace('add-', '');
 
-      const list = document.querySelector('#build-list');
-      const entries = list.querySelectorAll('[data-component]');
-      const numberOfEntries = entries.length;
-
-      let html = await this.app.generator.fetchCode(
-        new URL('../Templates/componentBuilderEntry.html', import.meta.url),
-      );
-      html = html.replaceAll(`{{component}}`, component);
-
-      const element = new ElementGenerator()
-        .setContent(html)
-        .setAttributes({
-          'data-component': component,
-          'data-build-list-order': numberOfEntries.toString(),
-        })
-        .setClasses(['build-list-entry'])
-        .append('#build-list')
-        .get();
-
-      this.app.buildPanel.addListItemListeners(element);
+      this.app.eventBus.publish('componentAddedToBuildPanel', { component });
     })();
   };
 }

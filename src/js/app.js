@@ -14,7 +14,7 @@ export default class App {
     this.eventBus = this.eventHandler.getEventBus();
 
     this.loadNavbar()
-      .then(() => (this.buildPanel = new BuildPanel()))
+      .then(() => (this.buildPanel = new BuildPanel(this)))
       .then(() => this.addListeners());
   }
 
@@ -72,10 +72,14 @@ export default class App {
 
     if (closedSections.length === sections.length) {
       sections.forEach((section) => section.expandSection());
+      document.querySelector('#toggle-sections-button').innerHTML =
+        'Hide All Sections';
 
       return;
     }
 
     sections.forEach((section) => section.collapseSection());
+    document.querySelector('#toggle-sections-button').innerHTML =
+      'Show All Sections';
   };
 }

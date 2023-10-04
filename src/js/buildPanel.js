@@ -1,17 +1,22 @@
-import { bodyScroll } from './utilities';
+import { bodyScroll, ElementGenerator } from './utilities';
 
 export default class BuildPanel {
-  constructor(app = document) {
+  constructor(app, parent = document) {
+    this.document = parent;
     this.app = app;
 
     this.hideBuildPanelListener();
     this.toggleBuildPanelListener();
     this.cancelButtonListener();
+    this.app.eventBus.subscribe(
+      'componentAddedToBuildPanel',
+      this.addComponentListener,
+    );
     this.open = false;
   }
 
   hideBuildPanelListener = () => {
-    this.app
+    this.document
       .querySelector('#hide-build-panel')
       ?.addEventListener('click', () => {
         this.hideBuildPanel();
@@ -19,7 +24,9 @@ export default class BuildPanel {
   };
 
   toggleBuildPanel = () => {
-    if (this.app.querySelector('#build-panel').classList.contains('hidden')) {
+    if (
+      this.document.querySelector('#build-panel').classList.contains('hidden')
+    ) {
       this.showBuildPanel();
 
       return;
@@ -29,16 +36,18 @@ export default class BuildPanel {
   };
 
   toggleBuildPanelListener = () => {
-    this.app
+    this.document
       .querySelector('#show-build-panel')
       ?.addEventListener('click', this.toggleBuildPanel);
   };
 
   cancelBuild = () => {
     this.open = false;
-    this.app.querySelectorAll('.add-component-button').forEach((element) => {
-      element.closest('button').classList.add('hidden');
-    });
+    this.document
+      .querySelectorAll('.add-component-button')
+      .forEach((element) => {
+        element.closest('button').classList.add('hidden');
+      });
 
     this.clearBuildList();
 
@@ -46,7 +55,7 @@ export default class BuildPanel {
   };
 
   cancelButtonListener = () => {
-    this.app
+    this.document
       .querySelector('#cancel-build')
       ?.addEventListener('click', this.cancelBuild);
   };
@@ -54,23 +63,27 @@ export default class BuildPanel {
   showBuildPanel = () => {
     bodyScroll(true);
     this.open = true;
-    this.app.querySelector('#build-panel').classList.remove('hidden');
-    this.app.querySelectorAll('.add-component-button').forEach((element) => {
-      element.closest('button').classList.remove('hidden');
-    });
+    this.document.querySelector('#build-panel').classList.remove('hidden');
+    this.document.querySelector('#show-build-panel').classList.add('hidden');
+    this.document
+      .querySelectorAll('.add-component-button')
+      .forEach((element) => {
+        element.closest('button').classList.remove('hidden');
+      });
   };
 
   hideBuildPanel = () => {
     bodyScroll(false);
-    this.app.querySelector('#build-panel').classList.add('hidden');
+    this.document.querySelector('#build-panel').classList.add('hidden');
+    this.document.querySelector('#show-build-panel').classList.remove('hidden');
   };
 
   clearBuildList = () => {
-    this.app.querySelector('#build-list').innerHTML = null;
+    this.document.querySelector('#build-list').innerHTML = null;
   };
 
   reorderBuildListByOrder = () => {
-    const buildList = this.app.querySelector('#build-list');
+    const buildList = this.document.querySelector('#build-list');
     const items = Array.from(buildList.children)
       .filter((item) => item.getAttribute('data-build-list-order') > -1)
       .sort((a, b) =>
@@ -80,7 +93,7 @@ export default class BuildPanel {
           : -1,
       );
 
-    const elements = this.app.createDocumentFragment();
+    const elements = this.document.createDocumentFragment();
 
     items.forEach((item) => {
       const clone = item.cloneNode(true);
@@ -112,7 +125,7 @@ export default class BuildPanel {
           return;
         }
 
-        const previousElement = this.app.querySelector(
+        const previousElement = this.document.querySelector(
           '[data-build-list-order="' + previousOrder + '"]',
         );
         previousElement.setAttribute(
@@ -137,14 +150,14 @@ export default class BuildPanel {
           parentElement.getAttribute('data-build-list-order'),
         );
         const listItemCount =
-          this.app.querySelector('#build-list').children.length;
+          this.document.querySelector('#build-list').children.length;
         const nextOrder = currentOrder + 1;
 
         if (nextOrder === listItemCount) {
           return;
         }
 
-        const nextElement = this.app.querySelector(
+        const nextElement = this.document.querySelector(
           '[data-build-list-order="' + nextOrder + '"]',
         );
         nextElement.setAttribute(
@@ -158,6 +171,29 @@ export default class BuildPanel {
 
         this.reorderBuildListByOrder();
       });
+  };
+
+  addComponentListener = async (event) => {
+    const list = document.querySelector('#build-list');
+    const entries = list.querySelectorAll('[data-component]');
+    const numberOfEntries = entries.length;
+
+    let html = await this.app.generator.fetchCode(
+      new URL('../Templates/componentBuilderEntry.html', import.meta.url),
+    );
+    html = html.replaceAll(`{{component}}`, event.component);
+
+    const element = new ElementGenerator()
+      .setContent(html)
+      .setAttributes({
+        'data-component': event.component,
+        'data-build-list-order': numberOfEntries.toString(),
+      })
+      .setClasses(['build-list-entry'])
+      .append('#build-list')
+      .get();
+
+    this.app.buildPanel.addListItemListeners(element);
   };
 
   removeComponentListener = (element) => {

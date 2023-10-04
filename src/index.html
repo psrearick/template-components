@@ -119,20 +119,8 @@
             <ul
               class="section-navigation flex flex-col h-full text-gray-700 text-lg flex-1 overflow-auto shadow"
             ></ul>
-            <div class="lg:flex gap-4 items-center justify-between mt-4 px-4">
-              <button
-                class="btn-secondary btn-md w-full lg:w-auto lg:mx-0"
-                id="toggle-sections-button"
-              >
-                Toggle Sections
-              </button>
-              <button
-                class="btn btn-md w-full mt-4 lg:w-auto lg:m-0"
-                id="show-build-panel"
-              >
-                Toggle Page Builder
-              </button>
-            </div>
+            <!--            <div class="lg:flex gap-4 items-center justify-between mt-4 px-4">-->
+            <!--            </div>-->
           </div>
           <!-- end navigation links -->
 
@@ -188,9 +176,23 @@
       </div>
       <div class="flex-1 lg:w-3/4 max-w-full">
         <div class="px-4 py-8">
-          <div class="flex justify-end max-w-7xl mx-auto">
+          <div
+            class="flex justify-end flex-col md:flex-row gap-4 max-w-7xl mx-auto"
+          >
+            <button
+              class="btn-secondary-hollow btn-md w-full lg:w-auto lg:mx-0"
+              id="toggle-sections-button"
+            >
+              Show All Sections
+            </button>
+            <button
+              class="btn-secondary-hollow btn-md w-full lg:w-auto lg:m-0"
+              id="show-build-panel"
+            >
+              Page Builder
+            </button>
             <a href="./playground.html">
-              <button class="btn btn-md">Playground</button>
+              <button class="btn btn-md w-full">Playground</button>
             </a>
           </div>
         </div>
