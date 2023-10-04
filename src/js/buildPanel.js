@@ -5,6 +5,7 @@ export default class BuildPanel {
     this.document = parent;
     this.app = app;
 
+    this.setBuildList();
     this.hideBuildPanelListener();
     this.toggleBuildPanelListener();
     this.cancelButtonListener();
@@ -60,6 +61,39 @@ export default class BuildPanel {
       ?.addEventListener('click', this.cancelBuild);
   };
 
+  setBuildList = () => {
+    const componentList = localStorage.getItem('build-list');
+
+    if (!componentList) {
+      return;
+    }
+
+    JSON.parse(componentList)
+      .sort((a, b) => (a.order > b.order ? 1 : -1))
+      .forEach(async (componentItem) => {
+        await this.addComponentListener({ component: componentItem.component });
+      });
+  };
+
+  updateBuildList = () => {
+    const list = this.getSortedBuildList();
+
+    if (list.length === 0) {
+      localStorage.removeItem('build-list');
+
+      return;
+    }
+
+    const componentList = list.map((listItem, index) => {
+      return {
+        order: index,
+        component: listItem.getAttribute('data-component'),
+      };
+    });
+
+    localStorage.setItem('build-list', JSON.stringify(componentList));
+  };
+
   showBuildPanel = () => {
     bodyScroll(true);
     this.open = true;
@@ -80,11 +114,16 @@ export default class BuildPanel {
 
   clearBuildList = () => {
     this.document.querySelector('#build-list').innerHTML = null;
+    this.updateBuildList();
   };
 
-  reorderBuildListByOrder = () => {
-    const buildList = this.document.querySelector('#build-list');
-    const items = Array.from(buildList.children)
+  getBuildListComponent = () => {
+    return this.document.querySelector('#build-list');
+  };
+
+  getSortedBuildList = () => {
+    const buildList = this.getBuildListComponent();
+    return Array.from(buildList.children)
       .filter((item) => item.getAttribute('data-build-list-order') > -1)
       .sort((a, b) =>
         a.getAttribute('data-build-list-order') >
@@ -92,10 +131,13 @@ export default class BuildPanel {
           ? 1
           : -1,
       );
+  };
 
+  reorderBuildListByOrder = () => {
+    const buildList = this.getBuildListComponent();
     const elements = this.document.createDocumentFragment();
 
-    items.forEach((item) => {
+    this.getSortedBuildList().forEach((item) => {
       const clone = item.cloneNode(true);
       this.addListItemListeners(clone);
       elements.append(clone);
@@ -103,6 +145,7 @@ export default class BuildPanel {
 
     buildList.innerHTML = null;
     buildList.append(elements);
+    this.updateBuildList();
   };
 
   addListItemListeners = (element) => {
@@ -149,8 +192,7 @@ export default class BuildPanel {
         const currentOrder = parseInt(
           parentElement.getAttribute('data-build-list-order'),
         );
-        const listItemCount =
-          this.document.querySelector('#build-list').children.length;
+        const listItemCount = this.getBuildListComponent().children.length;
         const nextOrder = currentOrder + 1;
 
         if (nextOrder === listItemCount) {
@@ -174,8 +216,8 @@ export default class BuildPanel {
   };
 
   addComponentListener = async (event) => {
-    const list = document.querySelector('#build-list');
-    const entries = list.querySelectorAll('[data-component]');
+    const entries =
+      this.getBuildListComponent().querySelectorAll('[data-component]');
     const numberOfEntries = entries.length;
 
     let html = await this.app.generator.fetchCode(
@@ -194,6 +236,7 @@ export default class BuildPanel {
       .get();
 
     this.app.buildPanel.addListItemListeners(element);
+    this.updateBuildList();
   };
 
   removeComponentListener = (element) => {
