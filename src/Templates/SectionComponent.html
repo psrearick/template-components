@@ -24,7 +24,7 @@
             />
           </svg>
         </button>
-        <div class="flex flex-col justify-center">
+        <div class="flex-v-center">
           <p class="text-gray-600 text-2xl font-bold font-serif">{Component}</p>
         </div>
       </div>
@@ -106,12 +106,12 @@
 
       <div class="relative">
         <div class="my-2 component-container">
-          <div class="w-full h-full flex flex-col justify-center">
+          <div class="full flex-v-center">
             <div
-              class="wrapper h-full w-full overflow-hidden min-h-[200px] relative max-w-6xl mx-auto resize"
+              class="wrapper full overflow-hidden min-h-[200px] parent max-w-6xl mx-auto resize"
             >
               <div
-                class="rounded-lg min-h-[200px] frame @container border border-primary-500 bg-white absolute w-full h-full origin-top-left overflow-auto scrollbar-hidden"
+                class="rounded-lg min-h-[200px] frame @container border border-primary-500 bg-white child full origin-top-left overflow-auto scrollbar-hidden"
                 title="{component}-frame"
                 id="{component}-frame"
               ></div>

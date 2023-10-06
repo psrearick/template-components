@@ -13,12 +13,10 @@
         <!-- Menu Toggle -->
         <div class="order-2 md:order-1 lg:hidden col-start-3 md:col-start-1">
           <div
-            class="h-[1.626rem] w-8 relative float-right md:float-none lg:hidden"
+            class="h-[1.626rem] w-8 parent float-right md:float-none lg:hidden"
           >
             <!-- Lines -->
-            <div
-              class="flex flex-col justify-between h-full w-full absolute right-0"
-            >
+            <div class="flex-v-between full child right-0">
               <span
                 class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-top-right ease-in-out duration-300 group-data-[checked]:-rotate-45"
               ></span>
@@ -73,7 +71,7 @@
           class="order-4 lg:relative lg:order-none flex fixed overflow-hidden lg:overflow-auto top-0 bottom-0 left-0 right-0 mt-16 lg:mt-0"
         >
           <div
-            class="pb-4 lg:pb-0 lg:transition-none lg:transform-none lg:will-change-auto group-data-[checked]:bg-white flex flex-col text-center w-full h-full overflow-auto opacity-0 lg:opacity-100 ease-in-out duration-500 translate-y-[-150%] group-data-[checked]:opacity-100 group-data-[checked]:translate-y-0 scrollbar-hidden"
+            class="pb-4 lg:pb-0 lg:transition-none lg:transform-none lg:will-change-auto group-data-[checked]:bg-white flex-v-between text-center full overflow-auto opacity-0 lg:opacity-100 ease-in-out duration-500 translate-y-[-150%] group-data-[checked]:opacity-100 group-data-[checked]:translate-y-0 scrollbar-hidden"
             style="
               transition-property: transform, opacity;
               will-change: transform, opacity, scroll-position;
@@ -84,7 +82,7 @@
                 class="flex flex-col lg:flex-row justify-start lg:justify-center lg:border-none border-t border-t-gray-200 text-left lg:text-center font-bold lg:font-light text-2xl lg:text-sm"
               >
                 <li
-                  class="noclick menu group/menu cursor-pointer px-4 py-4 flex flex-col justify-center hover:text-primary-400"
+                  class="noclick menu group/menu cursor-pointer px-4 py-4 flex-v-center hover:text-primary-400"
                 >
                   <span class="flex gap-2 items-center">
                     <span>Product</span>
@@ -180,24 +178,17 @@
                     </div>
                   </div>
                 </li>
-                <li
-                  class="px-4 py-4 flex flex-col justify-center hover:text-primary-400"
-                >
+                <li class="px-4 py-4 flex-v-center hover:text-primary-400">
                   <a href="#">Examples</a>
                 </li>
-                <li
-                  class="px-4 py-4 flex flex-col justify-center hover:text-primary-400"
-                >
+                <li class="px-4 py-4 flex-v-center hover:text-primary-400">
                   <a href="#">Blog</a>
                 </li>
-                <li
-                  class="px-4 py-4 flex flex-col justify-center hover:text-primary-400"
-                >
+                <li class="px-4 py-4 flex-v-center hover:text-primary-400">
                   <a href="#">Pricing</a>
                 </li>
               </ul>
             </div>
-            <div class="flex-1"></div>
             <div
               class="flex lg:hidden pt-8 justify-end transition duration-300 hover:-translate-y-1"
             >
