@@ -38,7 +38,11 @@ const checkbox = document.querySelector(
 
   document.querySelectorAll('*').forEach((el) =>
     el.addEventListener('scroll', () => {
-      // navbar.addEventListener('scroll', () => {
+      const navbarTop = navbar.getBoundingClientRect().top;
+      const navTop = navbar.querySelector('nav').getBoundingClientRect().top;
+
+      console.log(navTop, navbarTop);
+
       let scroll = window.scrollY;
 
       const previousDirectionDown = directionDown;
@@ -49,8 +53,6 @@ const checkbox = document.querySelector(
       }
 
       directionDown = scroll - previousScroll > 0;
-
-      console.log(scroll);
 
       if (scroll < 100) {
         navbar.setAttribute('data-scroll', 'top');
@@ -71,8 +73,6 @@ const checkbox = document.querySelector(
       }
 
       const changeInScroll = scroll - directionChangeScroll;
-
-      console.log(changeInScroll);
 
       if (changeInScroll > 60) {
         navbar.setAttribute('data-scroll', 'down');

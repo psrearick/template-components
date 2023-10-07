@@ -87,6 +87,16 @@ export default class ComponentGenerator {
         ucFirst(componentName),
       );
 
+      const containerProps =
+        this.componentDefinitions[componentName].html.containerProperties || {};
+
+      for (const propertyName of Object.keys(containerProps)) {
+        componentContainer = componentContainer.replaceAll(
+          '{' + propertyName + '}',
+          containerProps[propertyName],
+        );
+      }
+
       const containerEl = createElement(componentContainer);
 
       const frame = containerEl.querySelector('#' + componentName + '-frame');
