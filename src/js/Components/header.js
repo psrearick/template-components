@@ -25,74 +25,59 @@ const checkbox = document.querySelector(
     });
   });
 
-  // let previousContainerScroll = 0;
-  let container = navbar.closest('.component-container');
+  const doc = navbar.ownerDocument;
+  const navWindow = doc.defaultView || doc.parentWindow;
 
-  let scrollY = container
-    ? container.getBoundingClientRect().top - navbar.getBoundingClientRect().top
-    : window.scrollY;
-  //
-  let previousScroll = scrollY;
+  let scroll = () =>
+    Math.abs(doc.querySelector('body').getBoundingClientRect().top);
+
+  let previousScroll = scroll();
   let directionDown = true;
-  let directionChangeScroll = scrollY;
+  let directionChangeScroll = scroll();
 
-  document.querySelectorAll('*').forEach((el) =>
-    el.addEventListener('scroll', () => {
-      const navbarTop = navbar.getBoundingClientRect().top;
-      const navTop = navbar.querySelector('nav').getBoundingClientRect().top;
+  navWindow.addEventListener('scroll', () => {
+    const previousDirectionDown = directionDown;
 
-      console.log(navTop, navbarTop);
+    directionDown = scroll() - previousScroll > 0;
 
-      let scroll = window.scrollY;
+    if (scroll() < 100) {
+      navbar.setAttribute('data-scroll', 'top');
 
-      const previousDirectionDown = directionDown;
-      if (container) {
-        scroll =
-          container.getBoundingClientRect().top -
-          navbar.getBoundingClientRect().top;
-      }
+      previousScroll = scroll();
 
-      directionDown = scroll - previousScroll > 0;
+      return;
+    }
 
-      if (scroll < 100) {
-        navbar.setAttribute('data-scroll', 'top');
+    if (scroll() < 200 && directionDown) {
+      previousScroll = scroll();
 
-        previousScroll = scroll;
+      return;
+    }
 
-        return;
-      }
+    if (directionDown !== previousDirectionDown) {
+      directionChangeScroll = scroll();
+    }
 
-      if (scroll < 200 && directionDown) {
-        previousScroll = scroll;
+    const changeInScroll = scroll() - directionChangeScroll;
 
-        return;
-      }
+    if (changeInScroll > 60) {
+      navbar.setAttribute('data-scroll', 'down');
 
-      if (directionDown !== previousDirectionDown) {
-        directionChangeScroll = scroll;
-      }
+      previousScroll = scroll();
 
-      const changeInScroll = scroll - directionChangeScroll;
+      return;
+    }
 
-      if (changeInScroll > 60) {
-        navbar.setAttribute('data-scroll', 'down');
+    if (changeInScroll < -60) {
+      navbar.setAttribute('data-scroll', 'up');
 
-        previousScroll = scroll;
+      previousScroll = scroll();
 
-        return;
-      }
+      return;
+    }
 
-      if (changeInScroll < -60) {
-        navbar.setAttribute('data-scroll', 'up');
+    navbar.setAttribute('data-scroll', 'none');
 
-        previousScroll = scroll;
-
-        return;
-      }
-
-      navbar.setAttribute('data-scroll', 'none');
-
-      previousScroll = scroll;
-    }),
-  );
+    previousScroll = scroll();
+  });
 })();

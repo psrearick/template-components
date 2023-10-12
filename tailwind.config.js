@@ -98,7 +98,7 @@ module.exports = {
         '.bg-stripes': {
           backgroundImage:
             'linear-gradient(45deg, var(--stripes-color) 12.50%, transparent 12.50%, transparent 50%, var(--stripes-color) 50%, var(--stripes-color) 62.50%, transparent 62.50%, transparent 100%)',
-          backgroundSize: '20px 20px',
+          backgroundSize: '10px 15px',
         },
       };
 

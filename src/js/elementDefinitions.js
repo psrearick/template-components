@@ -187,6 +187,19 @@ export const components = {
       properties: {
         selector: 'header-7',
       },
+      containerProperties: {
+        bgClass: 'bg-gray-700',
+      },
+      bodyDefinition: {
+        hasBody: true,
+        bodyClasses: [
+          'min-h-[2000px]',
+          'full',
+          'bg-gray-800',
+          'bg-stripes',
+          'bg-stripes-primary-900',
+        ],
+      },
     },
     js: {
       code: fs.readFileSync(
