@@ -25,39 +25,45 @@ const checkbox = document.querySelector(
     });
   });
 
-  let previousScroll = window.scrollY;
+  const doc = navbar.ownerDocument;
+  const navWindow = doc.defaultView || doc.parentWindow;
+
+  let scroll = () =>
+    Math.abs(doc.querySelector('body').getBoundingClientRect().top);
+
+  let previousScroll = scroll();
   let directionDown = true;
-  let directionChangeScroll = window.scrollY;
-  document.addEventListener('scroll', () => {
-    const scroll = window.scrollY;
+  let directionChangeScroll = scroll();
+
+  navWindow.addEventListener('scroll', () => {
     const previousDirectionDown = directionDown;
 
-    directionDown = scroll - previousScroll > 0;
+    directionDown = scroll() - previousScroll > 0;
 
-    if (scroll < 100) {
+    if (scroll() < 100) {
       navbar.setAttribute('data-scroll', 'top');
 
-      previousScroll = scroll;
+      previousScroll = scroll();
 
       return;
     }
 
-    if (scroll < 600 && directionDown) {
-      previousScroll = scroll;
+    if (scroll() < 200 && directionDown) {
+      previousScroll = scroll();
 
       return;
     }
 
     if (directionDown !== previousDirectionDown) {
-      directionChangeScroll = scroll;
+      directionChangeScroll = scroll();
     }
 
-    const changeInScroll = scroll - directionChangeScroll;
+    const changeInScroll = scroll() - directionChangeScroll;
 
     if (changeInScroll > 60) {
       navbar.setAttribute('data-scroll', 'down');
 
-      previousScroll = scroll;
+      previousScroll = scroll();
 
       return;
     }
@@ -65,13 +71,13 @@ const checkbox = document.querySelector(
     if (changeInScroll < -60) {
       navbar.setAttribute('data-scroll', 'up');
 
-      previousScroll = scroll;
+      previousScroll = scroll();
 
       return;
     }
 
     navbar.setAttribute('data-scroll', 'none');
 
-    previousScroll = scroll;
+    previousScroll = scroll();
   });
 })();

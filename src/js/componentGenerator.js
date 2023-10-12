@@ -2,6 +2,7 @@ import * as elementDefinitions from './elementDefinitions';
 
 import {
   createElement,
+  ElementGenerator,
   encodeHTMLEntities,
   makeId,
   ucFirst,
@@ -30,10 +31,6 @@ export default class ComponentGenerator {
     });
   };
 
-  runJS = async (code, destination = window) => {
-    destination.eval(code);
-  };
-
   addComponentsToDom = async (componentList = [], section = null) => {
     const parent = section
       ? section.querySelector('.section-container')
@@ -54,8 +51,6 @@ export default class ComponentGenerator {
       if (!componentCode.js.hasJS) {
         return;
       }
-
-      this.runJS(componentCode.js.code);
 
       componentElement
         .querySelector('#' + componentName + '-js-show-code')
@@ -87,12 +82,84 @@ export default class ComponentGenerator {
         ucFirst(componentName),
       );
 
+      const definition = this.componentDefinitions[componentName];
+      const containerProps = definition.html.containerProperties || {};
+      const bodyDefinition = definition.html.bodyDefinition || {};
+
+      for (const propertyName of Object.keys(containerProps)) {
+        componentContainer = componentContainer.replaceAll(
+          '{' + propertyName + '}',
+          containerProps[propertyName],
+        );
+      }
+
       const containerEl = createElement(componentContainer);
 
       const frame = containerEl.querySelector('#' + componentName + '-frame');
 
+      let doc = document.implementation.createHTMLDocument(componentName);
+
       const componentData = componentListData[componentName];
-      frame.innerHTML = componentData.html.code;
+      new ElementGenerator('div', doc)
+        .setContent(componentData.html.code)
+        .append('body');
+
+      const links = document.querySelectorAll('link');
+      Array.from(links).forEach((link) =>
+        new ElementGenerator('link', doc)
+          .setAttributes({ href: link.href, rel: link.rel })
+          .append('head'),
+      );
+
+      const styles = document.querySelectorAll('style');
+      Array.from(styles).forEach((style) =>
+        new ElementGenerator('style', doc)
+          .setContent(style.innerHTML)
+          .append('head'),
+      );
+
+      const styleString = `
+        .font-sans {
+          font-family: Inter, Nunito, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        .font-serif {
+          font-family: Montserrat, Georgia, Cambria, "Times New Roman", Times, serif;
+        }
+      `;
+
+      new ElementGenerator('style', doc).setContent(styleString).append('head');
+
+      new ElementGenerator('meta', doc)
+        .setAttributes({
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1.0',
+        })
+        .appendToSelector('head');
+
+      frame.onload = () => {
+        let dest = frame.contentDocument;
+
+        let newNode = dest.importNode(doc.documentElement, true);
+        dest.replaceChild(newNode, dest.documentElement);
+
+        new ElementGenerator('script', doc)
+          .setContent(componentData.js.code)
+          .appendToElement(frame.contentDocument.body);
+
+        if (bodyDefinition?.hasBody) {
+          const classes = bodyDefinition.bodyClasses || [];
+          createElement(
+            '',
+            true,
+            'div',
+            frame.contentDocument,
+            'body',
+            {},
+            classes,
+          );
+        }
+      };
 
       const component = new Component(this.app, componentName);
 

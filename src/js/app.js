@@ -68,6 +68,12 @@ export default class App {
       (sectionName) => this.generator.sections[sectionName],
     );
 
+    if (sections.length <= 1) {
+      sections.forEach((section) => section.expandSection());
+
+      return;
+    }
+
     const closedSections = sections.filter((section) => section.isHidden());
 
     if (closedSections.length === sections.length) {

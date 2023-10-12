@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/styles.scss" />
 
     <meta name="theme-color" content="#fafafa" />
 
@@ -80,9 +81,9 @@
         >
           <div>
             <!-- Menu Toggle -->
-            <div class="h-[1.626rem] w-8 relative lg:hidden">
+            <div class="h-[1.626rem] w-8 parent lg:hidden">
               <!-- Lines -->
-              <div class="flex flex-col justify-between h-full w-full absolute">
+              <div class="flex-v-between full child">
                 <span
                   class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-top-left ease-in-out duration-300 group-data-[checked]:rotate-45"
                 ></span>
@@ -174,10 +175,8 @@
       </nav>
     </div>
 
-    <div id="hero" class="h-full w-full">
-      <div
-        class="hero-bg-img min-h-[667px] md:min-h-[768px] bg-center h-full bg-cover bg-no-repeat relative pt-32 md:pt-42 lg:pt-48"
-      >
+    <div id="hero" class="full">
+      <div class="hero-bg-img h-full relative pt-32 md:pt-42 lg:pt-48">
         <div class="text-white px-4 max-w-xl md:max-w-3xl lg:max-w-6xl mx-auto">
           <p
             class="text-5xl md:text-6xl lg:text-6xl font-serif mb-8 text-center"
@@ -346,7 +345,7 @@
             </p>
           </div>
           <div
-            class="bg-gray-200 text-gray-800 p-4 rounded col-span-6 md:col-span-2 flex flex-col justify-between"
+            class="bg-gray-200 text-gray-800 p-4 rounded col-span-6 md:col-span-2 flex-v-between"
           >
             <div>
               <p class="text-2xl font-serif font-bold md:mb-2">
@@ -460,9 +459,7 @@
             <a class="hover:text-secondary-500" href="#">Contact</a>
           </div>
         </div>
-        <div
-          class="col-span-2 lg:col-span-1 text-center flex flex-col justify-center"
-        >
+        <div class="col-span-2 lg:col-span-1 text-center flex-v-center">
           <p class="mb-2">
             <a href="tel:2705515073" class="hover:text-primary-400"
               >(270) 551-5073</a
@@ -530,7 +527,6 @@
         <button class="btn btn-md">Playground</button>
       </a>
     </div>
-
     <script>
       const navbarSelector = '#header';
       const navbar = document.querySelector(navbarSelector);
@@ -559,55 +555,60 @@
           });
         });
 
-        let previousScroll = window.scrollY;
+        const doc = navbar.ownerDocument;
+        const navWindow = doc.defaultView || doc.parentWindow;
+
+        let scroll = () =>
+          Math.abs(doc.querySelector('body').getBoundingClientRect().top);
+
+        let previousScroll = scroll();
         let directionDown = true;
-        let directionChangeScroll = window.scrollY;
-        document.addEventListener('scroll', () => {
-          const scroll = window.scrollY;
-          const header = document.querySelector('#header');
+        let directionChangeScroll = scroll();
+
+        navWindow.addEventListener('scroll', () => {
           const previousDirectionDown = directionDown;
 
-          directionDown = scroll - previousScroll > 0;
+          directionDown = scroll() - previousScroll > 0;
 
-          if (scroll < 100) {
-            header.setAttribute('data-scroll', 'top');
+          if (scroll() < 100) {
+            navbar.setAttribute('data-scroll', 'top');
 
-            previousScroll = scroll;
+            previousScroll = scroll();
 
             return;
           }
 
-          if (scroll < 600 && directionDown) {
-            previousScroll = scroll;
+          if (scroll() < 200 && directionDown) {
+            previousScroll = scroll();
 
             return;
           }
 
           if (directionDown !== previousDirectionDown) {
-            directionChangeScroll = scroll;
+            directionChangeScroll = scroll();
           }
 
-          const changeInScroll = scroll - directionChangeScroll;
+          const changeInScroll = scroll() - directionChangeScroll;
 
           if (changeInScroll > 60) {
-            header.setAttribute('data-scroll', 'down');
+            navbar.setAttribute('data-scroll', 'down');
 
-            previousScroll = scroll;
+            previousScroll = scroll();
 
             return;
           }
 
           if (changeInScroll < -60) {
-            header.setAttribute('data-scroll', 'up');
+            navbar.setAttribute('data-scroll', 'up');
 
-            previousScroll = scroll;
+            previousScroll = scroll();
 
             return;
           }
 
-          header.setAttribute('data-scroll', 'none');
+          navbar.setAttribute('data-scroll', 'none');
 
-          previousScroll = scroll;
+          previousScroll = scroll();
         });
       })();
     </script>
@@ -625,57 +626,6 @@
 
         masterNav.removeAttribute('data-closed');
         masterNav.setAttribute('data-open', '');
-      });
-
-      let previousScroll = window.scrollY;
-      let directionDown = true;
-      let directionChangeScroll = window.scrollY;
-      document.addEventListener('scroll', () => {
-        const scroll = window.scrollY;
-        const header = document.querySelector('#header');
-        const previousDirectionDown = directionDown;
-
-        directionDown = scroll - previousScroll > 0;
-
-        if (scroll < 100) {
-          header.setAttribute('data-scroll', 'top');
-
-          previousScroll = scroll;
-
-          return;
-        }
-
-        if (scroll < 600 && directionDown) {
-          previousScroll = scroll;
-
-          return;
-        }
-
-        if (directionDown !== previousDirectionDown) {
-          directionChangeScroll = scroll;
-        }
-
-        const changeInScroll = scroll - directionChangeScroll;
-
-        // if (changeInScroll > 60) {
-        //   header.setAttribute('data-scroll', 'down');
-        //
-        //   previousScroll = scroll;
-        //
-        //   return;
-        // }
-
-        if (changeInScroll < -60) {
-          header.setAttribute('data-scroll', 'up');
-
-          previousScroll = scroll;
-
-          return;
-        }
-
-        header.setAttribute('data-scroll', 'none');
-
-        previousScroll = scroll;
       });
     </script>
     <script type="module">

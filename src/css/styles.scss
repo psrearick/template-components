@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /**
+  ################################################################################
+  LAYOUT ELEMENTS
+  ################################################################################
+  ########################################
+  CONTAINERS
+  ########################################
+   */
+  .container-xl {
+    @apply py-40;
+  }
+
+  .container-lg {
+    @apply py-32;
+  }
+
+  @media (width >= 768px) {
+    .container-xl {
+      @apply py-48;
+    }
+
+    .container-lg {
+      @apply py-40;
+    }
+  }
+
+  @media (width >= 1024px) {
+    .container-xl {
+      @apply py-52;
+    }
+
+    .container-lg {
+      @apply py-48;
+    }
+  }
+
+  @container (width >= 0) {
+    .container-xl {
+      @apply py-40;
+    }
+
+    .container-lg {
+      @apply py-32;
+    }
+  }
+
+  @container (width >= 768px) {
+    .container-xl {
+      @apply py-48;
+    }
+
+    .container-lg {
+      @apply py-40;
+    }
+  }
+
+  @container (width >= 1024px) {
+    .container-xl {
+      @apply py-52;
+    }
+
+    .container-lg {
+      @apply py-48;
+    }
+  }
+
+  /**
+  ########################################
+  BLOCKS
+  ########################################
+ */
+  .element:not(:last-child) {
+    @apply mb-6;
+  }
+
+  /**
+  ########################################
+  Sizing
+  ########################################
+ */
+  .full-x {
+    @apply w-full;
+  }
+
+  .full-y {
+    @apply h-full;
+  }
+
+  .full {
+    @apply h-full w-full;
+  }
+
+  .absolute.full-top,
+  .fixed.full-top {
+    @apply top-0 left-0 right-0;
+  }
+
+  .parent .child {
+    .full-x {
+      @apply left-0 right-0;
+    }
+
+    .full-y {
+      @apply top-0 bottom-0;
+    }
+
+    .full {
+      @apply top-0 bottom-0 left-0 right-0;
+    }
+  }
+
+  .h-device {
+    @apply h-full min-h-[667px] md:min-h-[768px] max-h-screen;
+  }
+
+  /**
+  ########################################
+  POSITIONING
+  ########################################
+ */
+  .parent {
+    @apply relative;
+
+    .child {
+      @apply absolute;
+    }
+  }
+
+  .flex-v-center {
+    @apply flex flex-col justify-center;
+  }
+
+  .flex-v-between {
+    @apply flex flex-col justify-between;
+  }
+
+  /**
+  ########################################
+  Images
+  ########################################
+ */
+  .bg-full {
+    @apply bg-center bg-cover bg-no-repeat;
+  }
+}

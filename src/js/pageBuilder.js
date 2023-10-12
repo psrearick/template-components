@@ -152,9 +152,6 @@ export default class PageBuilder {
     document
       .querySelector('#preview-panel .component-container')
       .classList.add('invisible');
-    // document
-    //   .querySelector('#preview-panel .component-container')
-    //   .classList.remove('absolute');
   };
 
   registerLoadedListeners = () => {
