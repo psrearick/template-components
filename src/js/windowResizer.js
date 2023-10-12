@@ -79,9 +79,13 @@ export default class WindowResizer {
         window.innerHeight * ratio,
         elementDimensions.height,
       );
+
       targetWidth = Math.min(componentWidth, elementDimensions.width);
       element.removeAttribute('data-exact-size');
     }
+
+    const minHeight = element.getAttribute('data-min-height') || 0;
+    targetHeight = Math.max(targetHeight, minHeight);
 
     element.style.width = (rotate ? targetHeight : targetWidth) + 'px';
     element.style.height = (rotate ? targetWidth : targetHeight) + 'px';

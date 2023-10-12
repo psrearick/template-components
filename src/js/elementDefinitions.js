@@ -79,6 +79,7 @@ export const sections = {
 };
 
 export const components = {
+  // HEADERS
   header1: {
     html: {
       code: new URL('../Components/header1.html', import.meta.url),
@@ -193,6 +194,9 @@ export const components = {
       properties: {
         selector: 'header-5',
       },
+      containerProperties: {
+        minHeight: '768',
+      },
     },
     js: {
       code: fs.readFileSync(
@@ -263,11 +267,15 @@ export const components = {
       },
     },
   },
+  // HERO
   hero1: {
     html: {
       code: new URL('../Components/hero1.html', import.meta.url),
       properties: {
         selector: 'hero-1',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
@@ -278,6 +286,9 @@ export const components = {
       properties: {
         selector: 'hero-2',
       },
+      containerProperties: {
+        minHeight: '768',
+      },
     },
     js: {},
   },
@@ -286,6 +297,9 @@ export const components = {
       code: new URL('../Components/hero3.html', import.meta.url),
       properties: {
         selector: 'hero-3',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
@@ -296,6 +310,9 @@ export const components = {
       properties: {
         selector: 'hero-4',
       },
+      containerProperties: {
+        minHeight: '768',
+      },
     },
     js: {},
   },
@@ -304,6 +321,9 @@ export const components = {
       code: new URL('../Components/hero6.html', import.meta.url),
       properties: {
         selector: 'hero-6',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
@@ -314,14 +334,70 @@ export const components = {
       properties: {
         selector: 'hero-5',
       },
+      containerProperties: {
+        minHeight: '800',
+      },
     },
     js: {},
   },
+  // ABOUT
+  about1: {
+    html: {
+      code: new URL('../Components/about1.html', import.meta.url),
+      properties: {
+        selector: 'about-1',
+      },
+      containerProperties: {
+        minHeight: '800',
+      },
+    },
+    js: {},
+  },
+  about2: {
+    html: {
+      code: new URL('../Components/about2.html', import.meta.url),
+      properties: {
+        selector: 'about-2',
+      },
+      containerProperties: {
+        minHeight: '1000',
+      },
+    },
+    js: {},
+  },
+  about3: {
+    html: {
+      code: new URL('../Components/about3.html', import.meta.url),
+      properties: {
+        selector: 'about-3',
+      },
+      containerProperties: {
+        minHeight: '768',
+      },
+    },
+    js: {},
+  },
+  about4: {
+    html: {
+      code: new URL('../Components/about4.html', import.meta.url),
+      properties: {
+        selector: 'about-4',
+      },
+      containerProperties: {
+        minHeight: '768',
+      },
+    },
+    js: {},
+  },
+  // TEXT
   text1: {
     html: {
       code: new URL('../Components/text1.html', import.meta.url),
       properties: {
         selector: 'text-1',
+      },
+      containerProperties: {
+        minHeight: '321',
       },
     },
     js: {},
@@ -332,76 +408,8 @@ export const components = {
       properties: {
         selector: 'text-2',
       },
-    },
-    js: {},
-  },
-  text5: {
-    html: {
-      code: new URL('../Components/text5.html', import.meta.url),
-      properties: {
-        selector: 'text-5',
-      },
-    },
-    js: {},
-  },
-  services1: {
-    html: {
-      code: new URL('../Components/services1.html', import.meta.url),
-      properties: {
-        selector: 'services-1',
-      },
-    },
-    js: {},
-  },
-  contact1: {
-    html: {
-      code: new URL('../Components/contact1.html', import.meta.url),
-      properties: {
-        selector: 'contact-1',
-      },
-    },
-    js: {},
-  },
-  contact2: {
-    html: {
-      code: new URL('../Components/contact2.html', import.meta.url),
-      properties: {
-        selector: 'contact-2',
-      },
-    },
-    js: {},
-  },
-  contact3: {
-    html: {
-      code: new URL('../Components/contact3.html', import.meta.url),
-      properties: {
-        selector: 'contact-3',
-      },
-    },
-    js: {},
-  },
-  faq1: {
-    html: {
-      code: new URL('../Components/faq1.html', import.meta.url),
-      properties: {
-        selector: 'faq-1',
-      },
-    },
-    js: {
-      code: fs.readFileSync(
-        path.join(__dirname, '/Components/accordion.js'),
-        'utf8',
-      ),
-      properties: {
-        selector: 'faq-1',
-      },
-    },
-  },
-  footer1: {
-    html: {
-      code: new URL('../Components/footer1.html', import.meta.url),
-      properties: {
-        selector: 'footer-1',
+      containerProperties: {
+        minHeight: '400',
       },
     },
     js: {},
@@ -412,6 +420,9 @@ export const components = {
       properties: {
         selector: 'text-3',
       },
+      containerProperties: {
+        minHeight: '542',
+      },
     },
     js: {},
   },
@@ -420,6 +431,34 @@ export const components = {
       code: new URL('../Components/text4.html', import.meta.url),
       properties: {
         selector: 'text-4',
+      },
+      containerProperties: {
+        minHeight: '676',
+      },
+    },
+    js: {},
+  },
+  text5: {
+    html: {
+      code: new URL('../Components/text5.html', import.meta.url),
+      properties: {
+        selector: 'text-5',
+      },
+      containerProperties: {
+        minHeight: '756',
+      },
+    },
+    js: {},
+  },
+  // SERVICES
+  services1: {
+    html: {
+      code: new URL('../Components/services1.html', import.meta.url),
+      properties: {
+        selector: 'services-1',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
@@ -430,6 +469,9 @@ export const components = {
       properties: {
         selector: 'services-2',
       },
+      containerProperties: {
+        minHeight: '768',
+      },
     },
     js: {},
   },
@@ -438,6 +480,9 @@ export const components = {
       code: new URL('../Components/services3.html', import.meta.url),
       properties: {
         selector: 'services-3',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {
@@ -456,6 +501,9 @@ export const components = {
       properties: {
         selector: 'services-4',
       },
+      containerProperties: {
+        minHeight: '768',
+      },
     },
     js: {},
   },
@@ -465,14 +513,21 @@ export const components = {
       properties: {
         selector: 'services-5',
       },
+      containerProperties: {
+        minHeight: '768',
+      },
     },
     js: {},
   },
+  // PROCESS
   process1: {
     html: {
       code: new URL('../Components/process1.html', import.meta.url),
       properties: {
         selector: 'process-1',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
@@ -483,50 +538,92 @@ export const components = {
       properties: {
         selector: 'process-2',
       },
-    },
-    js: {},
-  },
-  about1: {
-    html: {
-      code: new URL('../Components/about1.html', import.meta.url),
-      properties: {
-        selector: 'about-1',
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
   },
-  about2: {
+  // CONTACT
+  contact1: {
     html: {
-      code: new URL('../Components/about2.html', import.meta.url),
+      code: new URL('../Components/contact1.html', import.meta.url),
       properties: {
-        selector: 'about-2',
+        selector: 'contact-1',
+      },
+      containerProperties: {
+        minHeight: '524',
       },
     },
     js: {},
   },
-  about3: {
+  contact2: {
     html: {
-      code: new URL('../Components/about3.html', import.meta.url),
+      code: new URL('../Components/contact2.html', import.meta.url),
       properties: {
-        selector: 'about-3',
+        selector: 'contact-2',
+      },
+      containerProperties: {
+        minHeight: '492',
       },
     },
     js: {},
   },
-  about4: {
+  contact3: {
     html: {
-      code: new URL('../Components/about4.html', import.meta.url),
+      code: new URL('../Components/contact3.html', import.meta.url),
       properties: {
-        selector: 'about-4',
+        selector: 'contact-3',
+      },
+      containerProperties: {
+        minHeight: '788',
       },
     },
     js: {},
   },
+  // FAQ
+  faq1: {
+    html: {
+      code: new URL('../Components/faq1.html', import.meta.url),
+      properties: {
+        selector: 'faq-1',
+      },
+      containerProperties: {
+        minHeight: '768',
+      },
+    },
+    js: {
+      code: fs.readFileSync(
+        path.join(__dirname, '/Components/accordion.js'),
+        'utf8',
+      ),
+      properties: {
+        selector: 'faq-1',
+      },
+    },
+  },
+  // FOOTERS
+  footer1: {
+    html: {
+      code: new URL('../Components/footer1.html', import.meta.url),
+      properties: {
+        selector: 'footer-1',
+      },
+      containerProperties: {
+        minHeight: '364',
+      },
+    },
+    js: {},
+  },
+  // TESTIMONIALS
   testimonials1: {
     html: {
       code: new URL('../Components/testimonials1.html', import.meta.url),
       properties: {
         selector: 'testimonials-1',
+      },
+      containerProperties: {
+        minHeight: '768',
       },
     },
     js: {},
