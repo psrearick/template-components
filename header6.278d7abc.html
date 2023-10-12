@@ -1,0 +1,148 @@
+<div id="{{selector|r}}" class="group data-[checked]:z-20 z-10 fixed full-top transition-[z-index] duration-500 ease-[steps(2, jump-both)]">
+  <div>
+    <nav aria-label="header navbar" class="h-16 group-data-[active]:bg-white group-data-[checked]:bg-white absolute w-full">
+      <div class="w-11/12 max-w-7xl m-auto grid grid-cols-3 lg:flex relative h-full items-center">
+        <!-- Menu Toggle -->
+        <div class="order-2 md:order-1 lg:hidden col-start-3 md:col-start-1">
+          <div class="h-[1.626rem] w-8 parent float-right md:float-none lg:hidden">
+            <!-- Lines -->
+            <div class="flex-v-between full child right-0">
+              <span class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-top-right ease-in-out duration-300 group-data-[checked]:-rotate-45"></span>
+              <span class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform ease-in-out duration-300 group-data-[checked]:scale-y-0"></span>
+              <span class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-bottom-right ease-in-out duration-300 group-data-[checked]:rotate-45"></span>
+            </div>
+            <!-- End Lines-->
+            <!-- Checkbox-->
+            <label id="{{selector|r}}-menu-toggle" class="cursor-pointer w-8 absolute h-[1.626rem]">
+              <input type="checkbox" class="opacity-0 cursor-pointer" aria-label="Menu Toggle" aria-labelledby="{{selector|r}}-menu-toggle">
+            </label>
+            <!-- End Checkbox-->
+          </div>
+        </div>
+        <!-- End Menu Toggle -->
+
+        <!-- site title -->
+        <div class="order-1 col-start-1 md:order-2 col-span-2 md:col-span-1 lg:order-none z-10 md:flex justify-center">
+          <a href="#" class="flex items-center gap-2 text-primary-800">
+            <div class="relative h-[40px] w-[40px] rounded-[50%]">
+              <div class="h-[40px] w-[40px] bottom-0 bg-transparent border-[4.5px] rounded-full inline-block absolute border-primary-400"></div>
+              <div class="absolute left-[10px] top-[7.5px] border-x-[10px] border-transparent border-t-primary-400 border-t-[26px]"></div>
+              <div class="absolute left-[10px] top-[7.5px] border-x-[10px] border-transparent border-b-primary-400 border-b-[26px]"></div>
+            </div>
+            <h1 class="text-2xl font-bold font-serif">WebSaaS</h1>
+          </a>
+        </div>
+        <!-- end site title -->
+
+        <!-- navigation links -->
+        <div class="order-4 lg:relative lg:order-none flex fixed overflow-hidden lg:overflow-auto top-0 bottom-0 left-0 right-0 mt-16 lg:mt-0">
+          <div class="pb-4 lg:pb-0 lg:transition-none lg:transform-none lg:will-change-auto group-data-[checked]:bg-white flex-v-between text-center full overflow-auto opacity-0 lg:opacity-100 ease-in-out duration-500 translate-y-[-150%] group-data-[checked]:opacity-100 group-data-[checked]:translate-y-0 scrollbar-hidden" style="will-change:transform,opacity,scroll-position;transition-property:transform,opacity">
+            <div>
+              <ul class="flex flex-col lg:flex-row justify-start lg:justify-center lg:border-none border-t border-t-gray-200 text-left lg:text-center font-bold lg:font-light text-2xl lg:text-sm">
+                <li class="noclick menu group/menu cursor-pointer px-4 py-4 flex-v-center hover:text-primary-400">
+                  <span class="flex gap-2 items-center">
+                    <span>Product</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-6 hidden">
+                      <path fill-rule="evenodd" d="M11.47 7.72a.75.75 0 011.06 0l7.5 7.5a.75.75 0 11-1.06 1.06L12 9.31l-6.97 6.97a.75.75 0 01-1.06-1.06l7.5-7.5z" clip-rule="evenodd"></path>
+                    </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
+                    </svg>
+                  </span>
+                  <div data-menu-container="1" class="lg:hidden"></div>
+                  <div class="hidden text-black text-sm font-normal flex-col" data-menu-content="1" data-active-display="flex">
+                    <div class="mb-4">
+                      <p class="font-bold font-serif uppercase text-gray-600 text-lg mb-2">
+                        Overview
+                      </p>
+                      <div class="pl-4 mb-2">
+                        <p class="font-bold mb-2">How It Works</p>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit.
+                        </p>
+                      </div>
+                      <div class="pl-4 mb-2">
+                        <p class="font-bold mb-2">Features</p>
+                        <p>
+                          A, ad animi aut culpa doloribus est fugiat in iure
+                          laborum
+                        </p>
+                      </div>
+                      <div class="pl-4">
+                        <p class="font-bold mb-2">Design</p>
+                        <p>
+                          nulla officia officiis, pariatur soluta, tempore ullam
+                          ut voluptate! At, libero
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="font-bold font-serif uppercase text-gray-600 text-lg mb-2">
+                        Who It's For
+                      </p>
+                      <div class="pl-4 mb-2">
+                        <p class="font-bold mb-2">Design Teams</p>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing
+                          elit.
+                        </p>
+                      </div>
+                      <div class="pl-4 mb-2">
+                        <p class="font-bold mb-2">Tech Startups</p>
+                        <p>
+                          A, ad animi aut culpa doloribus est fugiat in iure
+                          laborum
+                        </p>
+                      </div>
+                      <div class="pl-4">
+                        <p class="font-bold mb-2">Agile Teams</p>
+                        <p>
+                          nulla officia officiis, pariatur soluta, tempore ullam
+                          ut voluptate! At, libero
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="px-4 py-4 flex-v-center hover:text-primary-400">
+                  <a href="#">Examples</a>
+                </li>
+                <li class="px-4 py-4 flex-v-center hover:text-primary-400">
+                  <a href="#">Blog</a>
+                </li>
+                <li class="px-4 py-4 flex-v-center hover:text-primary-400">
+                  <a href="#">Pricing</a>
+                </li>
+              </ul>
+            </div>
+            <div class="flex lg:hidden pt-8 justify-end transition duration-300 hover:-translate-y-1">
+              <button class="rounded-xl text-xl font-bold py-4 bg-black text-white w-full mx-4">
+                Contact Us
+              </button>
+            </div>
+          </div>
+          <!-- end navigation links -->
+        </div>
+        <div class="hidden-content-container">
+          <div class="fixed left-0 top-16 right-0 overflow-auto bg-white hidden-content max-h-full">
+            <div data-content-count="0" class="hidden lg:grid grid-cols-3">
+              <div data-menu-container="1" class="py-4 px-6"></div>
+            </div>
+          </div>
+        </div>
+        <!-- spacer -->
+        <div class="hidden lg:block flex-1"></div>
+        <!-- end spacer -->
+        <!-- Contact button -->
+        <div class="hidden md:flex order-3 lg:order-none justify-end transition duration-300 hover:-translate-y-1">
+          <a href="#">
+            <button class="btn-md bg-black text-white">Contact Us</button>
+          </a>
+        </div>
+        <!-- end Contact button -->
+      </div>
+    </nav>
+  </div>
+</div>

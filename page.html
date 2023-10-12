@@ -14,7 +14,8 @@
     <link rel="apple-touch-icon" href="icon.68388f22.png">
 
     <link rel="stylesheet" href="index.a5b04e65.css">
-    <link rel="stylesheet" href="index.43f41a3b.css">
+    <link rel="stylesheet" href="index.3f88a013.css">
+    <link rel="stylesheet" href="index.d0b8c30b.css">
 
     <meta name="theme-color" content="#fafafa">
 
@@ -26,9 +27,9 @@
         <div class="w-11/12 max-w-[64rem] m-auto flex flex-row-reverse justify-between items-center relative h-full">
           <div>
             <!-- Menu Toggle -->
-            <div class="h-[1.626rem] w-8 relative lg:hidden">
+            <div class="h-[1.626rem] w-8 parent lg:hidden">
               <!-- Lines -->
-              <div class="flex flex-col justify-between h-full w-full absolute">
+              <div class="flex-v-between full child">
                 <span class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-top-left ease-in-out duration-300 group-data-[checked]:rotate-45"></span>
                 <span class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform ease-in-out duration-300 group-data-[checked]:scale-y-0"></span>
                 <span class="block h-1 w-full bg-gray-700 rounded-xl transition-transform will-change-transform origin-bottom-left ease-in-out duration-300 group-data-[checked]:-rotate-45"></span>
@@ -78,9 +79,9 @@
       </nav>
     </div>
 
-    <div id="hero" class="h-full w-full">
-      <div class="hero-bg-img min-h-[667px] md:min-h-[768px] bg-center h-full bg-cover bg-no-repeat relative pt-32 md:pt-42 lg:pt-48">
-        <div class="text-white px-4 max-w-xl md:max-w-3xl lg:max-w-6xl mx-auto">
+    <div id="hero" class="h-[85vh]">
+      <div class="hero-bg-img full relative pt-32 md:pt-42 lg:pt-48">
+        <div class="text-white full px-4 max-w-xl md:max-w-3xl lg:max-w-6xl mx-auto">
           <p class="text-5xl md:text-6xl lg:text-6xl font-serif mb-8 text-center">
             Frank's Mobile Detailing
           </p>
@@ -217,7 +218,7 @@
               an exceptional experience, every time.
             </p>
           </div>
-          <div class="bg-gray-200 text-gray-800 p-4 rounded col-span-6 md:col-span-2 flex flex-col justify-between">
+          <div class="bg-gray-200 text-gray-800 p-4 rounded col-span-6 md:col-span-2 flex-v-between">
             <div>
               <p class="text-2xl font-serif font-bold md:mb-2">
                 How We Can Help
@@ -291,7 +292,7 @@
             <a class="hover:text-secondary-500" href="#">Contact</a>
           </div>
         </div>
-        <div class="col-span-2 lg:col-span-1 text-center flex flex-col justify-center">
+        <div class="col-span-2 lg:col-span-1 text-center flex-v-center">
           <p class="mb-2">
             <a href="tel:2705515073" class="hover:text-primary-400">(270) 551-5073</a>
           </p>
@@ -328,17 +329,9 @@
         <button class="btn btn-md">Playground</button>
       </a>
     </div>
+    <script>const e="#header",t=document.querySelector(e),r=document.querySelector(e+" input[type=checkbox]");(()=>{if(!r||!t)return;r.addEventListener("change",function(){this.checked?t.setAttribute("data-checked",""):t.removeAttribute("data-checked")}),t.querySelectorAll("li, button").forEach(e=>{e.addEventListener("click",()=>{r.checked=!1;let e=new Event("change");r?.dispatchEvent(e)})});let e=t.ownerDocument,n=e.defaultView||e.parentWindow,c=()=>Math.abs(e.querySelector("body").getBoundingClientRect().top),o=c(),d=!0,a=c();n.addEventListener("scroll",()=>{let e=d;if(d=c()-o>0,100>c()){t.setAttribute("data-scroll","top"),o=c();return}if(200>c()&&d){o=c();return}d!==e&&(a=c());let r=c()-a;if(r>60){t.setAttribute("data-scroll","down"),o=c();return}if(r<-60){t.setAttribute("data-scroll","up"),o=c();return}t.setAttribute("data-scroll","none"),o=c()})})();</script>
 
-    <script>const e="#header",t=document.querySelector(e),r=document.querySelector(e+" input[type=checkbox]");(()=>{if(!r||!t)return;r.addEventListener("change",function(){this.checked?t.setAttribute("data-checked",""):t.removeAttribute("data-checked")}),t.querySelectorAll("li, button").forEach(e=>{e.addEventListener("click",()=>{r.checked=!1;let e=new Event("change");r?.dispatchEvent(e)})});let e=window.scrollY,c=!0,n=window.scrollY;document.addEventListener("scroll",()=>{let t=window.scrollY,r=document.querySelector("#header"),l=c;if(c=t-e>0,t<100){r.setAttribute("data-scroll","top"),e=t;return}if(t<600&&c){e=t;return}c!==l&&(n=t);let o=t-n;if(o>60){r.setAttribute("data-scroll","down"),e=t;return}if(o<-60){r.setAttribute("data-scroll","up"),e=t;return}r.setAttribute("data-scroll","none"),e=t})})();</script>
-
-    <script>document.querySelector(".hide-buttons").addEventListener("click",()=>{let t=document.querySelector(".master-nav");if(!t.hasAttribute("data-closed")){t.setAttribute("data-closed",""),t.removeAttribute("data-open");return}t.removeAttribute("data-closed"),t.setAttribute("data-open","")});let t=window.scrollY,e=!0,r=window.scrollY;document.addEventListener("scroll",()=>{let o=window.scrollY,l=document.querySelector("#header"),d=e;if(e=o-t>0,o<100){l.setAttribute("data-scroll","top"),t=o;return}if(o<600&&e){t=o;return}e!==d&&(r=o);let a=o-r;// if (changeInScroll > 60) {
-//   header.setAttribute('data-scroll', 'down');
-//
-//   previousScroll = scroll;
-//
-//   return;
-// }
-if(a<-60){l.setAttribute("data-scroll","up"),t=o;return}l.setAttribute("data-scroll","none"),t=o});</script>
+    <script>document.querySelector(".hide-buttons").addEventListener("click",()=>{let t=document.querySelector(".master-nav");if(!t.hasAttribute("data-closed")){t.setAttribute("data-closed",""),t.removeAttribute("data-open");return}t.removeAttribute("data-closed"),t.setAttribute("data-open","")});</script>
     <script type="module">function e(e){return e&&e.__esModule?e.default:e}var t={};!/* Font Face Observer v2.3.0 - © Bram Stein. License: BSD-3-Clause */function(){function e(e,t){document.addEventListener?e.addEventListener("scroll",t,!1):e.attachEvent("scroll",t)}function n(e){this.g=document.createElement("div"),this.g.setAttribute("aria-hidden","true"),this.g.appendChild(document.createTextNode(e)),this.h=document.createElement("span"),this.i=document.createElement("span"),this.m=document.createElement("span"),this.j=document.createElement("span"),this.l=-1,this.h.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;",this.i.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;",this.j.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;",this.m.style.cssText="display:inline-block;width:200%;height:200%;font-size:16px;max-width:none;",this.h.appendChild(this.m),this.i.appendChild(this.j),this.g.appendChild(this.h),this.g.appendChild(this.i)}function i(e,t){e.g.style.cssText="max-width:none;min-width:20px;min-height:20px;display:inline-block;overflow:hidden;position:absolute;width:auto;margin:0;padding:0;top:-999px;white-space:nowrap;font-synthesis:none;font:"+t+";"}function o(e){var t=e.g.offsetWidth,n=t+100;return e.j.style.width=n+"px",e.i.scrollLeft=n,e.h.scrollLeft=e.h.scrollWidth+100,e.l!==t&&(e.l=t,!0)}function s(t,n){function i(){o(s)&&null!==s.g.parentNode&&n(s.l)}var s=t;e(t.h,i),e(t.i,i),o(t)}function d(e,t,n){t=t||{},n=n||window,this.family=e,this.style=t.style||"normal",this.weight=t.weight||"normal",this.stretch=t.stretch||"normal",this.context=n}var a=null,l=null,r=null,c=null;function h(e){return null===c&&(c=!!e.document.fonts),c}function u(e,t){var n=e.style,i=e.weight;if(null===r){var o=document.createElement("div");try{o.style.font="condensed 100px sans-serif"}catch(e){}r=""!==o.style.font}return[n,i,r?e.stretch:"","100px",t].join(" ")}d.prototype.load=function(e,t){var o=this,d=e||"BESbswy",r=0,c=t||3e3,f=(new Date).getTime();return new Promise(function(e,t){if(h(o.context)&&(m=o.context,null===l&&(l=!!(h(m)&&/Apple/.test(window.navigator.vendor))&&!!(m=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent))&&603>parseInt(m[1],10)),!l)){var m,p,w=new Promise(function(e,t){!function n(){(new Date).getTime()-f>=c?t(Error(""+c+"ms timeout exceeded")):o.context.document.fonts.load(u(o,'"'+o.family+'"'),d).then(function(t){1<=t.length?e():setTimeout(n,25)},t)}()});Promise.race([new Promise(function(e,t){r=setTimeout(function(){t(Error(""+c+"ms timeout exceeded"))},c)}),w]).then(function(){clearTimeout(r),e(o)},t)}else p=function(){function l(){var t;(t=-1!=w&&-1!=g||-1!=w&&-1!=v||-1!=g&&-1!=v)&&((t=w!=g&&w!=v&&g!=v)||(null===a&&(a=!!(t=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent))&&(536>parseInt(t[1],10)||536===parseInt(t[1],10)&&11>=parseInt(t[2],10))),t=a&&(w==y&&g==y&&v==y||w==x&&g==x&&v==x||w==E&&g==E&&v==E)),t=!t),t&&(null!==b.parentNode&&b.parentNode.removeChild(b),clearTimeout(r),e(o))}var h=new n(d),m=new n(d),p=new n(d),w=-1,g=-1,v=-1,y=-1,x=-1,E=-1,b=document.createElement("div");b.dir="ltr",i(h,u(o,"sans-serif")),i(m,u(o,"serif")),i(p,u(o,"monospace")),b.appendChild(h.g),b.appendChild(m.g),b.appendChild(p.g),o.context.document.body.appendChild(b),y=h.g.offsetWidth,x=m.g.offsetWidth,E=p.g.offsetWidth,function e(){if((new Date).getTime()-f>=c)null!==b.parentNode&&b.parentNode.removeChild(b),t(Error(""+c+"ms timeout exceeded"));else{var n=o.context.document.hidden;(!0===n||void 0===n)&&(w=h.g.offsetWidth,g=m.g.offsetWidth,v=p.g.offsetWidth,l()),r=setTimeout(e,50)}}(),s(h,function(e){w=e,l()}),i(h,u(o,'"'+o.family+'",sans-serif')),s(m,function(e){g=e,l()}),i(m,u(o,'"'+o.family+'",serif')),s(p,function(e){v=e,l()}),i(p,u(o,'"'+o.family+'",monospace'))},document.body?p():document.addEventListener?document.addEventListener("DOMContentLoaded",function e(){document.removeEventListener("DOMContentLoaded",e),p()}):document.attachEvent("onreadystatechange",function e(){("interactive"==document.readyState||"complete"==document.readyState)&&(document.detachEvent("onreadystatechange",e),p())})})},t=d}();var n=async n=>{let i=new/*@__PURE__*/(e(t))("Montserrat"),o=new/*@__PURE__*/(e(t))("Inter");n=n||document,Promise.all([i.load(),o.load()]).then(()=>{n.querySelectorAll(".font-sans").forEach(e=>e.classList.add("fonts-loaded")),n.querySelectorAll(".font-serif").forEach(e=>e.classList.add("fonts-loaded"))})};(async()=>{await n()})();</script>
   </body>
 </html>

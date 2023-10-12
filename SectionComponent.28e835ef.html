@@ -1,0 +1,89 @@
+<!-- {component} -->
+<div class="mb-16 max-w-7xl mx-auto">
+  <!-- header and toggle -->
+  <div class="grid grid-cols-4 gap-x-4 mt-8 mx-auto">
+    <!-- header -->
+    <div class="col-span-4 md:col-span-2 flex items-center">
+      <div class="flex">
+        <button id="add-{component}" class="btn btn-md add-component-button mr-4 hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"></path>
+          </svg>
+        </button>
+        <div class="flex-v-center">
+          <p class="text-gray-600 text-2xl font-bold font-serif">{Component}</p>
+        </div>
+      </div>
+    </div>
+    <!-- end header -->
+
+    <div class="col-span-4 md:col-span-2 flex justify-end gap-4">
+      <!-- toggle HTML code -->
+      <button id="{component}-html-show-code" class="col-span-2 md:col-span-1 col-end-5 showCode my-4 btn btn-md">
+        Toggle HTML Code
+      </button>
+      <!-- end toggle HTML code -->
+
+      <!-- toggle JS code -->
+      <button id="{component}-js-show-code" class="col-span-2 md:col-span-1 hidden showCode my-4 btn btn-md">
+        Toggle JS Code
+      </button>
+      <!-- end toggle JS code -->
+    </div>
+  </div>
+  <!-- end header and toggle -->
+
+  <!-- code HTML display -->
+  <div class="bg-gray-200 mb-8 px-4 rounded-lg">
+    <pre class="hidden max-w-6xl mx-auto">
+            <code id="{component}-html-code" class="component-code block rounded-lg overflow-auto text-xs language-html"></code>
+        </pre>
+  </div>
+  <!-- end code HTML display -->
+
+  <!-- code JS display -->
+  <div class="bg-gray-200 mb-8 px-4 rounded-lg">
+    <pre class="hidden max-w-6xl mx-auto">
+            <code id="{component}-js-code" class="component-code block rounded-lg overflow-auto text-xs language-js"></code>
+        </pre>
+  </div>
+  <!-- end code JS display -->
+
+  <!-- {Component} Component -->
+  <div id="{component}" class="py-8 px-2 bg-gray-200 rounded-xl component">
+    <div class="max-w-6xl mx-auto">
+      <!-- Change Screen Size -->
+      <div class="">
+        <div class="grid grid-cols-4 py-4 gap-4">
+          <button class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-mobile">
+            <span class="block">Mobile</span>
+          </button>
+          <button class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-tablet">
+            <span class="block">Tablet</span>
+          </button>
+          <button class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-desktop">
+            <span class="block">Desktop</span>
+          </button>
+          <button class="btn-secondary-hollow btn-md col-span-4 lg:col-span-1 hover:shadow-md responsive-button" data-button-id="{component}-reset">
+            <span class="block">Reset</span>
+          </button>
+        </div>
+      </div>
+      <!-- end Change Screen Size -->
+      <!-- Component Container -->
+
+      <div class="relative">
+        <div class="my-2 component-container">
+          <div class="full flex-v-center">
+            <div class="wrapper full overflow-hidden min-h-[200px] parent max-w-6xl mx-auto resize bg-white">
+              <iframe id="{component}-frame" class="rounded-lg frame @container border border-primary-500 {bgClass} child full origin-top-left overflow-auto scrollbar-hidden" title="{component}-frame" data-min-height="{minHeight}"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end Component Container -->
+  </div>
+  <!-- end {Component} Component -->
+</div>
+<!-- end {component} -->
