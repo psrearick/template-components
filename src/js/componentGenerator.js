@@ -147,7 +147,6 @@ export default class ComponentGenerator {
           .setContent(componentData.js.code)
           .appendToElement(frame.contentDocument.body);
 
-        console.log(bodyDefinition);
         if (bodyDefinition?.hasBody) {
           const classes = bodyDefinition.bodyClasses || [];
           createElement(

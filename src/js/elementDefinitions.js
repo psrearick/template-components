@@ -85,6 +85,16 @@ export const components = {
       properties: {
         selector: 'header-1',
       },
+      bodyDefinition: {
+        hasBody: true,
+        bodyClasses: [
+          'min-h-[2000px]',
+          'full',
+          'bg-gray-100',
+          'bg-stripes',
+          'bg-stripes-primary-100',
+        ],
+      },
     },
     js: {
       code: fs.readFileSync(
@@ -101,6 +111,16 @@ export const components = {
       code: new URL('../Components/header2.html', import.meta.url),
       properties: {
         selector: 'header-2',
+      },
+      bodyDefinition: {
+        hasBody: true,
+        bodyClasses: [
+          'min-h-[2000px]',
+          'full',
+          'bg-gray-100',
+          'bg-stripes',
+          'bg-stripes-primary-100',
+        ],
       },
     },
     js: {
@@ -119,6 +139,16 @@ export const components = {
       properties: {
         selector: 'header-3',
       },
+      bodyDefinition: {
+        hasBody: true,
+        bodyClasses: [
+          'min-h-[2000px]',
+          'full',
+          'bg-gray-100',
+          'bg-stripes',
+          'bg-stripes-primary-100',
+        ],
+      },
     },
     js: {
       code: fs.readFileSync(
@@ -135,6 +165,16 @@ export const components = {
       code: new URL('../Components/header4.html', import.meta.url),
       properties: {
         selector: 'header-4',
+      },
+      bodyDefinition: {
+        hasBody: true,
+        bodyClasses: [
+          'min-h-[2000px]',
+          'full',
+          'bg-gray-800',
+          'bg-stripes',
+          'bg-stripes-primary-900',
+        ],
       },
     },
     js: {
@@ -169,6 +209,18 @@ export const components = {
       code: new URL('../Components/header6.html', import.meta.url),
       properties: {
         selector: 'header-6',
+      },
+      bodyDefinition: {
+        hasBody: true,
+        bodyClasses: [
+          'absolute',
+          'full',
+          'from-primary-200',
+          'to-primary-50',
+          'to-65%',
+          'radial-gradient',
+          'min-h-[600px]',
+        ],
       },
     },
     js: {

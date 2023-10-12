@@ -95,6 +95,11 @@
     @apply h-full w-full;
   }
 
+  .absolute.full-top,
+  .fixed.full-top {
+    @apply top-0 left-0 right-0;
+  }
+
   .parent .child {
     .full-x {
       @apply left-0 right-0;
