@@ -1,4 +1,4 @@
-import { components, sections } from './playgroundElementDefinitions';
+import { components, sections } from '../config/playgroundElementDefinitions';
 import { run } from './main';
 
 (async () => {

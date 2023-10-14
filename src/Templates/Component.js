@@ -1,4 +1,5 @@
 const componentName = '#{{name|r}}';
 const selector = `#${componentName}`;
 
-selector.toString();
+// eslint-disable-next-line no-unused-vars
+const component = document.querySelector(selector);

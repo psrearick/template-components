@@ -1,4 +1,4 @@
-import * as elementDefinitions from './elementDefinitions';
+import * as elementDefinitions from '../config/elementDefinitions';
 
 import {
   createElement,
