@@ -68,7 +68,7 @@ export const sections = {
     properties: {
       section: 'footers',
     },
-    components: ['footer1'],
+    components: ['footer1', 'footer2'],
   },
   testimonials: {
     properties: {
@@ -611,6 +611,18 @@ export const components = {
       },
       containerProperties: {
         minHeight: '364',
+      },
+    },
+    js: {},
+  },
+  footer2: {
+    html: {
+      code: new URL('../Components/footer2.html', import.meta.url),
+      properties: {
+        selector: 'footer-2',
+      },
+      containerProperties: {
+        minHeight: '406',
       },
     },
     js: {},
