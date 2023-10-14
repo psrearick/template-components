@@ -3,14 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-  .hover-float {
-    @apply transition-transform will-change-transform duration-300 hover:-translate-y-1;
-  }
-
-  .hover-shadow {
-    @apply hover:shadow-2xl;
-  }
-
   ul.list {
     @apply list-disc list-inside pl-4;
   }
@@ -100,20 +92,6 @@
     color: theme('colors.primary.900');
   }
 
-  .btn-md {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    box-shadow:
-      0 10px 15px -3px rgb(0 0 0 / 10%),
-      0 4px 6px -4px rgb(0 0 0 / 10%);
-  }
-
-  .btn-md:hover {
-    box-shadow:
-      0 20px 25px -5px rgb(0 0 0 / 10%),
-      0 8px 10px -6px rgb(0 0 0 / 10%);
-  }
-
   .link-text {
     color: theme('colors.primary.800');
   }
@@ -173,10 +151,8 @@
   }
 }
 
-@layer utilities {
-  .radial-gradient {
-    background: radial-gradient(var(--tw-gradient-stops));
-  }
+* {
+  scroll-behavior: smooth;
 }
 
 .font-sans.fonts-loaded {

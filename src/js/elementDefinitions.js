@@ -32,7 +32,7 @@ export const sections = {
     properties: {
       section: 'text',
     },
-    components: ['text1', 'text2', 'text3', 'text4', 'text5'],
+    components: ['text1', 'text2', 'text3', 'text4', 'text5', 'text6'],
   },
   services: {
     properties: {
@@ -446,6 +446,18 @@ export const components = {
       },
       containerProperties: {
         minHeight: '756',
+      },
+    },
+    js: {},
+  },
+  text6: {
+    html: {
+      code: new URL('../Components/text6.html', import.meta.url),
+      properties: {
+        selector: 'text-6',
+      },
+      containerProperties: {
+        minHeight: '404',
       },
     },
     js: {},
