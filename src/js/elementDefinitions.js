@@ -46,6 +46,12 @@ export const sections = {
       'services5',
     ],
   },
+  pricing: {
+    properties: {
+      section: 'pricing',
+    },
+    components: ['pricing1'],
+  },
   process: {
     properties: {
       section: 'process',
@@ -458,6 +464,19 @@ export const components = {
       },
       containerProperties: {
         minHeight: '404',
+      },
+    },
+    js: {},
+  },
+  // PRICING
+  pricing1: {
+    html: {
+      code: new URL('../Components/pricing1.html', import.meta.url),
+      properties: {
+        selector: 'pricing-1',
+      },
+      containerProperties: {
+        minHeight: '620',
       },
     },
     js: {},
