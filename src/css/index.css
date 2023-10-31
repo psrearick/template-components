@@ -44,54 +44,6 @@
     @apply max-h-screen;
   }
 
-  .btn-secondary-hollow {
-    background-color: theme('colors.white');
-    color: theme('colors.secondary.700');
-    border-width: 1px;
-    border-color: theme('colors.secondary.700');
-  }
-
-  .btn-secondary-hollow:hover {
-    background-color: theme('colors.secondary.100');
-    color: theme('colors.secondary.900');
-    border-color: theme('colors.secondary.900');
-  }
-
-  .btn-secondary {
-    background-color: theme('colors.secondary.600');
-    color: theme('colors.white');
-  }
-
-  .btn-secondary:hover {
-    background-color: theme('colors.secondary.100');
-    color: theme('colors.secondary.900');
-  }
-
-  .btn-hollow {
-    background-color: theme('colors.white');
-    color: theme('colors.primary.600');
-    border-width: 1px;
-    border-color: theme('colors.primary.600');
-  }
-
-  .btn-hollow:hover {
-    background-color: theme('colors.gray.100');
-    color: theme('colors.primary.900');
-    border-color: theme('colors.primary.900');
-  }
-
-  .btn,
-  .btn-light:hover {
-    background-color: theme('colors.primary.600');
-    color: theme('colors.white');
-  }
-
-  .btn:hover,
-  .btn-light {
-    background-color: theme('colors.primary.200');
-    color: theme('colors.primary.900');
-  }
-
   .link-text {
     color: theme('colors.primary.800');
   }

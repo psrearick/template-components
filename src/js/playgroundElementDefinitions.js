@@ -1,34 +1,26 @@
-import fs from 'fs';
-import path from 'path';
+// import fs from 'fs';
+// import path from 'path';
 
 export const sections = {
   playground: {
     properties: {
       section: 'playground',
     },
-    components: ['header7'],
+    components: ['buttons'],
   },
 };
 
 export const components = {
-  header7: {
+  buttons: {
     html: {
-      code: new URL('../Components/header7.html', import.meta.url),
+      code: new URL('../Components/buttons1.html', import.meta.url),
       properties: {
-        selector: 'header-7',
+        selector: 'buttons-1',
       },
       containerProperties: {
-        bgClass: 'bg-gray-700',
+        minHeight: '400',
       },
     },
-    js: {
-      code: fs.readFileSync(
-        path.join(__dirname, '/Components/header.js'),
-        'utf8',
-      ),
-      properties: {
-        selector: 'header-7',
-      },
-    },
+    js: {},
   },
 };

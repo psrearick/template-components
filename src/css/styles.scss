@@ -131,6 +131,10 @@
     }
   }
 
+  .flex-center {
+    @apply flex justify-center;
+  }
+
   .flex-v-center {
     @apply flex flex-col justify-center;
   }
@@ -166,15 +170,159 @@
   Buttons
   ########################################
  */
-  .btn-md {
-    @apply px-4 py-2 rounded-lg shadow-lg;
+  .btn {
+    --background-color: theme('colors.primary.600');
+    --border-color: theme('colors.primary.800');
+    --color: theme('colors.white');
+    --hover-background-color: theme('colors.primary.200');
+    --hover-border-color: theme('colors.primary.200');
+    --hover-color: theme('colors.primary.900');
+    --ring-color: theme('colors.primary.500');
+    --disabled-background-color: theme('colors.primary.500');
+    --disabled-color: theme('colors.white');
 
-    &:hover {
-      @apply shadow-xl;
+    &.plain {
+      --background-color: theme('colors.white');
+      --border-color: theme('colors.gray.200');
+      --color: theme('colors.black');
+      --hover-background-color: theme('colors.gray.400');
+      --hover-border-color: theme('colors.gray.400');
+      --hover-color: theme('colors.black');
+      --ring-color: theme('colors.gray.500');
+      --disabled-background-color: theme('colors.gray.200');
+      --disabled-color: theme('colors.black');
     }
 
-    &.round {
-      @apply rounded-full;
+    &.btn-light {
+      --background-color: theme('colors.primary.200');
+      --border-color: theme('colors.primary.300');
+      --color: theme('colors.primary.900');
+      --hover-background-color: theme('colors.primary.600');
+      --hover-border-color: theme('colors.primary.600');
+      --hover-color: theme('colors.white');
+      --ring-color: theme('colors.primary.600');
+      --disabled-background-color: theme('colors.primary.50');
+      --disabled-color: theme('colors.primary.900');
     }
+
+    &.btn-dark {
+      --background-color: theme('colors.primary.900');
+      --border-color: theme('colors.primary.600');
+      --color: theme('colors.white');
+      --hover-background-color: theme('colors.primary.600');
+      --hover-border-color: theme('colors.primary.600');
+      --hover-color: theme('colors.white');
+      --ring-color: theme('colors.primary.600');
+      --disabled-background-color: theme('colors.primary.500');
+      --disabled-color: theme('colors.white');
+    }
+
+    &.btn-outline {
+      --background-color: theme('colors.primary.900' / 0%);
+      --border-color: theme('colors.primary.600');
+      --color: theme('colors.primary.600');
+      --hover-background-color: theme('colors.gray.100');
+      --hover-color: theme('colors.primary.900');
+      --hover-border-color: theme('colors.primary.900');
+      --ring-color: theme('colors.primary.600');
+      --disabled-background-color: theme('colors.primary.500');
+      --disabled-color: theme('colors.white');
+    }
+
+    &.btn-secondary {
+      --background-color: theme('colors.secondary.600');
+      --border-color: theme('colors.secondary.600');
+      --color: theme('colors.white');
+      --hover-background-color: theme('colors.secondary.200');
+      --hover-color: theme('colors.secondary.900');
+      --hover-border-color: theme('colors.secondary.200');
+      --ring-color: theme('colors.secondary.600');
+      --disabled-background-color: theme('colors.secondary.500');
+      --disabled-color: theme('colors.white');
+    }
+
+    &.btn-secondary-outline {
+      --background-color: theme('colors.secondary.900' / 0%);
+      --border-color: theme('colors.secondary.600');
+      --color: theme('colors.secondary.600');
+      --hover-background-color: theme('colors.secondary.100');
+      --hover-color: theme('colors.secondary.900');
+      --hover-border-color: theme('colors.secondary.900');
+      --ring-color: theme('colors.secondary.600');
+      --disabled-background-color: theme('colors.secondary.500');
+      --disabled-color: theme('colors.white');
+    }
+
+    &.btn-tertiary {
+      --background-color: theme('colors.tertiary.600');
+      --border-color: theme('colors.tertiary.600');
+      --color: theme('colors.white');
+      --hover-background-color: theme('colors.tertiary.200');
+      --hover-color: theme('colors.tertiary.900');
+      --hover-border-color: theme('colors.tertiary.200');
+      --ring-color: theme('colors.tertiary.600');
+      --disabled-background-color: theme('colors.tertiary.500');
+      --disabled-color: theme('colors.white');
+    }
+
+    &.btn-tertiary-outline {
+      --background-color: theme('colors.tertiary.900' / 0%);
+      --border-color: theme('colors.tertiary.600');
+      --color: theme('colors.tertiary.600');
+      --hover-background-color: theme('colors.tertiary.100');
+      --hover-color: theme('colors.tertiary.900');
+      --hover-border-color: theme('colors.tertiary.900');
+      --ring-color: theme('colors.tertiary.600');
+      --disabled-background-color: theme('colors.tertiary.500');
+      --disabled-color: theme('colors.white');
+    }
+
+    @apply px-4 py-2 rounded-lg shadow-lg border;
+
+    border-color: var(--border-color);
+    background-color: var(--background-color);
+    color: var(--color);
+
+    &:hover,
+    &.hover,
+    &.active {
+      background-color: var(--hover-background-color);
+      border-color: var(--hover-border-color);
+      color: var(--hover-color);
+    }
+
+    &:focus,
+    &.focus {
+      @apply ring-2 ring-offset-2 outline-0;
+
+      --tw-ring-color: var(--ring-color);
+    }
+
+    &:disabled,
+    &.disabled {
+      background-color: var(--disabled-background-color);
+      border-color: var(--disabled-background-color);
+      color: var(--disabled-color);
+
+      &:hover,
+      &.hover {
+        @apply cursor-default;
+
+        background-color: var(--disabled-background-color);
+        border-color: var(--disabled-background-color);
+        color: var(--disabled-color);
+      }
+
+      &:focus,
+      &.focus {
+        @apply ring-0;
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .radial-gradient {
+    background: radial-gradient(var(--tw-gradient-stops));
   }
 }

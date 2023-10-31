@@ -82,6 +82,12 @@ export const sections = {
     },
     components: ['testimonials1'],
   },
+  uiKit: {
+    properties: {
+      section: 'ui-kit',
+    },
+    components: ['buttons'],
+  },
 };
 
 export const components = {
@@ -667,6 +673,19 @@ export const components = {
       },
       containerProperties: {
         minHeight: '768',
+      },
+    },
+    js: {},
+  },
+  // UI Kit
+  buttons: {
+    html: {
+      code: new URL('../Components/buttons1.html', import.meta.url),
+      properties: {
+        selector: 'buttons-1',
+      },
+      containerProperties: {
+        minHeight: '400',
       },
     },
     js: {},
