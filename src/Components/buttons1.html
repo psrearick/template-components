@@ -1,13 +1,14 @@
 <div class="p-8">
-  <div class="grid grid-cols-7 gap-y-4">
+  <p class="text-2xl mb-6">Button Styles</p>
+  <div class="grid grid-cols-7 gap-y-4 mb-8">
     <!-- HEADERS -->
-    <div><p class="text-center">Style</p></div>
-    <div><p class="text-center">Class</p></div>
-    <div><p class="text-center">Initial</p></div>
-    <div><p class="text-center">Hover</p></div>
-    <div><p class="text-center">Focus</p></div>
-    <div><p class="text-center">Active</p></div>
-    <div><p class="text-center">Disabled</p></div>
+    <div><p class="text-center font-bold">Style</p></div>
+    <div><p class="text-center font-bold">Class</p></div>
+    <div><p class="text-center font-bold">Initial</p></div>
+    <div><p class="text-center font-bold">Hover</p></div>
+    <div><p class="text-center font-bold">Focus</p></div>
+    <div><p class="text-center font-bold">Active</p></div>
+    <div><p class="text-center font-bold">Disabled</p></div>
 
     <!-- Normal Corners -->
     <!-- Plain -->
@@ -67,6 +68,25 @@
       <button class="btn btn-light disabled">Button</button>
     </div>
     <!-- End Light -->
+    <!-- Light Outline -->
+    <div class="flex-v-center">Primary Light Outline</div>
+    <div class="flex-v-center"><p>.btn.btn-light-outline</p></div>
+    <div class="col-start-3 flex-center">
+      <button class="btn btn-light-outline">Button</button>
+    </div>
+    <div class="flex-center">
+      <button class="btn btn-light-outline hover">Button</button>
+    </div>
+    <div class="flex-center">
+      <button class="btn btn-light-outline focus">Button</button>
+    </div>
+    <div class="flex-center">
+      <button class="btn btn-light-outline active">Button</button>
+    </div>
+    <div class="flex-center">
+      <button class="btn btn-light-outline disabled">Button</button>
+    </div>
+    <!-- End Light Outline -->
     <!-- Dark -->
     <div class="flex-v-center">Primary Dark</div>
     <div class="flex-v-center"><p>.btn.btn-dark</p></div>
@@ -183,14 +203,90 @@
     <!-- End Tertiary Outline -->
   </div>
 
-  <!--  <div>-->
-  <!--    Shapes-->
-  <!-- Standard Corners -->
-  <!-- Square Corners -->
-  <!-- Rounded Corners -->
-  <!--  </div>-->
+  <!-- Sizes -->
+  <p class="text-2xl mt-12 mb-6">Button Sizes</p>
+  <div class="grid grid-cols-3 gap-y-4">
+    <div><p class="text-center font-bold">Style</p></div>
+    <div><p class="text-center font-bold">Class</p></div>
+    <div><p class="text-center font-bold">Button</p></div>
+    <div class="flex-v-center text-center">Small</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-sm</p></div>
+    <div class="flex-center">
+      <button class="btn btn-sm">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Medium</div>
+    <div class="flex-v-center text-center"><p>.btn</p></div>
+    <div class="flex-center">
+      <button class="btn">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Large</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-lg</p></div>
+    <div class="flex-center">
+      <button class="btn btn-lg">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Extra-Large</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-xl</p></div>
+    <div class="flex-center">
+      <button class="btn btn-xl">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Small Full-Width</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-sm.btn-full</p></div>
+    <div class="flex-center">
+      <button class="btn btn-sm btn-full">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Medium Full-Width</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-full</p></div>
+    <div class="flex-center">
+      <button class="btn btn-full">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Large Full-Width</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-lg.btn-full</p></div>
+    <div class="flex-center">
+      <button class="btn btn-lg btn-full">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Extra-Large Full-Width</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-xl.btn-full</p></div>
+    <div class="flex-center">
+      <button class="btn btn-xl btn-full">Button</button>
+    </div>
+  </div>
+  <!-- End Sizes -->
 
-  <!--  <div>-->
-  <!--    SIZES-->
-  <!--  </div>-->
+  <!-- Shapes -->
+  <p class="text-2xl mb-6 mt-12">Button Sizes</p>
+  <div class="grid grid-cols-3 gap-y-4">
+    <div><p class="text-center font-bold">Style</p></div>
+    <div><p class="text-center font-bold">Class</p></div>
+    <div><p class="text-center font-bold">Button</p></div>
+    <div class="flex-v-center text-center">Square</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-r-none</p></div>
+    <div class="flex-center">
+      <button class="btn btn-r-none">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Small</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-r-sm</p></div>
+    <div class="flex-center">
+      <button class="btn btn-r-sm">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Medium</div>
+    <div class="flex-v-center text-center"><p>.btn</p></div>
+    <div class="flex-center">
+      <button class="btn">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Large</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-r-lg</p></div>
+    <div class="flex-center">
+      <button class="btn btn-r-lg">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Extra-Large</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-r-xl</p></div>
+    <div class="flex-center">
+      <button class="btn btn-r-xl">Button</button>
+    </div>
+    <div class="flex-v-center text-center">Full</div>
+    <div class="flex-v-center text-center"><p>.btn.btn-r-full</p></div>
+    <div class="flex-center">
+      <button class="btn btn-r-full">Button</button>
+    </div>
+  </div>
 </div>

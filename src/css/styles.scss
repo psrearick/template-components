@@ -205,6 +205,26 @@
       --disabled-color: theme('colors.primary.900');
     }
 
+    &.btn-light-outline {
+      @apply hover:shadow-sm hover:shadow-primary-700;
+
+      --background-color: theme('colors.primary.900' / 0%);
+      --border-color: theme('colors.primary.500');
+      --color: theme('colors.primary.500');
+      --hover-background-color: theme('colors.gray.900' / 0%);
+      --hover-color: theme('colors.primary.300');
+      --hover-border-color: theme('colors.primary.300');
+      --ring-color: theme('colors.primary.600');
+      --disabled-background-color: theme('colors.gray.100');
+      --disabled-color: theme('colors.primary.600');
+
+      &:disabled,
+      &.disabled,
+      &.active {
+        @apply hover:shadow-lg;
+      }
+    }
+
     &.btn-dark {
       --background-color: theme('colors.primary.900');
       --border-color: theme('colors.primary.600');
@@ -317,6 +337,42 @@
       &.focus {
         @apply ring-0;
       }
+    }
+
+    &.btn-sm {
+      @apply py-1 px-2 rounded-md shadow-md;
+    }
+
+    &.btn-lg {
+      @apply py-4 px-8 shadow-xl;
+    }
+
+    &.btn-xl {
+      @apply py-6 px-12 shadow-2xl;
+    }
+
+    &.btn-full {
+      @apply w-full max-w-7xl;
+    }
+
+    &.btn-r-none {
+      @apply rounded-none;
+    }
+
+    &.btn-r-sm {
+      @apply rounded-md;
+    }
+
+    &.btn-r-lg {
+      @apply rounded-xl;
+    }
+
+    &.btn-r-xl {
+      @apply rounded-2xl;
+    }
+
+    &.btn-r-full {
+      @apply rounded-full;
     }
   }
 }
