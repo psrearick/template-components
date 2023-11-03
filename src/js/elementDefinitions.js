@@ -20,7 +20,7 @@ export const sections = {
     properties: {
       section: 'hero',
     },
-    components: ['hero1', 'hero2', 'hero3', 'hero4', 'hero5', 'hero6'],
+    components: ['hero1', 'hero2', 'hero3', 'hero4', 'hero5', 'hero6', 'hero7'],
   },
   about: {
     properties: {
@@ -328,6 +328,18 @@ export const components = {
     },
     js: {},
   },
+  hero5: {
+    html: {
+      code: new URL('../Components/hero5.html', import.meta.url),
+      properties: {
+        selector: 'hero-5',
+      },
+      containerProperties: {
+        minHeight: '800',
+      },
+    },
+    js: {},
+  },
   hero6: {
     html: {
       code: new URL('../Components/hero6.html', import.meta.url),
@@ -340,14 +352,15 @@ export const components = {
     },
     js: {},
   },
-  hero5: {
+  hero7: {
     html: {
-      code: new URL('../Components/hero5.html', import.meta.url),
+      code: new URL('../Components/hero7.html', import.meta.url),
       properties: {
-        selector: 'hero-5',
+        selector: 'hero-7',
       },
       containerProperties: {
-        minHeight: '800',
+        minHeight: '768',
+        bgClass: 'bg-black',
       },
     },
     js: {},

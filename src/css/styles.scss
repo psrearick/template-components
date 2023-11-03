@@ -237,6 +237,18 @@
       --disabled-color: theme('colors.white');
     }
 
+    &.btn-dark-gray {
+      --background-color: theme('colors.gray.900');
+      --border-color: theme('colors.gray.600');
+      --color: theme('colors.white');
+      --hover-background-color: theme('colors.gray.600');
+      --hover-border-color: theme('colors.gray.600');
+      --hover-color: theme('colors.white');
+      --ring-color: theme('colors.gray.600');
+      --disabled-background-color: theme('colors.gray.500');
+      --disabled-color: theme('colors.white');
+    }
+
     &.btn-outline {
       --background-color: theme('colors.primary.900' / 0%);
       --border-color: theme('colors.primary.600');
